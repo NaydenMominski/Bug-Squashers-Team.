@@ -1,0 +1,19 @@
+mixin nav(user)
+    ul.top-links
+        if user
+            li
+                a(href='#')
+                    | Saved Properties   
+            li
+                a(href='#')
+                    | My Account
+            li
+                a(href="#")
+                    | Logout
+        else
+            li
+                a(href="/auth/sign-up")
+                    | Register
+            li
+                a(href="/auth/sign-in")
+                    | Sign In

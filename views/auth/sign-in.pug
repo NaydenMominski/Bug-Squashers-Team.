@@ -1,0 +1,19 @@
+extends ../_shared/_base
+
+block body
+    form.no-margin(action='USERS/loginaction.php', method='post', onsubmit='return ValidateLoginForm(this)')
+        table.bcollapse
+            tbody
+                tr
+                    td Username:
+                    td
+                        input.form-field(size='32', name='Email', type='text')
+                tr
+                    td Password:
+                    td
+                        input.form-field(size='32', name='Password', type='password')
+                tr
+                    td(colspan='2')
+                        br
+                        a.lfloat.margin-20(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=forgotten_password') forgotten password?
+                        input.ibutton.rfloat.margin-20(value='Login', type='submit')

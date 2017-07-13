@@ -1,0 +1,70 @@
+include _nav
+
+<!DOCTYPE html>
+html(lang="en")
+head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    title Property Portal Demo
+    meta(name='description', content='')
+    meta(name='keywords', content='')
+    link(rel='stylesheet', href='/static/css/main.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='/static/css/bootstrap.css', rel='stylesheet')
+    script(type='text/javascript', src='/static/js/jquery.js')
+    link(href='/static/css/css.css', rel='stylesheet', type='text/css')
+body
+    .row.top-container
+        .container
+            .col-md-4.no-left-padding.center-xs
+                br
+                img.site-logo(src='/static/pictures/logo.png')
+            .col-md-8.text-right.no-right-padding
+                br
+                br
+                +nav(user)
+    .clear
+    .nav-container
+        .container
+            .pull-left.visible-xs.visible-sm.padding_5
+            .clearfix
+            #nav_menu.hide-sm.navbar-collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href="/sell/sell") Sales
+                    li
+                        a(href='#') Rentals
+                    li
+                        a(href='#') Latest Ads
+                    li
+                        a(href='#') Post a New Ad
+                    li
+                        a(href='#') Agents
+                    li
+                        a(href='#') Email Alerts
+                    li
+                        a(href='#') Questions
+                    li
+                        a(href='#') Contact
+
+    block body
+    .text-center
+    .container
+        .navbar.top-nav-back.navbar-default
+            ul.bottom-nav-menu
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Sales') Sales
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Rentals') Rentals
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Latest+Ads') Latest Ads
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Post+a+New+Ad') Post a New Ad
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Agents') Agents
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Email+Alerts') Email Alerts
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Questions') Questions
+                li
+                    a(href='http://www.phpsitehost.com/demos/realestate1/index.php?page=en_Contact') Contact

@@ -1,0 +1,99 @@
+extends _shared/_base
+
+block body
+    .gray-wrapper
+        .container
+            #left_panel.text-left.col-md-3.no-left-padding
+                .search-panel
+                    h3.panel-title Search for a property
+                    hr
+                    // SEARCH FORM
+                    form#search-form(method='post', action='index.php')
+                        input(name='mod', value='search', type='hidden')
+                        input(name='search_type', value='search_form', type='hidden')
+                        #search_form_container
+                            .form-group
+                                label.control-label.col-sm-5(for='p_type')
+                                    small Type
+                                .control-field.col-sm-7.no-right-padding
+                                    select.form-control.input-sm(name='ad_type')
+                                        option(value='1', selected='selected') Sale
+                                        option(value='2') Rent
+                            .form-group
+                                label.control-label.col-sm-5(for='p_type')
+                                    small Property
+                                .control-field.col-sm-7.no-right-padding
+                                    select#p_type.form-control.input-sm(onchange='javascript:PropertyTypeChanged(this.value)', name='p_type')
+                                        option(value='-1', selected='selected') All
+                                        option(value='1') Apartment
+                                        option(value='2') House
+                                        option(value='4') Land
+                                        option(value='3') Office
+
+                            .form-group
+                                label.control-label.col-sm-5(for='min_price')
+                                    small Min price
+                                .control-field.col-sm-7.no-right-padding
+                                    input#price_from.form-control.input-sm(name='price_from', type='text')
+                            .form-group
+                                label.control-label.col-sm-5(for='min_price')
+                                    small Max price
+                                .control-field.col-sm-7.no-right-padding
+                                    input#price_to.form-control.input-sm(name='price_to', type='text')
+                            .form-group
+                                label.control-label.col-sm-5(for='min_price')
+                                    small Order by
+                                .control-field.col-sm-7.no-right-padding
+                                    select#order_by.form-control.input-sm(type='text', name='order_by')
+                                        option(value='date', selected='selected') Date
+                                        option(value='price') Price
+
+                        input.btn.btn-primary.pull-right(style='width:145px;margin-top:4px', name='commit', value='Search', type='submit')
+                    .clear
+                    // END SEARCH FORM
+                br
+            #main_panel.col-md-9
+                // FEATURED LISTINGS
+                #myCarousel.carousel.slide
+                    ol.carousel-indicators
+                        li(data-target='#myCarousel', data-slide-to='0')
+                            img.img-shadow.indicator-image(src='/static/pictures/38849069.jpg')
+                        li(data-target='#myCarousel', data-slide-to='1')
+                            img.img-shadow.indicator-image(src='/static/pictures/968963630.jpg')
+                        li.active(data-target='#myCarousel', data-slide-to='2')
+                            img.img-shadow.indicator-image(src='/static/pictures/185363932.jpg')
+                    .carousel-inner
+                        .item.slide-back
+                            .container
+                                .xcarousel-caption
+                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                        img.img-shadow(src='/static/pictures/38849069_002.jpg', alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs Exclusive apartment in downtown Bristol 43234, $416000444
+                                        p.hide-xs
+                                            | An exclusive offer - excellent apartment in the very center of Milan, close to the Duomo!
+                                    br
+                        .item.slide-back
+                            .container
+                                .xcarousel-caption
+                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=123')
+                                        img.img-shadow(src='/static/pictures/968963630_002.jpg', alt='', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs Apartment for sale, $54000
+                                        p.hide-xs This apartment is a very good investment - it can be easily rented.
+                                    br
+                        .item.slide-back.active
+                            .container
+                                .xcarousel-caption
+                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=114')
+                                        img.img-shadow(src='/static/pictures/185363932_002.jpg', alt='Beautiful apartment with sea view', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs Beautiful apartment with sea view, $450000
+                                        p.hide-xs An absolutely amazing property with wonderful sea view ...
+                                    br
+                    a.left.carousel-control(href='#myCarousel', data-slide='prev')
+                        img.carousel-icon(src='/static/pictures/carousel-arrow-left.png')
+                    a.right.carousel-control(href='#myCarousel', data-slide='next')
+                        img.carousel-icon(src='/static/pictures/carousel-arrow-right.png')
+                
+    script(type='text/javascript', src='/static/js/jquery.js')
+    script(type='text/javascript', src='/static/js/carousel.js')
+                
+                // END FEATURED LISTINGS
