@@ -1,0 +1,117 @@
+extends ../_shared/_base
+
+block body
+    .container
+        br
+        .col-md-9.text-left
+            form#sell_form(enctype='multipart/form-data', action='index.php', method='post', name='sell_form', onsubmit='return SubmitForm2(this)')
+            br
+            h3.no-top-margin.text-center
+                | Property Details
+            hr
+            br
+            .col-md-2
+                | Headline:
+            .col-md-10
+                input.form-control.input-sm(type='text', name='headline', value='')
+                i
+                | if you leave empty, it will look like 'Apartment for sale in New York, Price:  $240,000'
+                br
+            .clearfix
+            br
+            .col-md-4
+                br
+                | Property:
+                br
+                select.form-control.input-sm(name='pfield0')
+                    option(value='') Please Select
+                    option(value='1') Apartament
+                    option(value='2') House
+            .col-md-8
+                br
+                | Location:
+                br
+                select#user_type.form-control.input-sm(name='location')
+                    option(value='') Please Select
+                    option(value='1') Veliko Tarnovo
+                    option(value='2') Sofia
+            .col-md-4
+                br
+                | 		Price ($):
+                br
+                input.form-control.input-sm(type='text', name='price', value='')
+            .col-md-4
+                br
+                | 		Size		
+                br
+                input.form-control.input-sm(type='text', name='size', value='')
+            .col-md-4
+                br
+                | Bedrooms:
+                br
+                select.form-control.input-sm(name='pfield0')
+                    option(value='') Please Select
+                    option 1
+                    option 2
+                    option 3
+                    option 4
+                    option 5
+                    option 6
+                    option 7+
+            .col-md-4
+                br
+                | Bathrooms:
+                br
+                select.form-control.input-sm(name='pfield1')
+                    option(value='') Please Select
+                    option 1
+                    option 2
+                    option 3
+                    option 4
+                    option 5+
+            .col-md-4
+                br
+                | Floor:
+                br
+                input.form-control.input-sm(type='text', value='', name='pfield2')
+            .col-md-4
+                br
+                | Floors in building:
+                br
+                input.form-control.input-sm(type='text', value='', name='pfield3')
+            .clearfix
+            br
+            h3
+                | Property Amenities
+            hr
+            .col-md-4
+                input(type='checkbox', value='asansior\
+                ', name='re_opt1')
+                span.listing-feature-span
+                | asansior
+            .col-md-4
+                input(type='checkbox', value='basein', name='re_opt2')
+                span.listing-feature-span basein
+            .clearfix
+            br
+            h3
+                | Description
+            .clear
+            hr
+            textarea.pull-left(cols='80', rows='7', name='description')
+            .clear
+            br
+            #images_fieldset
+                h3
+                | Images
+                .clear
+                hr
+                .col-md-4
+                | Please Select
+                .col-md-8
+                input#images.btn.btn-default.btn-gradient(type='file', name='images[]', multiple='multiple')
+                .clear
+                br
+            br
+            
+            input.btn.btn-default.btn-gradient.pull-right(type='submit', value=' Submit ')
