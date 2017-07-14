@@ -23,7 +23,17 @@ const getData = (db) => {
                 .value();
             return Promise.resolve(user);
         },
-        create(username, hashedPass, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website, usersalt) {
+        create(username,
+            hashedPass,
+            usertype,
+            agency,
+            userfirstname,
+            userlastname,
+            address,
+            useremail,
+            userphone,
+            website,
+            usersalt) {
             const user = {
                 username,
                 hashedPass,

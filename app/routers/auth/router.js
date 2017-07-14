@@ -28,7 +28,8 @@ module.exports = {
                 } = req.body;
 
                 const usersalt = encryption.generateSalt();
-                const hashedPass = encryption.generateHashedPassword(usersalt, password);
+                const hashedPass = encryption
+                    .generateHashedPassword(usersalt, password);
 
                 return data.auth.create(
                         username,

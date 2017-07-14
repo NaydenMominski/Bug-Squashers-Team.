@@ -12,7 +12,8 @@ module.exports = (app, { auth }, db, secret) => {
                     return done(null,
                         false, { message: 'Incorrect username.' });
                 }
-                const hashPass = encryption.generateHashedPassword(user.usersalt, password);
+                const hashPass = encryption
+                    .generateHashedPassword(user.usersalt, password);
 
                 if (user.hashedPass !== hashPass) {
                     return done(null,
