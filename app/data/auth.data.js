@@ -17,10 +17,18 @@ const getData = (db) => {
                     return user;
                 });
         },
-        create(username, password) {
+        create(username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website) {
             const user = {
                 username,
                 password,
+                usertype,
+                agency,
+                userfirstname,
+                userlastname,
+                address,
+                useremail,
+                userphone,
+                website,
             };
 
             return collection.insert(user)

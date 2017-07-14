@@ -13,19 +13,17 @@ module.exports = {
                 return res.render('auth/sign-in');
             })
             .post('/sign-up', (req, res) => {
-                const { username, password } = req.body;
-                return data.auth.create(username, password)
+                const { username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website } = req.body;
+                return data.auth.create(username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website)
                     .then(() => {
                         res.redirect('/auth/sign-in');
                     });
             })
-            .post('/sign-in', passport.authenticate('local',
-                {
-                    successRedirect: '/',
-                    failureRedirect: '/auth/sign-in',
-                    failureFlash: true,
-                })
-            )
+            .post('/sign-in', passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/auth/sign-in',
+                failureFlash: true,
+            }))
             .get('/sign-out', (req, res) => {
                 req.logout();
                 res.redirect('/');

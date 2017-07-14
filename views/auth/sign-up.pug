@@ -1,16 +1,7 @@
 extends ../_shared/_base
 
 block body
-    //- form(action="/auth/sign-up" method="POST")
-    //-     input.form-control(name="username", placeholder="Enter username")
-    //-     input.form-control(name="password", type="text", placeholder="Enter password")
-    //-     button.btn.btn-success
-    //-         | Sign Up
     .container
-        .margin-top-5
-        .pull-right
-            a#show_search.visible-xs.visible-sm.pull-left.btn.btn-sm.btn-default.btn-gradient(href="javascript:ShowHide('left_panel')") Search for a property
-        .clear
         br
         .col-md-9.text-left
             h3.no-top-margin Create your free account
@@ -18,7 +9,7 @@ block body
             | In order to register and be able to submit listings, please fill the form below.
             br
             br
-            form(action='index.php', method='post')
+            form(action='/auth/sign-up', method='post')
                 input(type='hidden', name='mod', value='registration')
                 input(type='hidden', name='ProceedSend', value='1')
                 .form-group
@@ -31,9 +22,9 @@ block body
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='password', name='password', required='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='user_type') I am:
+                    label.control-label.col-sm-4(for='usertype') I am:
                     .control-field.col-sm-8.no-right-padding
-                        select#user_type.form-control.input-sm(name='user_type')
+                        select#user_type.form-control.input-sm(name='usertype')
                             option(value='2') Agency
                             option(value='1') Private Seller
                 .form-group
@@ -42,30 +33,30 @@ block body
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='text', name='agency', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='user_first_name')
-                        | First Name(*):
+                    label.control-label.col-sm-4(for='userfirstname')
+                        | First Name:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='user_first_name', value='', required='', size='30')
+                        input.form-control.input-sm(type='text', name='userfirstname', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='user_last_name')
-                        | Last Name(*):
+                    label.control-label.col-sm-4(for='userlastname')
+                        | Last Name:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='user_last_name', value='', required='', size='30')
+                        input.form-control.input-sm(type='text', name='userlastname', value='', size='30')
                 .form-group
                     label.control-label.col-sm-4(for='address')
                         | Address:
                     .control-field.col-sm-8.no-right-padding
                         textarea.form-control.input-sm(cols='22', rows='2', name='address')
                 .form-group
-                    label.control-label.col-sm-4(for='user_email')
-                        | Email(*):
+                    label.control-label.col-sm-4(for='useremail')
+                        | Email:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='email', name='user_email', value='', required='', size='30')
+                        input.form-control.input-sm(type='email', name='useremail', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='user_phone')
+                    label.control-label.col-sm-4(for='userphone')
                         | Phone:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='user_phone', value='', size='30')
+                        input.form-control.input-sm(type='text', name='userphone', value='', size='30')
                 .form-group
                     label.control-label.col-sm-4(for='user_phone')
                         | Website:
