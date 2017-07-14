@@ -27,7 +27,6 @@ module.exports = {
                     website,
                 } = req.body;
 
-
                 return data.auth.signUp(
                         username,
                         password,

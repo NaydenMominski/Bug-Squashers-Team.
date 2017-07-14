@@ -9,7 +9,10 @@ mixin nav(user)
                     | My Account
             li
                 a(href="/auth/sign-out")
-                    | Logout
+                    | Logout 
+            li
+                a(href="#")
+                    =user.username
         else
             li
                 a(href="/auth/sign-up")
