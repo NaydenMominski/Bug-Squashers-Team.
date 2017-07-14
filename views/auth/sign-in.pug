@@ -1,25 +1,28 @@
 extends ../_shared/_base
 
 block body
-    form.no-marginform(action="/auth/sign-in" method="POST")
-        table.bcollapse
-            tbody
-                th
-                    td
-                        h3
-                            | Sign In
-                tr
-                    td
-                        | Username:
-                    td
-                        input.form-field(name="username", placeholder="Enter username")
-                tr
-                    td
-                        | Password:
-                    td
-                        input.form-field(name="password", type="text", placeholder="Enter password")
-                tr
-                    td(colspan='2')
-                        br
-                        a.lfloat.margin-20(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=forgotten_password') forgotten password?
-                        input.ibutton.rfloat.margin-20(value='Login', type='submit')
+    .container
+        .col-md-4
+        #singin.text-center.col-md-4.no-center-padding
+            .search-panel
+                h3.panel-title Sign In
+                hr
+                // Sing-In FORM
+                form.no-marginform(action="/auth/sign-in" method="POST")
+                    table.bcollapse
+                        tbody
+                            tr
+                                td
+                                    | Username:
+                                td
+                                    input.form-field(name="username", placeholder="Enter username")
+                            tr
+                                td
+                                    | Password:
+                                td
+                                    input.form-field(name="password", type="text", placeholder="Enter password")
+                            tr
+                                td(colspan='2')
+                                    br
+                                    a.lfloat.margin-20(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=forgotten_password') forgotten password?
+                                    input.ibutton.rfloat.margin-20(value='Login', type='submit')
