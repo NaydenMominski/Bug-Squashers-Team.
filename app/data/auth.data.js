@@ -1,4 +1,5 @@
 const { ObjectID } = require('mongodb');
+const encryption = require('../../utils/encryption');
 
 const getData = (db) => {
     const collection = db.collection('users');
@@ -17,14 +18,10 @@ const getData = (db) => {
                     return user;
                 });
         },
-        findByUsername(username) {
-            const user = db.get('users')
-                .find({ username })
-                .value();
-            return Promise.resolve(user);
-        },
-        create(username,
-            hashedPass,
+
+        signUp(
+            username,
+            password,
             usertype,
             agency,
             userfirstname,
@@ -32,25 +29,36 @@ const getData = (db) => {
             address,
             useremail,
             userphone,
-            website,
-            usersalt) {
-            const user = {
-                username,
-                hashedPass,
-                usertype,
-                agency,
-                userfirstname,
-                userlastname,
-                address,
-                useremail,
-                userphone,
-                website,
-                usersalt,
-            };
+            website, ) {
+            return this.findBy({ username: username })
+                .then((user) => {
+                    if (user) {
+                        throw new Error('Duplicated user');
+                    }
+                    const usersalt = encryption.generateSalt();
+                    const hashedPass = encryption
+                        .generateHashedPassword(usersalt, password);
 
-            return collection.insert(user)
-                .then((result) => {
+                    user = {
+                        username,
+                        hashedPass,
+                        usertype,
+                        agency,
+                        userfirstname,
+                        userlastname,
+                        address,
+                        useremail,
+                        userphone,
+                        website,
+                        usersalt,
+                    };
                     return user;
+                })
+                .then((user) => {
+                    return collection.insert(user)
+                        .then((result) => {
+                            return user;
+                        });
                 });
         },
     };
