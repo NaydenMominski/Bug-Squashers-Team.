@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const passport = require('passport');
+const encryption = require('../../../utils/encryption');
 
 module.exports = {
     initRouter(data) {
@@ -13,8 +14,34 @@ module.exports = {
                 return res.render('auth/sign-in');
             })
             .post('/sign-up', (req, res) => {
-                const { username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website } = req.body;
-                return data.auth.create(username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website)
+                const {
+                    username,
+                    password,
+                    usertype,
+                    agency,
+                    userfirstname,
+                    userlastname,
+                    address,
+                    useremail,
+                    userphone,
+                    website,
+                } = req.body;
+
+                const usersalt = encryption.generateSalt();
+                const hashedPass = encryption.generateHashedPassword(usersalt, password);
+
+                return data.auth.create(
+                        username,
+                        hashedPass,
+                        usertype,
+                        agency,
+                        userfirstname,
+                        userlastname,
+                        address,
+                        useremail,
+                        userphone,
+                        website,
+                        usersalt)
                     .then(() => {
                         res.redirect('/auth/sign-in');
                     });

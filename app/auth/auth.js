@@ -2,6 +2,7 @@ const session = require('express-session');
 const passport = require('passport');
 const { Strategy } = require('passport-local');
 const MongoStore = require('connect-mongo')(session);
+const encryption = require('../../utils/encryption');
 
 module.exports = (app, { auth }, db, secret) => {
     passport.use(new Strategy((username, password, done) => {
@@ -9,14 +10,13 @@ module.exports = (app, { auth }, db, secret) => {
             .then((user) => {
                 if (!user) {
                     return done(null,
-                        false,
-                        { message: 'Incorrect username.' });
+                        false, { message: 'Incorrect username.' });
                 }
+                const hashPass = encryption.generateHashedPassword(user.usersalt, password);
 
-                if (user.password !== password) {
+                if (user.hashedPass !== hashPass) {
                     return done(null,
-                        false,
-                        { message: 'Incorrect password.' });
+                        false, { message: 'Incorrect password.' });
                 }
 
                 return done(null, user);

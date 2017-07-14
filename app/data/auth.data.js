@@ -17,10 +17,16 @@ const getData = (db) => {
                     return user;
                 });
         },
-        create(username, password, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website) {
+        findByUsername(username) {
+            const user = db.get('users')
+                .find({ username })
+                .value();
+            return Promise.resolve(user);
+        },
+        create(username, hashedPass, usertype, agency, userfirstname, userlastname, address, useremail, userphone, website, usersalt) {
             const user = {
                 username,
-                password,
+                hashedPass,
                 usertype,
                 agency,
                 userfirstname,
@@ -29,6 +35,7 @@ const getData = (db) => {
                 useremail,
                 userphone,
                 website,
+                usersalt,
             };
 
             return collection.insert(user)
