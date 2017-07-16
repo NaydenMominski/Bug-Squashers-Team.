@@ -1,5 +1,17 @@
 const { Router } = require('express');
 const passport = require('passport');
+const multer = require('multer');
+
+const Storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, './static/pictures/img');
+    },
+    filename: (req, file, callback) => {
+        callback(null,
+            file.fieldname + '_' + Date.now() + '_' + file.originalname);
+    },
+});
+const upload = multer({ storage: Storage }).single('avatar');
 
 
 module.exports = {
@@ -13,7 +25,9 @@ module.exports = {
             .get('/sign-in', (req, res) => {
                 return res.render('auth/sign-in');
             })
-            .post('/sign-up', (req, res) => {
+            .post('/sign-up', upload, (req, res) => {
+                const image = req.file ? req.file.filename : 'default.png';
+                console.log(req.file);
                 const {
                     username,
                     password,
@@ -38,6 +52,7 @@ module.exports = {
                         useremail,
                         userphone,
                         website,
+                        image,
                     )
                     .then(() => {
                         res.redirect('/auth/sign-in');

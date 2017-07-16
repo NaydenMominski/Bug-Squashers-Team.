@@ -29,7 +29,8 @@ const getData = (db) => {
             address,
             useremail,
             userphone,
-            website, ) {
+            website,
+            image) {
             return this.findBy({ username: username })
                 .then((user) => {
                     if (user) {
@@ -51,6 +52,7 @@ const getData = (db) => {
                         userphone,
                         website,
                         usersalt,
+                        image,
                     };
                     return user;
                 })

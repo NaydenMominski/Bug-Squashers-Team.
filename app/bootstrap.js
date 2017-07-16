@@ -29,4 +29,3 @@ const bootstrapApp = () => {
 };
 
 module.exports = { bootstrapApp };
-

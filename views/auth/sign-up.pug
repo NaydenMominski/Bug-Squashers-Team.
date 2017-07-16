@@ -9,7 +9,7 @@ block body
             | In order to register and be able to submit listings, please fill the form below.
             br
             br
-            form(action='/auth/sign-up', method='post')
+            form(action='/auth/sign-up', method='post',enctype='multipart/form-data')
                 input(type='hidden', name='mod', value='registration')
                 input(type='hidden', name='ProceedSend', value='1')
                 .form-group
@@ -62,6 +62,11 @@ block body
                         | Website:
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='text', name='website', value='', size='30')
+                .form-group
+                    label.control-label.col-sm-4(for='avatar')
+                        | Avatar:
+                    .control-field.col-sm-8.no-right-padding
+                        input.form-control.input-sm(type='file', name='avatar', accept='.jpg,.jpeg,.png')
                 br
                 br
                 input.pull-right.btn.btn-default.btn-gradient(type='submit', value='Submit')
