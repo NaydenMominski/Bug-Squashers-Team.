@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
+const encryption = require('../../../utils/encryption');
 
 module.exports = {
     initRouter(data) {
@@ -14,34 +15,26 @@ module.exports = {
                 return res.render('auth/sign-in');
             })
             .post('/sign-up', upload(), (req, res) => {
-                const image = req.file ? req.file.filename : 'default.png';
                 // console.log(req.file);
-                const {
-                    username,
-                    password,
-                    usertype,
-                    agency,
-                    userfirstname,
-                    userlastname,
-                    address,
-                    useremail,
-                    userphone,
-                    website,
-                } = req.body;
 
-                return data.auth.signUp(
-                        username,
-                        password,
-                        usertype,
-                        agency,
-                        userfirstname,
-                        userlastname,
-                        address,
-                        useremail,
-                        userphone,
-                        website,
-                        image,
-                    )
+                const usersalt = encryption.generateSalt();
+                const user = {
+                    username: req.body.username,
+                    hashedPass: encryption
+                        .generateHashedPassword(usersalt, req.body.password),
+                    salt: usersalt,
+                    usertype: req.body.usertype,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    agency: req.body.agency,
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    website: req.body.website,
+                    avatar: req.file ? req.file.filename : 'default.png',
+                    sellproperty: {},
+                };
+
+                return data.auth.signUp(user)
                     .then(() => {
                         res.redirect('/auth/sign-in');
                     });

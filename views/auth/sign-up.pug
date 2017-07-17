@@ -10,8 +10,6 @@ block body
             br
             br
             form(action='/auth/sign-up', method='post',enctype='multipart/form-data')
-                input(type='hidden', name='mod', value='registration')
-                input(type='hidden', name='ProceedSend', value='1')
                 .form-group
                     label.control-label.col-sm-4(for='username') Username(*):
                     .control-field.col-sm-8.no-right-padding
@@ -33,32 +31,32 @@ block body
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='text', name='agency', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='userfirstname')
+                    label.control-label.col-sm-4(for='firstname')
                         | First Name:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='userfirstname', value='', size='30')
+                        input.form-control.input-sm(type='text', name='firstname', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='userlastname')
+                    label.control-label.col-sm-4(for='lastname')
                         | Last Name:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='userlastname', value='', size='30')
+                        input.form-control.input-sm(type='text', name='lastname', value='', size='30')
                 .form-group
                     label.control-label.col-sm-4(for='address')
                         | Address:
                     .control-field.col-sm-8.no-right-padding
                         textarea.form-control.input-sm(cols='22', rows='2', name='address')
                 .form-group
-                    label.control-label.col-sm-4(for='useremail')
+                    label.control-label.col-sm-4(for='email')
                         | Email:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='email', name='useremail', value='', size='30')
+                        input.form-control.input-sm(type='email', name='email', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='userphone')
+                    label.control-label.col-sm-4(for='phone')
                         | Phone:
                     .control-field.col-sm-8.no-right-padding
-                        input.form-control.input-sm(type='text', name='userphone', value='', size='30')
+                        input.form-control.input-sm(type='text', name='phone', value='', size='30')
                 .form-group
-                    label.control-label.col-sm-4(for='user_phone')
+                    label.control-label.col-sm-4(for='website')
                         | Website:
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='text', name='website', value='', size='30')

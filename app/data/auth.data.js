@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const encryption = require('../../utils/encryption');
+
 
 const getData = (db) => {
     const collection = db.collection('users');
@@ -19,42 +19,13 @@ const getData = (db) => {
                 });
         },
 
-        signUp(
-            username,
-            password,
-            usertype,
-            agency,
-            userfirstname,
-            userlastname,
-            address,
-            useremail,
-            userphone,
-            website,
-            image) {
-            return this.findBy({ username: username })
+        signUp(newUser) {
+            return this.findBy({ username: newUser.username })
                 .then((user) => {
                     if (user) {
                         throw new Error('Duplicated user');
                     }
-                    const usersalt = encryption.generateSalt();
-                    const hashedPass = encryption
-                        .generateHashedPassword(usersalt, password);
-
-                    user = {
-                        username,
-                        hashedPass,
-                        usertype,
-                        agency,
-                        userfirstname,
-                        userlastname,
-                        address,
-                        useremail,
-                        userphone,
-                        website,
-                        usersalt,
-                        image,
-                    };
-                    return user;
+                    return newUser;
                 })
                 .then((user) => {
                     return collection.insert(user)
