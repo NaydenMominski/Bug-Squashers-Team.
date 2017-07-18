@@ -14,7 +14,7 @@ module.exports = {
             .get('/sign-in', (req, res) => {
                 return res.render('auth/sign-in');
             })
-            .post('/sign-up', upload(), (req, res) => {
+            .post('/sign-up', upload('./static/pictures/img'), (req, res) => {
                 // console.log(req.file);
 
                 const salt = encryption.generateSalt();

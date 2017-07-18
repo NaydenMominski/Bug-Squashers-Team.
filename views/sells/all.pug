@@ -41,7 +41,7 @@ block content
                             .row
                                 .col-sm-5.col-xs-12
                                     a.btn-block.result-details-link(href='index.php?mod=details&id=124')
-                                        img.img-res(alt=item.headline, src='static/pictures/sell')
+                                        img.img-res(alt=item.headline, src='static/pictures/sell/'+ item.avatar)
                                 .col-sm-7.col-xs-12
                                     .details
                                         p.description
@@ -51,15 +51,15 @@ block content
                                                 =item.location
                                             br
                                             br
-                                            | 												Bedrooms:
+                                            | Bedrooms:
                                             b 1
-                                            | 												Bathrooms:
+                                            | Bathrooms:
                                             b 1
-                                            | 											, 
+                                            | , 
                                             br
                                             br
-                                            // template
-                                            | An exclusive offer - excellent apartment in the very center of Milan, close to the Duomo!
+                                            b
+                                            =item.description
                                         span.is_r_featured .
                             .row.margin-top-20
                                 .col-xs-6

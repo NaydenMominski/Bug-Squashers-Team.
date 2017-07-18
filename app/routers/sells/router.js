@@ -22,7 +22,7 @@ module.exports = {
             .get('/:id', (req, res) => {
                 return controller.getDetails(req, res);
             })
-            .post('/', upload(), (req, res) => {
+            .post('/', upload('./static/pictures/sell'), (req, res) => {
                 if (!req.user) {
                     return res.redirect('/auth/sign-in');
                 }
