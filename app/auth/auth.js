@@ -13,7 +13,7 @@ module.exports = (app, { auth }, db, secret) => {
                         false, { message: 'Incorrect username.' });
                 }
                 const hashPass = encryption
-                    .generateHashedPassword(user.usersalt, password);
+                    .generateHashedPassword(user.salt, password);
 
                 if (user.hashedPass !== hashPass) {
                     return done(null,

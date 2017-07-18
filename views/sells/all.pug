@@ -1,8 +1,106 @@
 extends _shared/_base
 
 block content
-    ul
-        for item in context
-            li
-                a.sell-item(href="/sells/" + item.id)
-                    =item.text
+    .container
+        .margin-top-5
+        .pull-right
+            a#show_search.visible-xs.visible-sm.pull-left.btn.btn-sm.btn-default.btn-gradient(href="javascript:ShowHide('left_panel')") Search for a property
+        .clear
+        br
+        .col-md-9.text-left
+            link(rel='stylesheet', href='css/results.css')
+            script(src='js/results.js')
+            .panel.panel-default.results-info
+                .number-results
+                    | Total Results: 28, 
+                    | Order by: 
+                    a.underline-link.black-text(href='index.php?mod=search&order_by=date_old') Date
+                    img(src='images/down.png', width='14', height='14', alt='')
+                    a.underline-link.black-text(href='index.php?mod=search&order_by=price_max') Price
+                .view-select-tabs
+                    a#list-view.current(href='#')
+                        span List View
+                    a#grid-view(href='#')
+                        span Grid View
+                .rfloat.r-margin-4.add-top-margin Results Format: 
+                .clear
+            .clear
+
+             for item in context
+                .results-container
+                    .panel.panel-default.search-result
+                        // template
+                        // template
+                        .panel-heading.featured-heading
+                            h3.panel-title
+                                a.search-result-title.featured-r-title(href='#')
+                                    =item.headline
+                                span.listing-price.r-margin-18
+                                    =item.price
+                        .panel-body
+                            .row
+                                .col-sm-5.col-xs-12
+                                    a.btn-block.result-details-link(href='index.php?mod=details&id=124')
+                                        img.img-res(alt=item.headline, src='static/pictures/sell')
+                                .col-sm-7.col-xs-12
+                                    .details
+                                        p.description
+                                            // template
+                                            | Location: 
+                                            b
+                                                =item.location
+                                            br
+                                            br
+                                            | 												Bedrooms:
+                                            b 1
+                                            | 												Bathrooms:
+                                            b 1
+                                            | 											, 
+                                            br
+                                            br
+                                            // template
+                                            | An exclusive offer - excellent apartment in the very center of Milan, close to the Duomo!
+                                        span.is_r_featured .
+                            .row.margin-top-20
+                                .col-xs-6
+                                    a#save_124.btn.btn-default(href='javascript:SaveListing(124)') Save
+                                .col-xs-6
+                                    .text-right
+                                        a.btn.btn-primary(href='index.php?mod=details&id=124') Details
+
+            .clear
+            ul.pagination
+                li
+                    a
+                        b 1
+                li
+                    a.pagination-link(href='index.php?mod=search&num=2') 2
+                li
+                    a.pagination-link(href='index.php?mod=search&num=3') 3
+                li
+                    a.pagination-link(href='index.php?mod=search&num=2') >
+                li
+                    a.pagination-link(href='index.php?mod=search&num=3') >>
+        #right_panel.col-md-3
+            .panel.panel-success
+                .panel-heading
+                    h3.panel-title Real Estate Quick Links
+                .panel-body
+                    a(href='index.php?mod=search&location=1-3') Barbour (2)
+                    br
+                    a(href='index.php?mod=search&location=1-62') Tallapoosa (1)
+                    br
+                    a(href='index.php?mod=search&location=1-6') Bullock (1)
+                    br
+            .panel.panel-success
+                .panel-heading
+                    h3.panel-title Latest News
+                .panel-body
+                    a(href='index.php?mod=news&id=1')
+                        h4 Some test news
+                    span.sub-text
+                        | This is a test bla bla
+                        a(title='Some test news', href='index.php?mod=news&id=1') ...
+                    br
+            br
+            wsa(banners_1='')

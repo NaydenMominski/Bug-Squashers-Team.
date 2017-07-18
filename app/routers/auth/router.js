@@ -17,12 +17,12 @@ module.exports = {
             .post('/sign-up', upload(), (req, res) => {
                 // console.log(req.file);
 
-                const usersalt = encryption.generateSalt();
+                const salt = encryption.generateSalt();
                 const user = {
                     username: req.body.username,
                     hashedPass: encryption
-                        .generateHashedPassword(usersalt, req.body.password),
-                    salt: usersalt,
+                        .generateHashedPassword(salt, req.body.password),
+                    salt: salt,
                     usertype: req.body.usertype,
                     firstname: req.body.firstname,
                     lastname: req.body.lastname,
