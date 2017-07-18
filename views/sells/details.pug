@@ -1,0 +1,64 @@
+extends _shared/_base
+
+block content
+    .container
+        br
+        .col-md-9.text-left
+            h2.lfloat 
+                =context.headline
+            .clear
+            br
+            .justify-align
+                .tabbable
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href='#tab-details', data-toggle='tab') Details
+                        li
+                            a(href='#tab-contact', onclick='javascript:show_map()', data-toggle='tab') Location
+                        li
+                            a(href='#tab-share', data-toggle='tab') Share
+                    .tab-content
+                        br
+                        #tab-details.tab-pane.active
+                            .col-md-6
+                                | Location: 
+                                b
+                                    =context.location
+                                br
+                                br
+                                | 			Size:
+                                b 
+                                    =context.location
+                                br
+                                br
+                                | 					Bedrooms:
+                                b 
+                                    =context.bedrooms
+                                br
+                                br
+                                | 					Bathrooms:
+                                b 
+                                    =context.bathrooms
+                                br
+                                br
+                                b 
+                                    =context.description
+                                br
+                                br
+                            .col-md-6
+                                .final-result-image
+                                    a(href='/static/pictures/img/' + context.avatar, rel='prettyPhoto[ad_gal]')
+                                        img(src='/static/pictures/img/' + context.avatar, width='300', alt='Exclusive apartment in downtown Bristol 43234')
+                            .clear
+                            hr
+                            | 		Posted by:
+                            b ewrewr
+                            | 			(Private Seller)				,
+                            img(src='images/phone_icon.png', alt='phone icon')
+                            b 23434
+                            | 		Posted on:
+                            b
+                                | 05/21/14
+                            | , 
+                            | 		Total Hits: 
+                            b 760

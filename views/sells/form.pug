@@ -1,0 +1,116 @@
+extends _shared/_base
+
+block content
+    .container
+        br
+        .col-md-9.text-left
+            form#sell_form(action="/sells" method="POST",enctype='multipart/form-data')
+                .form-group
+                    h3.no-top-margin.text-center
+                        | Property Details
+                    hr
+                    br
+                    label.control-label.col-sm-2(for='headline')
+                        | Headline:
+                    .control-field.col-sm-10.no-right-padding
+                        input.form-control.input-sm(type='text', name='headline', value='')
+                        i
+                        | if you leave empty, it will look like 'Apartment for sale in New York, Price:  $240,000'
+                        br
+                .form-group.col-md-4
+                    br
+                    | Property:
+                    br
+                    select.form-control.input-sm(name='property')
+                        option(value='') Please Select
+                        each value in ["Apartament", "House"]
+                            option(value=value)
+                                =value
+                .form-group.col-md-8
+                    br
+                    | Location:
+                    br
+                    select#user_type.form-control.input-sm(name='location')
+
+                        option(value='') Please Select
+                        each value,index in ["Sofia","Varna","Burgas","Plovdiv","Veliko Tarnovo","Stara Zagora","Ruse"]
+                            option(value=index)
+                                =value
+                .form-group.col-md-4
+                    br
+                    | 		Price ($):
+                    br
+                    input.form-control.input-sm(type='text', name='price', value='')
+                .form-group.col-md-4
+                    br
+                    | 		Size		
+                    br
+                    input.form-control.input-sm(type='text', name='size', value='')
+                .form-group.col-md-4
+                    br
+                    | Bedrooms:
+                    br
+                    select.form-control.input-sm(name='bedrooms')
+                        option(value='') Please Select
+                        option 1
+                        option 2
+                        option 3
+                        option 4
+                        option 5
+                        option 6
+                        option 7+
+                .form-group.col-md-4
+                    br
+                    | Bathrooms:
+                    br
+                    select.form-control.input-sm(name='bathrooms')
+                        option(value='') Please Select
+                        option 1
+                        option 2
+                        option 3
+                        option 4
+                        option 5+
+                .form-group.col-md-4
+                    br
+                    | Floor:
+                    br
+                    input.form-control.input-sm(type='text', value='', name='floor')
+                .form-group.col-md-4
+                    br
+                    | Floors in building:
+                    br
+                    input.form-control.input-sm(type='text', value='', name='buildingfloors')
+                .clearfix
+                br
+                h3
+                    | Property Amenities
+                hr
+                .form-group.col-md-4
+                    input(type='checkbox', value='lift', name='lift')
+                    span.listing-feature-span
+                    | asansior
+                .form-group.col-md-4
+                    input(type='checkbox', value='garden', name='garden')
+                    span.listing-feature-span
+                    | garden
+                .clearfix
+                .form-group
+                br
+                h3
+                    | Description
+                .clear
+                hr
+                textarea.pull-left(cols='80', rows='7', name='description')
+                .clear
+                br
+                .form-group
+                    label.control-label.col-sm-2(for='avatar')
+                        | Avatar:
+                    .control-field.col-sm-6.no-right-padding
+                        input.form-control.input-sm(type='file', name='avatar', accept='.jpg,.jpeg,.png')
+                br
+                br
+                input.btn.btn-default.btn-gradient.pull-right(type='submit', value=' Submit ')
+                .clear
+                br
+                br
