@@ -52,13 +52,15 @@ block content
                             .clear
                             hr
                             | 		Posted by:
-                            b ewrewr
-                            | 			(Private Seller)				,
-                            img(src='images/phone_icon.png', alt='phone icon')
-                            b 23434
-                            | 		Posted on:
-                            b
+                            if user
+                                b 
+                                    = user.username + "(" + user.usertype + "),"                                
+                                img(src='/static/pictures/phone_icon.png', alt='phone icon')
+                                b 
+                                    = user.phone
+                                | 		Posted on:
+                                b
                                 | 05/21/14
-                            | , 
-                            | 		Total Hits: 
-                            b 760
+                                | , 
+                                | 		Total Hits: 
+                                b 760

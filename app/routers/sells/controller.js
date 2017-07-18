@@ -31,6 +31,7 @@ const getController = (data) => {
         },
         create(req, res) {
             const sell = req.body;
+            const user = req.user;
             const sellimages = req.file;
 
             if (!isValid(sell)) {
@@ -38,9 +39,8 @@ const getController = (data) => {
                     .then(() => res.redirect(400, '/sells/form'));
             }
 
-            return data.create(sell, sellimages)
+            return data.create(user, sell, sellimages)
                 .then((result) => {
-                    console.log(result);
                     res.redirect('/sells/' + result.id);
                 });
         },
