@@ -28,26 +28,21 @@ const getData = (db) => {
                 return Promise.reject('Invalid id');
             }
         },
-        create(sell, sellimages) {
-            const newsell = {
-                headline: sell.headline,
-                property: sell.property,
-                location: sell.location,
-                price: sell.price,
-                size: sell.size,
-                bedrooms: sell.bedrooms,
-                bathrooms: sell.bathrooms,
-                floor: sell.floor,
-                buildingfloors: sell.buildingfloors,
-                lift: sell.lift,
-                garden: sell.garden,
-                description: sell.description,
-                avatar: sellimages ? sellimages.filename : 'default.png',
+        create(user, sell, sellimages) {
+            const userdb = {
+                id: user.id,
+                username: user.username,
+                usertype: user.usertype,
+                phone: user.phone,
+
             };
-            return collection.insert(newsell)
+            sell.avatar = sellimages ? sellimages.filename : 'default.png';
+            sell.user = userdb;
+
+            return collection.insert(sell)
                 .then((result) => {
-                    newsell.id = newsell._id;
-                    return newsell;
+                    sell.id = sell._id;
+                    return sell;
                 });
         },
     };

@@ -2,7 +2,17 @@ mixin nav(user)
     ul.nav.navbar-nav.navbar-right
         if user
             li
+<<<<<<< HEAD
                 a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle
+=======
+                a(href='#')
+                    | My Account
+            li
+                a(href="/auth/sign-out")
+                    | Logout 
+            li
+                a(href="#")
+>>>>>>> 9273019b9024175738fca21370e14c3235ff8092
                     =user.username
                     span.caret
                 ul(role="menu").dropdown-menu
