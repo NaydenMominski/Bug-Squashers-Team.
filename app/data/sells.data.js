@@ -47,6 +47,25 @@ const getData = (db) => {
                     return sell;
                 });
         },
+        update(user, sell, editedSell, sellimages) {
+            const userdb = {
+                id: user.id,
+                username: user.username,
+                usertype: user.usertype,
+                phone: user.phone,
+            };
+            console.log(editedSell);
+            editedSell.avatar = sellimages ? sellimages.filename : 'default.png';
+            editedSell.user = userdb;
+            editedSell.date = new Date();
+            return collection.updateOne({
+                    _id: sell._id,
+                }, editedSell)
+                .then((result) => {
+                    sell.id = sell._id;
+                    return sell;
+                });
+        },
     };
 };
 

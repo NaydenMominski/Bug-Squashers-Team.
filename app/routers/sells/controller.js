@@ -18,7 +18,7 @@ const getController = (data) => {
             return data.getById(req.params.id)
                 .then((sell) => {
                     if (!sell) {
-                        return res.redirect(404, '/sells/all');
+                        return res.redirect(404, '/sells');
                     }
                     sell.date = sell.date.toLocaleDateString('en-US');
 
@@ -33,7 +33,7 @@ const getController = (data) => {
                     });
                 })
                 .catch((err) => {
-                    return res.redirect(404, '/sells/all');
+                    return res.redirect(404, '/sells');
                 });
         },
         create(req, res) {
@@ -55,15 +55,40 @@ const getController = (data) => {
             return data.getById(req.params.id)
                 .then((sell) => {
                     if (!sell) {
-                        return res.redirect(404, '/sells/all');
+                        return res.redirect(404, '/sells');
                     }
-                    console.log(sell);
                     return res.render('sells/edit-form', {
                         context: sell,
                     });
                 })
                 .catch((err) => {
-                    return res.redirect(404, '/sells/all');
+                    return res.redirect(404, '/sells');
+                });
+        },
+        editPost(req, res) {
+            const id = req.params.id;
+            // console.log(editedSell);
+            data.getById(req.params.id)
+                .then((sell) => {
+                    if (!sell) {
+                        return res.redirect(404, '/sells');
+                    }
+                    const editedSell = req.body;
+                    const user = req.user;
+                    const sellimages = req.file;
+                    if (sell.user.id.equals(req.user._id)) {
+                        return data.update(user, sell, editedSell, sellimages)
+                            .then((result) => {
+                                res.redirect('/sells/' + result.id);
+                            });
+                    }
+                    return data.update(user, sell, sellimages)
+                        .then((result) => {
+                            res.redirect('/sells/' + result.id);
+                        });
+                })
+                .catch((err) => {
+                    return res.redirect(404, '/sells');
                 });
         },
     };

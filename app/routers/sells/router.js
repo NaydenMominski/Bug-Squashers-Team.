@@ -30,6 +30,12 @@ module.exports = {
                     return res.redirect('/auth/sign-in');
                 }
                 return controller.create(req, res);
+            })
+            .post('/:id', upload('./static/pictures/sell'), (req, res) => {
+                if (!req.user) {
+                    return res.redirect('/auth/sign-in');
+                }
+                return controller.editPost(req, res);
             });
         return router;
     },
