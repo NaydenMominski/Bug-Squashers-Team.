@@ -20,7 +20,14 @@ const getController = (data) => {
                     if (!sell) {
                         return res.redirect(404, '/sells/all');
                     }
+                    sell.date = sell.date.toLocaleDateString('en-US');
 
+                    const curency = +sell.price;
+                    sell.price = curency.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                    });
                     return res.render('sells/details', {
                         context: sell,
                     });

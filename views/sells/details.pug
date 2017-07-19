@@ -6,6 +6,7 @@ block content
         .col-md-9.text-left
             h2.lfloat 
                 =context.headline
+                =context.price
             .clear
             br
             .justify-align
@@ -25,25 +26,27 @@ block content
                                 b
                                     =context.location
                                 br
-                                br
                                 | Size:
                                 b 
                                     =context.size
-                                br
+                                |   m2
                                 br
                                 | Bedrooms:
                                 b 
                                     =context.bedrooms
-                                br
                                 br
                                 | Bathrooms:
                                 b 
                                     =context.bathrooms
                                 br
                                 br
+                                b
+                                    =context.price
+                                |    USD
+                                br
+                                br
                                 b 
                                     =context.description
-                                br
                                 br
                             .col-md-6
                                 .final-result-image
@@ -52,15 +55,14 @@ block content
                             .clear
                             hr
                             | 		Posted by:
-                            if user
-                                b 
-                                    = user.username + "(" + user.usertype + "),"                                
-                                img(src='/static/pictures/phone_icon.png', alt='phone icon')
-                                b 
-                                    = user.phone
-                                | 		Posted on:
-                                b
-                                | 05/21/14
-                                | , 
-                                | 		Total Hits: 
-                                b 760
+                            b 
+                                = context.user.username + "(" + context.user.usertype + "),"                                
+                            img(src='/static/pictures/phone_icon.png', alt='phone icon')
+                            b 
+                                = context.user.phone
+                            | Posted on:
+                            b
+                                = context.date
+                            | , 
+                            | Total Hits: 
+                            b 760

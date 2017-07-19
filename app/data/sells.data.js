@@ -36,8 +36,10 @@ const getData = (db) => {
                 phone: user.phone,
 
             };
+
             sell.avatar = sellimages ? sellimages.filename : 'default.png';
             sell.user = userdb;
+            sell.date = new Date();
 
             return collection.insert(sell)
                 .then((result) => {
