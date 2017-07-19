@@ -1,18 +1,20 @@
 mixin nav(user)
-    ul.top-links
+    ul.nav.navbar-nav.navbar-right
         if user
             li
-                a(href='#')
-                    | Saved Properties   
-            li
-                a(href='#')
-                    | My Account
-            li
-                a(href="/auth/sign-out")
-                    | Logout 
-            li
-                a(href="#")
+                a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle
                     =user.username
+                    span.caret
+                ul(role="menu").dropdown-menu
+                    li
+                        a(href='#')
+                            | My Account
+                    li
+                        a(href="#")
+                            | Saved Properties   
+                    li
+                        a(href="/auth/sign-out")
+                            | Logout 
         else
             li
                 a(href="/auth/sign-up")

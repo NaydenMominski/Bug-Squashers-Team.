@@ -4,7 +4,7 @@ include _nav
 html(lang="en")
 head
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
-    title Property Portal Demo
+    title Real Estate
     meta(name='description', content='')
     meta(name='keywords', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -20,11 +20,10 @@ body
         .container
             .col-md-4.no-left-padding.center-xs
                 br
-                img.site-logo(src='/static/pictures/logo.png')
+                a(href="/", title="title") 
+                    img.site-logo(src='/static/pictures/logo.png')
             .col-md-8.text-right.no-right-padding
-                br
-                br
-                +nav(user)
+            
     .clear
     .nav-container
         .container
@@ -48,6 +47,7 @@ body
                         a(href='#') Questions
                     li
                         a(href='#') Contact
+                +nav(user)
 
     block body
     .text-center
@@ -61,7 +61,7 @@ body
                 li
                     a(href='#') Latest Ads
                 li
-                    a(href='#') Post a New Ad
+                    a(href='/sells/form') Post a New Ad
                 li
                     a(href='#') Agents
                 li
