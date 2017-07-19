@@ -19,6 +19,9 @@ module.exports = {
 
                 return res.render('sells/form');
             })
+            .get('/edit/:id', (req, res) => {
+                return controller.editGet(req, res);
+            })
             .get('/:id', (req, res) => {
                 return controller.getDetails(req, res);
             })

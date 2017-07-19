@@ -51,8 +51,22 @@ const getController = (data) => {
                     res.redirect('/sells/' + result.id);
                 });
         },
+        editGet(req, res) {
+            return data.getById(req.params.id)
+                .then((sell) => {
+                    if (!sell) {
+                        return res.redirect(404, '/sells/all');
+                    }
+                    console.log(sell);
+                    return res.render('sells/edit-form', {
+                        context: sell,
+                    });
+                })
+                .catch((err) => {
+                    return res.redirect(404, '/sells/all');
+                });
+        },
     };
 };
-
 
 module.exports = { getController };

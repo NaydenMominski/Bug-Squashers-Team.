@@ -16,8 +16,7 @@ block content
                             a(href='#tab-details', data-toggle='tab') Details
                         li
                             a(href='#tab-contact', onclick='javascript:show_map()', data-toggle='tab') Location
-                        li
-                            a(href='#tab-share', data-toggle='tab') Share
+
                     .tab-content
                         br
                         #tab-details.tab-pane.active
@@ -48,6 +47,9 @@ block content
                                 b 
                                     =context.description
                                 br
+                                br
+                                a(href='/sells/edit/' + context._id)
+                                    | Edit
                             .col-md-6
                                 .final-result-image
                                     a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')
