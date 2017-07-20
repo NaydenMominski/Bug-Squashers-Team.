@@ -6,7 +6,9 @@ block content
         .col-md-9.text-left
             form#sell_form(action="/sells" method="POST",enctype='multipart/form-data')
                 .form-group
-                    h3.no-top-margin.text-center
+                    br
+                    br
+                    h3.no-top-margin.text-left
                         | Property Details
                     hr
                     br
@@ -15,7 +17,7 @@ block content
                     .control-field.col-sm-10.no-right-padding
                         input.form-control.input-sm(type='text', name='headline', value='')
                         i
-                        | if you leave empty, it will look like 'Apartment for sale in New York, Price:  $240,000'
+                        | if you leave empty, it will look like 'Apartment for sale in Sofia, Price:  $76,000'
                         br
                 .form-group.col-md-4
                     br
@@ -104,6 +106,21 @@ block content
                 .clear
                 br
                 .form-group
+                    br
+                    h3
+                        | Add a Google Map to Your Listing
+                    .clear
+                    hr
+                    label.control-label.col-sm-2(for='address')
+                        | Address
+                    .control-field.col-sm-10.no-right-padding
+                        input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property")
+                        input(type="button", style="float:left !important", class="btn btn-default btn-gradient", value="Use this address", onclick="javascript:codeAddress()")
+                    //- block map
+                    div#map(style="width: 500px; height: 300px; position: relative; overflow: hidden;")
+                    script(src="../../static/js/googlemap-api.js")
+                    script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&callback=initMap")
+                .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
                     .control-field.col-sm-6.no-right-padding
@@ -114,3 +131,4 @@ block content
                 .clear
                 br
                 br
+            

@@ -6,6 +6,7 @@
     "author": "Bug-Squashers-Team",
     "license": "MIT",
     "dependencies": {
+        "@google/maps": "^0.4.2",
         "body-parser": "^1.17.2",
         "bootstrap": "^3.3.7",
         "connect-flash": "^0.1.1",
