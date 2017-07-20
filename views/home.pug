@@ -8,9 +8,7 @@ block body
                     h3.panel-title Search for a property
                     hr
                     // SEARCH FORM
-                    form#search-form(method='post', action='index.php')
-                        input(name='mod', value='search', type='hidden')
-                        input(name='search_type', value='search_form', type='hidden')
+                    form#search-form(method='get', action='/sells')
                         #search_form_container
                             .form-group
                                 label.control-label.col-sm-5(for='p_type')
@@ -24,12 +22,9 @@ block body
                                     small Property
                                 .control-field.col-sm-7.no-right-padding
                                     select#p_type.form-control.input-sm(name='p_type')
-                                        option(value='-1', selected='selected') All
-                                        option(value='1') Apartment
-                                        option(value='2') House
-                                        option(value='4') Land
-                                        option(value='3') Office
-
+                                        option(value='All', selected='selected') All
+                                        option(value='Apartament') Apartment
+                                        option(value='House') House
                             .form-group
                                 label.control-label.col-sm-5(for='min_price')
                                     small Min price
@@ -48,7 +43,7 @@ block body
                                         option(value='date', selected='selected') Date
                                         option(value='price') Price
 
-                        input.btn.btn-primary.pull-right(style='width:145px;margin-top:4px', name='commit', value='Search', type='submit')
+                        input.btn.btn-primary.pull-right(style='width:145px;margin-top:4px', type='submit')
                     .clear
                     // END SEARCH FORM
                 br

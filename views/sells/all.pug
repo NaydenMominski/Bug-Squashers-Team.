@@ -8,15 +8,15 @@ block content
         .clear
         br
         .col-md-9.text-left
-            link(rel='stylesheet', href='css/results.css')
-            script(src='js/results.js')
+            //- link(rel='stylesheet', href='css/results.css')
+            //- script(src='js/results.js')
             .panel.panel-default.results-info
                 .number-results
                     | Total Results: 28, 
                     | Order by: 
-                    a.underline-link.black-text(href='index.php?mod=search&order_by=date_old') Date
-                    img(src='images/down.png', width='14', height='14', alt='')
-                    a.underline-link.black-text(href='index.php?mod=search&order_by=price_max') Price
+                    a.underline-link.black-text(href='#') Date
+                    //- img(src='images/down.png', width='14', height='14', alt='')
+                    a.underline-link.black-text(href='#') Price
                 .view-select-tabs
                     a#list-view.current(href='#')
                         span List View
@@ -63,7 +63,10 @@ block content
                                         span.is_r_featured .
                             .row.margin-top-20
                                 .col-xs-6
-                                    a#save_124.btn.btn-default(href='javascript:SaveListing(124)') Save
+                                    //- form#search-form
+                                    //-     input(type='text', name='query', placeholder='Search...')
+                                    //-     input(type='text', name='page', placeholder='Search...')
+                                    //-     input(type='submit', value='Search')
                                 .col-xs-6
                                     .text-right
                                         a.btn.btn-primary(href='sells/' + item._id) Details

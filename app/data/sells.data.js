@@ -3,8 +3,23 @@ const { ObjectID } = require('mongodb');
 const getData = (db) => {
     const collection = db.collection('sells');
     return {
-        getAll() {
-            return collection.find({})
+        getAll(req, res) {
+            let property = req.query.p_type || 'All';
+
+            if (property === 'All') {
+                property = { $in: ['Apartament', 'House'] };
+            }
+
+            const min = +req.query.price_from || 0;
+            const max = +req.query.price_to || 9999999999;
+            const price = { '$gte': min, '$lt': max };
+
+            const query = {
+                property,
+                price,
+            };
+
+            return collection.find(query)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {

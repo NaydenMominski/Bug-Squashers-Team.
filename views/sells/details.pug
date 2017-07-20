@@ -49,10 +49,12 @@ block content
                                     =context.description
                                 br
                                 br
-                                a(href='/sells/edit/' + context._id)
-                                    | Edit                                  
-                                form(action="/sells/edit/"+context._id , method="POST")
-                                    input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
+                                .row.margin-top-20
+                                    .col-md-6
+                                        a#save_124.btn.btn-default(href='/sells/edit/' + context._id) Edit
+                                    .col-md-6
+                                        form(action="/sells/edit/"+context._id , method="POST")
+                                            input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
                             .col-md-6
                                 .final-result-image
                                     a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')

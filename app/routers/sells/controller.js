@@ -7,7 +7,7 @@ const isValid = (item) => {
 const getController = (data) => {
     return {
         getAll(req, res) {
-            return data.getAll()
+            return data.getAll(req, res)
                 .then((sells) => {
                     return res.render('sells/all', {
                         context: sells,
@@ -40,6 +40,7 @@ const getController = (data) => {
             const sell = req.body;
             const user = req.user;
             const sellimages = req.file;
+            sell.price = +sell.price;
 
             if (!isValid(sell)) {
                 return Promise.resolve()
@@ -76,6 +77,7 @@ const getController = (data) => {
                     const editedSell = req.body;
                     const user = req.user;
                     const sellimages = req.file;
+                    editedSell.price = +editedSell.price;
 
                     if (sell.user.id.equals(req.user._id)) {
                         return data.update(user, sell, editedSell, sellimages)
@@ -102,6 +104,7 @@ const getController = (data) => {
                                 res.redirect('/sells');
                             });
                     }
+                    console.log('Wrong user');
                     return res.redirect('/sells/' + id);
                 })
                 .catch((err) => {

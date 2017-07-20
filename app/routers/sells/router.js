@@ -29,6 +29,7 @@ module.exports = {
                 if (!req.user) {
                     return res.redirect('/auth/sign-in');
                 }
+                // console.log(typeof req.body.price);
                 return controller.create(req, res);
             })
             .post('/edit/:id', (req, res) => {
