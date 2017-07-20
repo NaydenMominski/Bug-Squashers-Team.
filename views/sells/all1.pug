@@ -1,8 +1,0 @@
-extends _shared/_base
-
-block content
-    ul
-        for item in context
-            li
-                a.sell-item(href="/sells/" + item.id)
-                    =item.text

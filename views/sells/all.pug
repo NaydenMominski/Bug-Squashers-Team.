@@ -36,11 +36,12 @@ block content
                                 a.search-result-title.featured-r-title(href='sells/' + item._id)
                                     =item.headline
                                 span.listing-price.r-margin-18
-                                    =item.price
+                                    b
+                                        =item.price
                         .panel-body
                             .row
                                 .col-sm-5.col-xs-12
-                                    a.btn-block.result-details-link(href='#')
+                                    a.btn-block.result-details-link(href='sells/' + item._id)
                                         img.img-res(alt=item.headline, src='static/pictures/sell/'+ item.avatar)
                                 .col-sm-7.col-xs-12
                                     .details

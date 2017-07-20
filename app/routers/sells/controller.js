@@ -9,6 +9,15 @@ const getController = (data) => {
         getAll(req, res) {
             return data.getAll(req, res)
                 .then((sells) => {
+                    sells.forEach((sell) => {
+                        const curency = +sell.price;
+                        sell.price = curency.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                        });
+                    });
+
                     return res.render('sells/all', {
                         context: sells,
                     });

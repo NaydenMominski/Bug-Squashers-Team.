@@ -13,13 +13,14 @@ const getData = (db) => {
             const min = +req.query.price_from || 0;
             const max = +req.query.price_to || 9999999999;
             const price = { '$gte': min, '$lt': max };
+            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: 1 };
 
             const query = {
                 property,
                 price,
             };
 
-            return collection.find(query)
+            return collection.find(query).sort(orderBy)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {
@@ -74,8 +75,8 @@ const getData = (db) => {
             editedSell.date = new Date();
 
             return collection.updateOne({
-                _id: sell._id,
-            }, editedSell)
+                    _id: sell._id,
+                }, editedSell)
                 .then((result) => {
                     sell.id = sell._id;
                     return sell;
