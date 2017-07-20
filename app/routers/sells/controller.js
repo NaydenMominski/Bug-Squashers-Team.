@@ -68,7 +68,7 @@ const getController = (data) => {
         editPost(req, res) {
             const id = req.params.id;
             // console.log(editedSell);
-            data.getById(req.params.id)
+            data.getById(id)
                 .then((sell) => {
                     if (!sell) {
                         return res.redirect(404, '/sells');
@@ -76,16 +76,33 @@ const getController = (data) => {
                     const editedSell = req.body;
                     const user = req.user;
                     const sellimages = req.file;
+
                     if (sell.user.id.equals(req.user._id)) {
                         return data.update(user, sell, editedSell, sellimages)
                             .then((result) => {
                                 res.redirect('/sells/' + result.id);
                             });
                     }
-                    return data.update(user, sell, sellimages)
-                        .then((result) => {
-                            res.redirect('/sells/' + result.id);
-                        });
+                    return res.redirect('/sells/' + id);
+                })
+                .catch((err) => {
+                    return res.redirect(404, '/sells');
+                });
+        },
+        deletePost(req, res) {
+            const id = req.params.id;
+            data.getById(id)
+                .then((sell) => {
+                    if (!sell) {
+                        return res.redirect(404, '/sells');
+                    }
+                    if (sell.user.id.equals(req.user._id)) {
+                        return data.remove(sell)
+                            .then((result) => {
+                                res.redirect('/sells');
+                            });
+                    }
+                    return res.redirect('/sells/' + id);
                 })
                 .catch((err) => {
                     return res.redirect(404, '/sells');

@@ -4,7 +4,7 @@ block content
     .container
         br
         .col-md-9.text-left
-            form#sell_form(action="/sells/"+context._id method="POST",enctype='multipart/form-data')
+            form#sell_form(action="/sells/"+context._id , method="POST",enctype='multipart/form-data')
                 input.form-control.input-sm(type="hidden", name="id", value=context._id)
                 .form-group
                     h3.no-top-margin.text-center

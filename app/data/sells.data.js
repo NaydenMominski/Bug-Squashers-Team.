@@ -54,10 +54,10 @@ const getData = (db) => {
                 usertype: user.usertype,
                 phone: user.phone,
             };
-            console.log(editedSell);
             editedSell.avatar = sellimages ? sellimages.filename : 'default.png';
             editedSell.user = userdb;
             editedSell.date = new Date();
+
             return collection.updateOne({
                 _id: sell._id,
             }, editedSell)
@@ -65,6 +65,13 @@ const getData = (db) => {
                     sell.id = sell._id;
                     return sell;
                 });
+        },
+        remove(sell) {
+            console.log(sell);
+
+            return collection.remove({
+                _id: sell._id,
+            });
         },
     };
 };
