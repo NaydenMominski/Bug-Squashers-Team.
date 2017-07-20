@@ -59,8 +59,8 @@ const getData = (db) => {
             editedSell.user = userdb;
             editedSell.date = new Date();
             return collection.updateOne({
-                    _id: sell._id,
-                }, editedSell)
+                _id: sell._id,
+            }, editedSell)
                 .then((result) => {
                     sell.id = sell._id;
                     return sell;
