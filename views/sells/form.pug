@@ -115,11 +115,8 @@ block content
                         | Address
                     .control-field.col-sm-10.no-right-padding
                         input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property")
-                        input(type="button", style="float:left !important", class="btn btn-default btn-gradient", value="Use this address", onclick="javascript:codeAddress()")
-                    //- block map
+                         //- input(type="button", style="float:left !important", class="btn btn-default btn-gradient", value="Use this address", onclick="javascript:codeAddress()")
                     div#map(style="width: 500px; height: 300px; position: relative; overflow: hidden;")
-                    script(src="../../static/js/googlemap-api.js")
-                    script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&callback=initMap")
                 .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
