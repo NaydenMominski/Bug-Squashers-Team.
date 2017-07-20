@@ -825,7 +825,8 @@ form#main button:hover {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.property-meta { 
+
+.property-meta {
     background-color: #fff;
     border: 1px solid #e2e9e6;
     margin-bottom: 20px;
@@ -836,13 +837,14 @@ form#main button:hover {
     padding: 0;
     margin: 0;
 }
+
 .final-result-image li {
     padding: 16px;
     display: inline-block;
     border-right: 1px solid #eeeeee;
 }
 
-#tab-details>div>a>img{ 
+#tab-details>div>a>img {
     width: 100%;
 }
 
@@ -1104,7 +1106,7 @@ form#main button:hover {
 }
 
 .top-link:hover {
-    color: #33333;
+    color: #333333;
     text-decoration: none;
 }
 
@@ -1466,7 +1468,8 @@ form#main button:hover {
     padding-right: 20px;
     color: #ffffff;
 }
-.nav-tabs > li > a {
+
+.nav-tabs>li>a {
     color: #555555;
 }
 
@@ -1844,11 +1847,9 @@ fieldset[disabled] .btn {
     background: #cfd7d9;
 }
 
-
-.final-result-image .panel-heading{ 
-    background-color:transparent !important;
+.final-result-image .panel-heading {
+    background-color: transparent !important;
 }
-
 
 .panel-title {
     margin-top: 0;

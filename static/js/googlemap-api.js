@@ -1,5 +1,3 @@
-
-
 function initMap() {
     let options = {
         zoom: 12,
@@ -55,8 +53,11 @@ function initMap() {
         });
     }
 
-    $('a[href="#tab-location"]').on('shown.bs.tab', function (e) {
+    $('a[href="#tab-location"]').on('shown.bs.tab', function(e) {
         var target = $(e.target).attr("href") // activated tab
         alert(target);
     });
 }
+
+
+google.maps.event.addDomListener(window, "load", initMap);
