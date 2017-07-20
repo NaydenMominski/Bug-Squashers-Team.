@@ -1,7 +1,7 @@
 include _nav
 
 <!DOCTYPE html>
-html(lang="en")
+html(lang='en')
 head
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     title Real Estate
@@ -9,18 +9,19 @@ head
     meta(name='keywords', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    link(rel='stylesheet', href='/static/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/static/css/main.css')
     link(rel='stylesheet', href='/static/css/css.css')
     link(rel='stylesheet', href='/static/css/app.css')
-    script(type='text/javascript', src='/static/js/jquery.js')
-    script(type='text/javascript', src='/static/js/bootstrap.js')
+    script(src='/js/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
 body
     .row.top-container
         .container
             .col-md-4.no-left-padding.center-xs
                 br
-                a(href="/", title="title") 
+                a(href='/', title='title') 
                     img.site-logo(src='/static/pictures/logo.png')
             .col-md-8.text-right.no-right-padding
             
@@ -32,7 +33,7 @@ body
             #nav_menu.hide-sm.navbar-collapse
                 ul.nav.navbar-nav
                     li
-                        a(href="/sells") Sales
+                        a(href='/sells') Sales
                     li
                         a(href='#') Rentals
                     li
@@ -69,5 +70,5 @@ body
                     a(href='#') Questions
                 li
                     a(href='#') Contact
-    script(src="../../static/js/googlemap-api.js")
-    script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&callback=initMap&sensor=false&libraries=places")
+    script(src='../../static/js/googlemap-api.js')
+    script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&callback=initMap&sensor=false&libraries=places')

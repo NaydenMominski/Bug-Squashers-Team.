@@ -5,8 +5,8 @@ block content
         br
         .col-md-9.text-left
             h2.lfloat 
-                =context.headline
-                | 
+                =context.headline 
+                | &nbsp;
                 =context.price
             .clear
             br
@@ -16,36 +16,33 @@ block content
                         li.active
                             a(href='#tab-details', data-toggle='tab') Details
                         li
-                            a(href='#tab-contact', onclick='javascript:show_map()', data-toggle='tab') Location
+                            a(href='#tab-location', data-toggle='tab') Location
 
                     .tab-content
                         br
                         #tab-details.tab-pane.active
-                            .col-md-6
-                                | Location: 
-                                b
-                                    =context.location
-                                br
-                                | Size:
-                                b 
-                                    =context.size
-                                |   m2
-                                br
-                                | Bedrooms:
-                                b 
-                                    =context.bedrooms
-                                br
-                                | Bathrooms:
-                                b 
-                                    =context.bathrooms
-                                br
-                                br
-                                b
-                                    =context.price
-                                |    USD
-                                br
-                                br
-                                b 
+                            .col-md-12
+                                a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')
+                                    img(src='/static/pictures/sell/' + context.avatar, width='300', alt='Exclusive apartment in downtown Bristol 43234')
+                            .col-md-6.final-result-image
+                                ul  
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-map-marker
+                                        =context.address
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-home
+                                        =context.property
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-bed
+                                        =context.bedrooms
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-bath
+                                        =context.bathrooms
+                            .panel.panel-default.col-md-12.final-result-image
+                                .panel-heading
+                                    h4.panel-title Description
+                                |               
+                                .panel-body
                                     =context.description
                                 br
                                 br
@@ -63,13 +60,16 @@ block content
                             hr
                             | 		Posted by:
                             b 
-                                = context.user.username + " (" + context.user.usertype + "), "                                
+                                = context.user.username + "(" + context.user.usertype + "),"                                
                             img(src='/static/pictures/phone_icon.png', alt='phone icon')
                             b 
                                 = context.user.phone
-                            |  Posted on: 
+                            | Posted on:
                             b
                                 = context.date
-                            //- | , 
-                            //- | Total Hits: 
-                            //- b 760
+                            | , 
+                            | Total Hits: 
+                            b 760
+                        #tab-location.tab-pane
+                            if context.long 
+                            div#map(style="width: 500px; height: 300px; position: relative; overflow: hidden;")
