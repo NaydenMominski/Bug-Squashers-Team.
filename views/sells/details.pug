@@ -6,6 +6,7 @@ block content
         .col-md-9.text-left
             h2.lfloat 
                 =context.headline
+                | 
                 =context.price
             .clear
             br
@@ -49,7 +50,9 @@ block content
                                 br
                                 br
                                 a(href='/sells/edit/' + context._id)
-                                    | Edit
+                                    | Edit                                  
+                                form(action="/sells/edit/"+context._id , method="POST")
+                                    input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
                             .col-md-6
                                 .final-result-image
                                     a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')
@@ -58,13 +61,13 @@ block content
                             hr
                             | 		Posted by:
                             b 
-                                = context.user.username + "(" + context.user.usertype + "),"                                
+                                = context.user.username + " (" + context.user.usertype + "), "                                
                             img(src='/static/pictures/phone_icon.png', alt='phone icon')
                             b 
                                 = context.user.phone
-                            | Posted on:
+                            |  Posted on: 
                             b
                                 = context.date
-                            | , 
-                            | Total Hits: 
-                            b 760
+                            //- | , 
+                            //- | Total Hits: 
+                            //- b 760

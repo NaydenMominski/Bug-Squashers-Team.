@@ -31,6 +31,12 @@ module.exports = {
                 }
                 return controller.create(req, res);
             })
+            .post('/edit/:id', (req, res) => {
+                if (!req.user) {
+                    return res.redirect('/auth/sign-in');
+                }
+                return controller.deletePost(req, res);
+            })
             .post('/:id', upload('./static/pictures/sell'), (req, res) => {
                 if (!req.user) {
                     return res.redirect('/auth/sign-in');
