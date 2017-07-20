@@ -116,6 +116,8 @@ block content
                     .control-field.col-sm-10.no-right-padding
                         input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property")
                     div#map(style="width: 500px; height: 300px; position: relative; overflow: hidden;")
+                    input#long-map(type="hidden", name="long", value="")
+                    input#lat-map(type="hidden", name="lat", value="")
                 .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
