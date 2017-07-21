@@ -16,7 +16,7 @@ block content
                         li.active
                             a(href='#tab-details', data-toggle='tab') Details
                         li
-                            a(href='#tab-location', data-toggle='tab') Location
+                            a(href='#tab-location', data-toggle='tab', data-coords=context.coords) Location
 
                     .tab-content
                         br
@@ -67,3 +67,6 @@ block content
                             | Total Hits: 
                             b 760
                         #tab-location.tab-pane  
+                            .maps
+    script(src='../../static/js/googlemap-api.js')
+    script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')

@@ -1912,3 +1912,11 @@ fieldset[disabled] .btn {
     color: #ffffff;
     cursor: pointer;
 }
+
+.map,
+#map-location {
+    width: 500px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}

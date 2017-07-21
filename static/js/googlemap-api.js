@@ -1,63 +1,88 @@
-function initMap() {
-    let options = {
-        zoom: 12,
-        center: { lat: 42.698334, lng: 42.698334 }
-    }
+jQuery(function($) {
+    let mapIndex = 1;
 
-    // new map
-    const map = new google.maps.Map(document.getElementById('map'), options);
+    function initMap($map, coords) {
+        $map = $map || $('#map-location');
+        const options = {
+            zoom: 12,
+            center: new google.maps.LatLng(42.698334, 42.698334)
+        }
 
-    // Add marker
-    addMarker(map, {
-        coords: { lat: 42.698334, lng: 42.698334 },
-        content: '<h3>Current position</h3>'
-    });
+        const drawingManager = new google.maps.drawing.DrawingManager();
+        const map = new google.maps.Map($map[0], options);
+        drawingManager.setMap(map);
 
-    // search box 
-    const searchBox = new google.maps.places.SearchBox(document.getElementById('address'));
-    google.maps.event.addListener(searchBox, 'places_changed', () => {
-        const places = searchBox.getPlaces();
 
-        const bounds = new google.maps.LatLngBounds();
-        let i, place;
+        if ($map[0].id === 'map-location') {
+            const searchBox = new google.maps.places.SearchBox(document.getElementById('address'));
+            google.maps.event.addListener(searchBox, 'places_changed', () => {
+                const places = searchBox.getPlaces();
 
-        for (i = 0; place = places[i]; i++) {
+                const bounds = new google.maps.LatLngBounds();
+                let i, place;
 
-            bounds.extend(place.geometry.location);
-            addMarker(map, {
-                coords: place.geometry.location,
-                content: `<div><strong>${place.name}</strong><br>
+                for (i = 0; place = places[i]; i++) {
+
+                    bounds.extend(place.geometry.location);
+                    addMarker(map, {
+                        coords: place.geometry.location,
+                        content: `<div><strong>${place.name}</strong><br>
                 ${place.formatted_address}</div>`
+                    });
+                    document.getElementById('long-map').value = place.geometry.location;
+                }
+
+                map.fitBounds(bounds);
+                map.setZoom(15);
+
             });
         }
 
-        map.fitBounds(bounds);
-        map.setZoom(15);
-    });
+        if (coords) {
+            console.log(coords)
+            addMarker(map, {
+                coords: coords
+            });
+        }
 
-    // add marker
-    function addMarker(map, props) {
-        const marker = new google.maps.Marker({
-            position: props.coords,
-            map: map,
-            draggable: true
-        });
+        // add marker
+        function addMarker(map, props) {
+            const marker = new google.maps.Marker({
+                position: props.coords,
+                map: map,
+                draggable: true
+            });
 
-        const infoWindow = new google.maps.InfoWindow({ content: props.content });
+            const infoWindow = new google.maps.InfoWindow({ content: props.content });
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+        }
 
-        document.getElementById('long-map').value = marker.getPosition().lng();
-        document.getElementById('lat-map').value = marker.getPosition().lat();
-
-        marker.addListener('click', () => {
-            infoWindow.open(map, marker);
-        });
     }
 
-    $('a[href="#tab-location"]').on('shown.bs.tab', function(e) {
-        var target = $(e.target).attr("href") // activated tab
-        alert(target);
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        const target = $(e.target).attr("href");
+
+
+
+        if ((target == '#tab-location')) {
+            mapIndex++;
+            let coords = $(this).data('coords');
+            let locationToStringed = coords;
+            let input = locationToStringed.replace('(', '');
+            let latlngStr = input.split(",", 2);
+            let lat = parseFloat(latlngStr[0]);
+            let lng = parseFloat(latlngStr[1]);
+            let parsedPosition = new google.maps.LatLng(lat, lng);
+
+
+            $('.maps').html('').append('<div class="map-' + mapIndex + '" style="width: 800px; height: 500px;"></div>');
+            initMap($('.map-' + mapIndex), parsedPosition);
+        }
+
     });
-}
 
-
-google.maps.event.addDomListener(window, "load", initMap);
+    initMap();
+});
