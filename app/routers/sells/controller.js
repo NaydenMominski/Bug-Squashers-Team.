@@ -10,14 +10,13 @@ const getController = (data) => {
             return data.getAll(req, res)
                 .then((sells) => {
                     sells.forEach((sell) => {
-                        const curency = +sell.price;
+                        const curency = parseInt(sell.price, 10);
                         sell.price = curency.toLocaleString('en-US', {
                             style: 'currency',
                             currency: 'USD',
                             minimumFractionDigits: 0,
                         });
                     });
-
                     return res.render('sells/all', {
                         context: sells,
                     });
@@ -31,7 +30,7 @@ const getController = (data) => {
                     }
                     sell.date = sell.date.toLocaleDateString('en-US');
 
-                    const curency = +sell.price;
+                    const curency = parseInt(sell.price, 10);
                     sell.price = curency.toLocaleString('en-US', {
                         style: 'currency',
                         currency: 'USD',
@@ -49,7 +48,7 @@ const getController = (data) => {
             const sell = req.body;
             const user = req.user;
             const sellimages = req.file;
-            sell.price = +sell.price;
+            sell.price = parseInt(sell.price, 10);
 
             if (!isValid(sell)) {
                 return Promise.resolve()
@@ -86,7 +85,7 @@ const getController = (data) => {
                     const editedSell = req.body;
                     const user = req.user;
                     const sellimages = req.file;
-                    editedSell.price = +editedSell.price;
+                    editedSell.price = parseInt(editedSell.price, 10);
 
                     if (sell.user.id.equals(req.user._id)) {
                         return data.update(user, sell, editedSell, sellimages)

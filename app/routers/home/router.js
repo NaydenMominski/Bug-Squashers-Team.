@@ -1,13 +1,16 @@
 const { Router } = require('express');
 
+const { getController } = require('./controller');
+
 module.exports = {
-    initRouter() {
+    initRouter(data) {
         const router = new Router();
+        const controller = getController(data.home);
 
-        router.get('/', (req, res) => {
-            return res.render('home');
-        });
-
+        router
+            .get('/', (req, res) => {
+                return controller.lastSells(req, res);
+            });
         return router;
     },
 };

@@ -5,22 +5,26 @@ const getData = (db) => {
     return {
         getAll(req, res) {
             let property = req.query.p_type || 'All';
-
             if (property === 'All') {
                 property = { $in: ['Apartament', 'House'] };
             }
 
-            const min = +req.query.price_from || 0;
-            const max = +req.query.price_to || 9999999999;
+            const min = parseInt(req.query.price_from, 10) || 0;
+            const max = parseInt(req.query.price_to, 10) || 9999999999;
             const price = { '$gte': min, '$lt': max };
-            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: 1 };
-
+            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
+            const page = parseInt(req.query.page, 10) || 1;
+            const pagesize = parseInt(req.query.size, 10) || 10;
             const query = {
                 property,
                 price,
             };
 
-            return collection.find(query).sort(orderBy)
+            return collection
+                .find(query)
+                .sort(orderBy)
+                .skip(pagesize * (page - 1))
+                .limit(pagesize)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {
@@ -83,7 +87,7 @@ const getData = (db) => {
                 });
         },
         remove(sell) {
-            console.log(sell);
+            // console.log(sell);
 
             return collection.remove({
                 _id: sell._id,

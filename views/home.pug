@@ -51,37 +51,33 @@ block body
                 // FEATURED LISTINGS
                 #myCarousel.carousel.slide
                     ol.carousel-indicators
-                        li(data-target='#myCarousel', data-slide-to='0')
-                            img.img-shadow.indicator-image(src='/static/pictures/38849069.jpg')
-                        li(data-target='#myCarousel', data-slide-to='1')
-                            img.img-shadow.indicator-image(src='/static/pictures/968963630.jpg')
-                        li.active(data-target='#myCarousel', data-slide-to='2')
-                            img.img-shadow.indicator-image(src='/static/pictures/185363932.jpg')
+                        each item,index in context
+                            li(data-target='#myCarousel', data-slide-to=index)
+                                img.img-shadow.indicator-image(src='static/pictures/sell/'+ item.avatar)
                     .carousel-inner
                         .item.slide-back
                             .container
                                 .xcarousel-caption
                                     a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
-                                        img.img-shadow(src='/static/pictures/38849069_002.jpg', alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
-                                        h3.no-top-margin.hide-xs Exclusive apartment in downtown Bristol 43234, $416000444
-                                        p.hide-xs
-                                            | An exclusive offer - excellent apartment in the very center of Milan, close to the Duomo!
+                                        img.img-shadow(src=src='static/pictures/sell/'+ context[0].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs=context[0].headline + ' , ' +context[0].price
+                                        p.hide-xs=context[0].description
                                     br
                         .item.slide-back
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=123')
-                                        img.img-shadow(src='/static/pictures/968963630_002.jpg', alt='', style='margin-left:15px', height='160', align='right')
-                                        h3.no-top-margin.hide-xs Apartment for sale, $54000
-                                        p.hide-xs This apartment is a very good investment - it can be easily rented.
+                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                        img.img-shadow(src=src='static/pictures/sell/'+ context[1].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs=context[1].headline + ' , ' +context[1].price
+                                        p.hide-xs=context[1].description
                                     br
                         .item.slide-back.active
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=114')
-                                        img.img-shadow(src='/static/pictures/185363932_002.jpg', alt='Beautiful apartment with sea view', style='margin-left:15px', height='160', align='right')
-                                        h3.no-top-margin.hide-xs Beautiful apartment with sea view, $450000
-                                        p.hide-xs An absolutely amazing property with wonderful sea view ...
+                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                        img.img-shadow(src=src='static/pictures/sell/'+ context[2].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
+                                        h3.no-top-margin.hide-xs=context[2].headline + ' , ' +context[2].price
+                                        p.hide-xs=context[2].description
                                     br
                     a.left.carousel-control(href='#myCarousel', data-slide='prev')
                         img.carousel-icon(src='/static/pictures/carousel-arrow-left.png')
