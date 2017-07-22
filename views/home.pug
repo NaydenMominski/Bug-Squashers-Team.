@@ -58,7 +58,7 @@ block body
                         .item.slide-back
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                    a.carousel-link(href='sells/' + context[0]._id)
                                         img.img-shadow(src=src='static/pictures/sell/'+ context[0].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[0].headline + ' , ' +context[0].price
                                         p.hide-xs=context[0].description
@@ -66,7 +66,7 @@ block body
                         .item.slide-back
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                    a.carousel-link(href='sells/' + context[1]._id)
                                         img.img-shadow(src=src='static/pictures/sell/'+ context[1].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[1].headline + ' , ' +context[1].price
                                         p.hide-xs=context[1].description
@@ -74,7 +74,7 @@ block body
                         .item.slide-back.active
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='http://www.phpsitehost.com/demos/realestate1/index.php?mod=details&id=124')
+                                    a.carousel-link(href='sells/' + context[2]._id)
                                         img.img-shadow(src=src='static/pictures/sell/'+ context[2].avatar, alt='Exclusive apartment in downtown Bristol 43234', style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[2].headline + ' , ' +context[2].price
                                         p.hide-xs=context[2].description

@@ -47,15 +47,25 @@ const getController = (data) => {
         create(req, res) {
             const sell = req.body;
             const user = req.user;
-            const sellimages = req.file;
+            const userdb = {
+                id: user.id,
+                username: user.username,
+                usertype: user.usertype,
+                phone: user.phone,
+
+            };
+
+            sell.avatar = req.file ? req.file.filename : 'no-image.png';
             sell.price = parseInt(sell.price, 10);
+            sell.user = userdb;
+            sell.date = new Date();
 
             if (!isValid(sell)) {
                 return Promise.resolve()
                     .then(() => res.redirect(400, '/sells/form'));
             }
 
-            return data.create(user, sell, sellimages)
+            return data.create(sell)
                 .then((result) => {
                     res.redirect('/sells/' + result.id);
                 });
@@ -82,13 +92,24 @@ const getController = (data) => {
                     if (!sell) {
                         return res.redirect(404, '/sells');
                     }
+
                     const editedSell = req.body;
                     const user = req.user;
-                    const sellimages = req.file;
-                    editedSell.price = parseInt(editedSell.price, 10);
+                    const userdb = {
+                        id: user.id,
+                        username: user.username,
+                        usertype: user.usertype,
+                        phone: user.phone,
+                    };
 
-                    if (sell.user.id.equals(req.user._id)) {
-                        return data.update(user, sell, editedSell, sellimages)
+                    editedSell.avatar = req.file ? req.file.filename : 'no-image.png';
+                    editedSell.price = parseInt(editedSell.price, 10);
+                    editedSell.user = userdb;
+                    editedSell.date = new Date();
+
+
+                    if (sell.user.id.equals(user._id)) {
+                        return data.update(sell, editedSell)
                             .then((result) => {
                                 res.redirect('/sells/' + result.id);
                             });

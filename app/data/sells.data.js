@@ -48,36 +48,14 @@ const getData = (db) => {
                 return Promise.reject('Invalid id');
             }
         },
-        create(user, sell, sellimages) {
-            const userdb = {
-                id: user.id,
-                username: user.username,
-                usertype: user.usertype,
-                phone: user.phone,
-
-            };
-
-            sell.avatar = sellimages ? sellimages.filename : 'default.png';
-            sell.user = userdb;
-            sell.date = new Date();
-
+        create(sell) {
             return collection.insert(sell)
                 .then((result) => {
                     sell.id = sell._id;
                     return sell;
                 });
         },
-        update(user, sell, editedSell, sellimages) {
-            const userdb = {
-                id: user.id,
-                username: user.username,
-                usertype: user.usertype,
-                phone: user.phone,
-            };
-            editedSell.avatar = sellimages ? sellimages.filename : 'default.png';
-            editedSell.user = userdb;
-            editedSell.date = new Date();
-
+        update(sell, editedSell) {
             return collection.updateOne({
                     _id: sell._id,
                 }, editedSell)
