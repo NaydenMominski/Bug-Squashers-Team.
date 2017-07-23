@@ -18,13 +18,14 @@ block body
                                         option(value='1', selected='selected') Sale
                                         option(value='2') Rent
                             .form-group
-                                label.control-label.col-sm-5(for='p_type')
-                                    small Property
+                                label.control-label.col-sm-5(for='province')
+                                    small Province
                                 .control-field.col-sm-7.no-right-padding
-                                    select#p_type.form-control.input-sm(name='p_type')
+                                    select#p_type.form-control.input-sm(name='province')
                                         option(value='All', selected='selected') All
-                                        option(value='Apartament') Apartment
-                                        option(value='House') House
+                                        each value in province
+                                            option(value=value)
+                                                =value
                             .form-group
                                 label.control-label.col-sm-5(for='min_price')
                                     small Min price

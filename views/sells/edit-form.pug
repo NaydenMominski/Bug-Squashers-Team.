@@ -32,10 +32,10 @@ block content
                                 option(value=`${property}`)= property
                 .form-group.col-md-8
                     br
-                    | Location:
+                    | Province:
                     br
                     select#user_type.form-control.input-sm(name='location')
-                        each location in ["undefined","Sofia","Varna","Burgas","Plovdiv","Veliko Tarnovo","Stara Zagora","Ruse"]
+                        each location in province
                             if (location === context.location)
                                 option(value=`${location}` selected)= location
                             else if (location === 'undefined') 

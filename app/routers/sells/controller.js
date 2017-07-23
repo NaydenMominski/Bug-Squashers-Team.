@@ -1,3 +1,5 @@
+const constants = require('../../../utils/constants');
+
 const isValid = (item) => {
     return typeof item !== 'undefined' &&
         typeof item.headline === 'string' &&
@@ -78,6 +80,7 @@ const getController = (data) => {
                     }
                     return res.render('sells/edit-form', {
                         context: sell,
+                        province: constants.province,
                     });
                 })
                 .catch((err) => {

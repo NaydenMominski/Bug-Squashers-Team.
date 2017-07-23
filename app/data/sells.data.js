@@ -4,21 +4,14 @@ const getData = (db) => {
     const collection = db.collection('sells');
     return {
         getAll(req, res) {
-            let property = req.query.p_type || 'All';
-            if (property === 'All') {
-                property = { $in: ['Apartament', 'House'] };
-            }
-
+            const location = req.query.province || 'All';
             const min = parseInt(req.query.price_from, 10) || 0;
             const max = parseInt(req.query.price_to, 10) || 9999999999;
             const price = { '$gte': min, '$lt': max };
             const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
             const page = parseInt(req.query.page, 10) || 1;
             const pagesize = parseInt(req.query.size, 10) || 10;
-            const query = {
-                property,
-                price,
-            };
+            const query = location === 'All' ? { price } : { location, price };
 
             return collection
                 .find(query)

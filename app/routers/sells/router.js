@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { upload } = require('../../../utils/uploadfiles');
+const constants = require('../../../utils/constants');
 
 const { getController } = require('./controller');
 
@@ -16,8 +17,9 @@ module.exports = {
                 if (!req.user) {
                     return res.redirect('/auth/sign-in');
                 }
-
-                return res.render('sells/form');
+                return res.render('sells/form', {
+                    province: constants.province,
+                });
             })
             .get('/edit/:id', (req, res) => {
                 return controller.editGet(req, res);

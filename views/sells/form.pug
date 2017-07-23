@@ -30,12 +30,12 @@ block content
                                 =value
                 .form-group.col-md-8
                     br
-                    | Location:
+                    | Province:
                     br
                     select#user_type.form-control.input-sm(name='location')
 
                         option(value='') Please Select
-                        each value,index in ["Sofia","Varna","Burgas","Plovdiv","Veliko Tarnovo","Stara Zagora","Ruse"]
+                        each value in province
                             option(value=value)
                                 =value
                 .form-group.col-md-4
