@@ -8,20 +8,11 @@ block content
         .clear
         br
         .col-md-9.text-left
-            //- link(rel='stylesheet', href='css/results.css')
-            //- script(src='js/results.js')
             .panel.panel-default.results-info
                 .number-results
-                    | Total Results: 28, 
-                    | Order by: 
-                    a.underline-link.black-text(href='#') Date
-                    //- img(src='images/down.png', width='14', height='14', alt='')
-                    a.underline-link.black-text(href='#') Price
-                .view-select-tabs
-                    a#list-view.current(href='#')
-                        span List View
-                    a#grid-view(href='#')
-                        span Grid View
+                    | Total Results: 
+                    b
+                        =results
                 .rfloat.r-margin-4.add-top-margin Results Format: 
                 .clear
             .clear
@@ -64,47 +55,12 @@ block content
                                         span.is_r_featured .
                             .row.margin-top-20
                                 .col-xs-6
-                                    //- form#search-form
-                                    //-     input(type='text', name='query', placeholder='Search...')
-                                    //-     input(type='text', name='page', placeholder='Search...')
-                                    //-     input(type='submit', value='Search')
                                 .col-xs-6
                                     .text-right
                                         a.btn.btn-primary(href='sells/' + item._id) Details
 
             .clear
             ul.pagination
-                li
-                    a
-                        b 1
-                li
-                    a.pagination-link(href='index.php?mod=search&num=2') 2
-                li
-                    a.pagination-link(href='index.php?mod=search&num=3') 3
-                li
-                    a.pagination-link(href='index.php?mod=search&num=2') >
-                li
-                    a.pagination-link(href='index.php?mod=search&num=3') >>
-        #right_panel.col-md-3
-            .panel.panel-success
-                .panel-heading
-                    h3.panel-title Real Estate Quick Links
-                .panel-body
-                    a(href='index.php?mod=search&location=1-3') Barbour (2)
-                    br
-                    a(href='index.php?mod=search&location=1-62') Tallapoosa (1)
-                    br
-                    a(href='index.php?mod=search&location=1-6') Bullock (1)
-                    br
-            .panel.panel-success
-                .panel-heading
-                    h3.panel-title Latest News
-                .panel-body
-                    a(href='index.php?mod=news&id=1')
-                        h4 Some test news
-                    span.sub-text
-                        | This is a test bla bla
-                        a(title='Some test news', href='index.php?mod=news&id=1') ...
-                    br
-            br
-            wsa(banners_1='')
+                for page,index in pages
+                    li
+                        a.pagination-link(href=`/sells?province=${page.searchQuery.province}&price_from=${page.searchQuery.price_from}&price_to=${page.searchQuery.price_to}&order_by=${page.searchQuery.order_by}&page=${index}`)=index+1 

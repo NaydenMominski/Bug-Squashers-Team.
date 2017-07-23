@@ -3,21 +3,12 @@ const { ObjectID } = require('mongodb');
 const getData = (db) => {
     const collection = db.collection('sells');
     return {
-        getAll(req, res) {
-            const location = req.query.province || 'All';
-            const min = parseInt(req.query.price_from, 10) || 0;
-            const max = parseInt(req.query.price_to, 10) || 9999999999;
-            const price = { '$gte': min, '$lt': max };
-            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
-            const page = parseInt(req.query.page, 10) || 1;
-            const pagesize = parseInt(req.query.size, 10) || 10;
-            const query = location === 'All' ? { price } : { location, price };
-
+        getAll(queries) {
             return collection
-                .find(query)
-                .sort(orderBy)
-                .skip(pagesize * (page - 1))
-                .limit(pagesize)
+                .find(queries.query)
+                .sort(queries.orderBy)
+                // .skip(queries.pagesize * (queries.page - 1))
+                // .limit(queries.pagesize)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {
