@@ -1,5 +1,4 @@
 jQuery(function($) {
-    let mapIndex = 1;
 
     function initMap($map, coords) {
         $map = $map || $('#map-location');
@@ -82,7 +81,7 @@ jQuery(function($) {
         }
 
     }
-
-    initMap();
-
+    google.maps.event.addDomListener(window, 'load', () => {
+        initMap();
+    });
 });

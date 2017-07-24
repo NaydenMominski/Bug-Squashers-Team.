@@ -54,12 +54,6 @@ block content
                                             input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
                             .clear
                             hr
-                            | 		Posted by:
-                            b 
-                                = context.user.username + "(" + context.user.usertype + "),"                                
-                            img(src='/static/pictures/phone_icon.png', alt='phone icon')
-                            b 
-                                = context.user.phone
                             | Posted on:
                             b
                                 = context.date
@@ -78,5 +72,7 @@ block content
                         a.sidebar-link(href="#")
                             strong 
                                 = context.user.username
-                    a.btn.btn-primary(href="#", data-toggle="sidebar-menu")
+                    a.btn.btn-primary.overlay-btn(href="#", data-toggle="sidebar-menu")
                         | Contact Agent
+    script(src="/static/js/functions.js")
+    
