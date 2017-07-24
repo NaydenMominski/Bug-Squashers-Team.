@@ -9,6 +9,7 @@ jQuery(function($) {
         }
 
         let marker;
+        let infoWindow;
 
         const drawingManager = new google.maps.drawing.DrawingManager();
         const map = new google.maps.Map($map[0], options);
@@ -47,7 +48,6 @@ jQuery(function($) {
                 }, (results, status) => {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
-                            console.log(results[0]);
                             addMarker(map, {
                                     coords: latLng,
                                     content: `<div><strong>${results[0].formatted_address}</strong></div>`
@@ -70,12 +70,14 @@ jQuery(function($) {
                     draggable: true
                 });
 
-                const infoWindow = new google.maps.InfoWindow({ content: props.content });
+
+                infoWindow = new google.maps.InfoWindow({ content: props.content });
                 marker.addListener('click', () => {
                     infoWindow.open(map, marker);
                 });
             } else {
                 marker.setPosition(props.coords);
+                infoWindow.setContent(props.content);
             }
         }
 

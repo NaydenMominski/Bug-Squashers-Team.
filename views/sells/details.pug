@@ -3,7 +3,7 @@ extends _shared/_base
 block content
     .container
         br
-        .col-md-9.text-left
+        .col-md-8.text-left
             h2.lfloat 
                 =context.headline 
                 | &nbsp;
@@ -46,12 +46,12 @@ block content
                                     =context.description
                                 br
                                 br
-                                .row.margin-top-20
-                                    .col-md-6
-                                        a#save_124.btn.btn-default(href='/sells/edit/' + context._id) Edit
-                                    .col-md-6
-                                        form(action="/sells/edit/"+context._id , method="POST")
-                                            input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
+                                //- .row.margin-top-20
+                                //-     .col-md-6
+                                //-         a#save_124.btn.btn-default(href='/sells/edit/' + context._id) Edit
+                                //-     .col-md-6
+                                //-         form(action="/sells/edit/"+context._id , method="POST")
+                                //-             input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
                             .clear
                             hr
                             | 		Posted by:
@@ -69,3 +69,14 @@ block content
                         #tab-location.tab-pane  
                             .maps
                                 img(src='https://maps.googleapis.com/maps/api/staticmap?center='+context.lat+','+context.lng+'&markers=color:red%7C'+context.lat+','+context.lng+'&zoom=7&size=800x400&key=AIzaSyAUEyyA9gmlFmNHzLDhagVdO1cTtCvp5DE')
+        .col-md-4.text-center
+            .panel.text-center.contact-agent-container
+                .panel-body
+                    p
+                        img.img-circle(src='/static/pictures/img/'+ context.user.avatar)
+                    p
+                        a.sidebar-link(href="#")
+                            strong 
+                                = context.user.username
+                    a.btn.btn-primary(href="#", data-toggle="sidebar-menu")
+                        | Contact Agent

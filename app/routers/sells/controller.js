@@ -91,7 +91,7 @@ const getController = (data) => {
                 username: user.username,
                 usertype: user.usertype,
                 phone: user.phone,
-
+                avatar: user.avatar,
             };
 
             sell.avatar = req.file ? req.file.filename : 'no-image.png';

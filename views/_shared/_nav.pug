@@ -3,6 +3,7 @@ mixin nav(user)
         if user
             li
                 a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle
+                    img(src='/static/pictures/img/'+ user.avatar, alt="", class="img-circle")
                     =user.username
                     span.caret
                 ul(role="menu").dropdown-menu

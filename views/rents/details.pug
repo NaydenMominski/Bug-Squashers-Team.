@@ -3,7 +3,7 @@ extends _shared/_base
 block content
     .container
         br
-        .col-md-9.text-left
+        .col-md-8.text-left
             h2.lfloat 
                 =context.headline 
                 | &nbsp;
@@ -67,6 +67,16 @@ block content
                             | Total Hits: 
                             b 760
                         #tab-location.tab-pane  
-                            .maps
-    script(src='../../static/js/googlemap-api.js')
-    script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')
+                             .maps
+                                img(src='https://maps.googleapis.com/maps/api/staticmap?center='+context.lat+','+context.lng+'&markers=color:red%7C'+context.lat+','+context.lng+'&zoom=7&size=800x400&key=AIzaSyAUEyyA9gmlFmNHzLDhagVdO1cTtCvp5DE')
+        .col-md-4.text-center
+            .panel.text-center.contact-agent-container
+                .panel-body
+                    p
+                        img.img-circle(src='/static/pictures/img/'+ context.user.avatar)
+                    p
+                        a.sidebar-link(href="#")
+                            strong 
+                                = context.user.username
+                    a.btn.btn-primary(href="#", data-toggle="sidebar-menu")
+                        | Contact Agent
