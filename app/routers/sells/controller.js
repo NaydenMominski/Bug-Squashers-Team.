@@ -15,14 +15,19 @@ const getController = (data) => {
             const price = { '$gte': min, '$lt': max };
             const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
             const page = parseInt(req.query.page, 10) || 0;
-            const pagesize = parseInt(req.query.size, 10) || 3;
-            const query = location === 'All' ? { price } : { location, price };
+            const pagesize = parseInt(req.query.size, 10) || 5;
 
+            const query = location === 'All' ? { price } : { location, price };
             const queries = {
                 orderBy,
-                // page,
-                // pagesize,
                 query,
+            };
+            const searchQuery = {
+                location: location,
+                min: min,
+                max: max,
+                orderBy: req.query.order_by || 'date',
+                page: page,
             };
 
             return data.getAll(queries)
@@ -33,7 +38,8 @@ const getController = (data) => {
 
                     for (let i = 0; i < pagesLen; i += 1) {
                         pages.push({
-                            searchQuery: req.query,
+                            curentPage: page,
+                            searchQuery: searchQuery,
                         });
                     }
                     sells = sells.slice(page * pagesize, (page + 1) * pagesize);
@@ -50,6 +56,7 @@ const getController = (data) => {
                         context: sells,
                         pages: pages,
                         results: sellsResults,
+                        searchQuery: req.query,
 
                     });
                 });

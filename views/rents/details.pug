@@ -1,0 +1,72 @@
+extends _shared/_base
+
+block content
+    .container
+        br
+        .col-md-9.text-left
+            h2.lfloat 
+                =context.headline 
+                | &nbsp;
+                =context.price
+            .clear
+            br
+            .justify-align
+                .tabbable
+                    ul.nav.nav-tabs
+                        li.active
+                            a(href='#tab-details', data-toggle='tab') Details
+                        li
+                            a(href='#tab-location', data-toggle='tab', data-coords=context.coords) Location
+
+                    .tab-content
+                        br
+                        #tab-details.tab-pane.active
+                            .col-md-12
+                                a(href='/static/pictures/rent/' + context.avatar, rel='prettyPhoto[ad_gal]')
+                                    img(src='/static/pictures/rent/' + context.avatar, width='300', alt='Exclusive apartment in downtown Bristol 43234')
+                            .col-md-6.final-result-image
+                                ul  
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-map-marker
+                                        =context.address
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-home
+                                        =context.property
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-bed
+                                        =context.bedrooms
+                                    li.property-meta-item
+                                        i.fa.fa-fw.icon.fa-bath
+                                        =context.bathrooms
+                            .panel.panel-default.col-md-12.final-result-image
+                                .panel-heading
+                                    h4.panel-title Description
+                                |               
+                                .panel-body
+                                    =context.description
+                                br
+                                br
+                                .row.margin-top-20
+                                    .col-md-6
+                                        a#save_124.btn.btn-default(href='/rents/edit/' + context._id) Edit
+                                    .col-md-6
+                                        form(action="/rents/edit/"+context._id , method="POST")
+                                            input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
+                            .clear
+                            hr
+                            | 		Posted by:
+                            b 
+                                = context.user.username + "(" + context.user.usertype + "),"                                
+                            img(src='/static/pictures/phone_icon.png', alt='phone icon')
+                            b 
+                                = context.user.phone
+                            | Posted on:
+                            b
+                                = context.date
+                            | , 
+                            | Total Hits: 
+                            b 760
+                        #tab-location.tab-pane  
+                            .maps
+    script(src='../../static/js/googlemap-api.js')
+    script(async, defer, src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')

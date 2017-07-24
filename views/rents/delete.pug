@@ -1,0 +1,28 @@
+extends _shared/_base
+
+block content
+    .container
+        .col-md-4
+        #signin.text-center.col-md-4.no-center-padding
+            .search-panel
+                h3.panel-title Delete
+                hr
+
+                form.no-marginform(action="/rents/delete/"+context._id method="POST")
+                    table.bcollapse
+                        tbody
+                            tr
+                                td
+                                    | Username:
+                                td
+                                    input.form-field(name="username", placeholder="Enter username")
+                            tr
+                                td
+                                    | Password:
+                                td
+                                    input.form-field(name="password", type="password", placeholder="Enter password")
+                            tr
+                                td(colspan='2')
+                                    br
+                                    a.lfloat.margin-20(href='#') forgotten password?
+                                    input.ibutton.rfloat.margin-20(value='Login', type='submit')
