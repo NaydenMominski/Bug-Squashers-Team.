@@ -1,3 +1,5 @@
+const constants = require('../../../utils/constants');
+
 const getController = (data) => {
     return {
         lastSells(req, res) {
@@ -13,6 +15,7 @@ const getController = (data) => {
                     });
                     return res.render('home', {
                         context: sells,
+                        province: constants.province,
                     });
                 });
         },

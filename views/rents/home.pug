@@ -1,6 +1,6 @@
 extends _shared/_base
 
-block body
+block content
     .gray-wrapper
         .container
             #left_panel.text-left.col-md-3.no-left-padding
@@ -8,15 +8,15 @@ block body
                     h3.panel-title Search for a property
                     hr
                     // SEARCH FORM
-                    form#search-form(method='get', action='/sells')
+                    form#search-form(method='get', action='/rents/all')
                         #search_form_container
                             .form-group
                                 label.control-label.col-sm-5(for='p_type')
                                     small Type
                                 .control-field.col-sm-7.no-right-padding
                                     select.form-control.input-sm(name='ad_type')
-                                        option(value='1', selected='selected') Sale
-                                        //- option(value='2') Rent
+                                        //- option(value='1') Sale
+                                        option(value='2', selected='selected') Rent
                             .form-group
                                 label.control-label.col-sm-5(for='province')
                                     small Province
@@ -54,13 +54,13 @@ block body
                     ol.carousel-indicators
                         each item,index in context
                             li(data-target='#myCarousel', data-slide-to=index)
-                                img.img-shadow.indicator-image(src='static/pictures/sell/'+ item.avatar)
+                                img.img-shadow.indicator-image(src='static/pictures/rent/'+ item.avatar)
                     .carousel-inner
                         .item.slide-back
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='sells/' + context[0]._id)
-                                        img.img-shadow(src='static/pictures/sell/'+ context[0].avatar, style='margin-left:15px', height='160', align='right')
+                                    a.carousel-link(href='rents/' + context[0]._id)
+                                        img.img-shadow(src='static/pictures/rent/'+ context[0].avatar, style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[0].headline + ' , ' +context[0].price
                                         .carousel-text-container
                                             p.hide-xs=context[0].description
@@ -68,8 +68,8 @@ block body
                         .item.slide-back
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='sells/' + context[1]._id)
-                                        img.img-shadow(src='static/pictures/sell/'+ context[1].avatar, style='margin-left:15px', height='160', align='right')
+                                    a.carousel-link(href='rents/' + context[1]._id)
+                                        img.img-shadow(src='static/pictures/rent/'+ context[1].avatar, style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[1].headline + ' , ' +context[1].price
                                         .carousel-text-container
                                             p.hide-xs=context[1].description
@@ -77,8 +77,8 @@ block body
                         .item.slide-back.active
                             .container
                                 .xcarousel-caption
-                                    a.carousel-link(href='sells/' + context[2]._id)
-                                        img.img-shadow(src='static/pictures/sell/'+ context[2].avatar, style='margin-left:15px', height='160', align='right')
+                                    a.carousel-link(href='rents/' + context[2]._id)
+                                        img.img-shadow(src='static/pictures/rent/'+ context[2].avatar, style='margin-left:15px', height='160', align='right')
                                         h3.no-top-margin.hide-xs=context[2].headline + ' , ' +context[2].price
                                         .carousel-text-container
                                             p.hide-xs=context[2].description

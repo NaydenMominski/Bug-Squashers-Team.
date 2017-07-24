@@ -1,3 +1,5 @@
+const constants = require('../../../utils/constants');
+
 const isValid = (item) => {
     return typeof item !== 'undefined' &&
         typeof item.headline === 'string' &&
@@ -7,8 +9,41 @@ const isValid = (item) => {
 const getController = (data) => {
     return {
         getAll(req, res) {
-            return data.getAll(req, res)
+            const location = req.query.province || 'All';
+            const min = parseInt(req.query.price_from, 10) || 0;
+            const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
+            const price = { '$gte': min, '$lt': max };
+            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
+            const page = parseInt(req.query.page, 10) || 0;
+            const pagesize = parseInt(req.query.size, 10) || 5;
+
+            const query = location === 'All' ? { price } : { location, price };
+            const queries = {
+                orderBy,
+                query,
+            };
+            const searchQuery = {
+                location: location,
+                min: min,
+                max: max,
+                orderBy: req.query.order_by || 'date',
+                page: page,
+            };
+
+            return data.getAll(queries)
                 .then((sells) => {
+                    const pagesLen = Math.ceil(sells.length / pagesize);
+                    const pages = [];
+                    const sellsResults = sells.length;
+
+                    for (let i = 0; i < pagesLen; i += 1) {
+                        pages.push({
+                            curentPage: page,
+                            searchQuery: searchQuery,
+                        });
+                    }
+                    sells = sells.slice(page * pagesize, (page + 1) * pagesize);
+
                     sells.forEach((sell) => {
                         const curency = parseInt(sell.price, 10);
                         sell.price = curency.toLocaleString('en-US', {
@@ -19,6 +54,10 @@ const getController = (data) => {
                     });
                     return res.render('sells/all', {
                         context: sells,
+                        pages: pages,
+                        results: sellsResults,
+                        searchQuery: req.query,
+
                     });
                 });
         },
@@ -78,6 +117,7 @@ const getController = (data) => {
                     }
                     return res.render('sells/edit-form', {
                         context: sell,
+                        province: constants.province,
                     });
                 })
                 .catch((err) => {

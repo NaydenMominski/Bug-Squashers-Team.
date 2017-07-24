@@ -24,7 +24,7 @@ block content
                         // template
                         .panel-heading.featured-heading
                             h3.panel-title
-                                a.search-result-title.featured-r-title(href='sells/' + item._id)
+                                a.search-result-title.featured-r-title(href='rents/' + item._id)
                                     =item.headline
                                 span.listing-price.r-margin-18
                                     b
@@ -32,8 +32,8 @@ block content
                         .panel-body
                             .row
                                 .col-sm-5.col-xs-12
-                                    a.btn-block.result-details-link(href='sells/' + item._id)
-                                        img.img-res(alt=item.headline, src='static/pictures/sell/'+ item.avatar)
+                                    a.btn-block.result-details-link(href='/rents/' + item._id)
+                                        img.img-res(alt=item.headline, src='/static/pictures/rent/'+ item.avatar)
                                 .col-sm-7.col-xs-12
                                     .details
                                         p.description
@@ -57,14 +57,14 @@ block content
                                 .col-xs-6
                                 .col-xs-6
                                     .text-right
-                                        a.btn.btn-primary(href='sells/' + item._id) Details
+                                        a.btn.btn-primary(href='/rents/' + item._id) Details
 
             .clear
             ul.pagination
                 for page,index in pages
                     if(page.curentPage===index)
                         li.page-item.active
-                            a.pagination-link(href=`/sells?province=${page.searchQuery.location}&price_from=${page.searchQuery.min}&price_to=${page.searchQuery.max}&order_by=${page.searchQuery.orderBy}&page=${index}`)=index+1
+                            a.pagination-link(href=`/rents/all?province=${page.searchQuery.province}&price_from=${page.searchQuery.price_from}&price_to=${page.searchQuery.price_to}&order_by=${page.searchQuery.order_by}&page=${index}`)=index+1
                     else
                         li.page-item
-                            a.pagination-link(href=`/sells?province=${page.searchQuery.location}&price_from=${page.searchQuery.min}&price_to=${page.searchQuery.max}&order_by=${page.searchQuery.orderBy}&page=${index}`)=index+1
+                            a.pagination-link(href=`/rents/all?province=${page.searchQuery.province}&price_from=${page.searchQuery.price_from}&price_to=${page.searchQuery.price_to}&order_by=${page.searchQuery.order_by}&page=${index}`)=index+1 

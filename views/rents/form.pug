@@ -4,11 +4,11 @@ block content
     .container
         br
         .col-md-9.text-left
-            form#sell_form(action="/sells" method="POST",enctype='multipart/form-data')
+            form#rent_form(action="/rents/all" method="POST",enctype='multipart/form-data')
                 .form-group
                     br
                     h1
-                        | Add new Sale
+                        | Add new Rental
                     hr
                     br
                     h3.no-top-margin.text-left
@@ -119,8 +119,8 @@ block content
                     .control-field.col-sm-10.no-right-padding
                         input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property")
                     div#map-location
-                    input#lat(type="hidden", name="lat", value="")
-                    input#lng(type="hidden", name="lng", value="")
+                   
+                    input#long-map(type="hidden", name="coords", value="")
                 .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
