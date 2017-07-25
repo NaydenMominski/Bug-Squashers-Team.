@@ -1,5 +1,36 @@
+$(document).ready(function() {
+    let trigger = $('.overlay-btn'),
+        closeSiderbar = $('.close-sidebar'),
+        contactAgent = $('#sidebar-wrapper'),
+        btnContact = $('.contact-agent-container'),
+        isClosed = false;
+
+    trigger.on('click', () => {
+        adminContactSlide();
+    });
+
+    closeSiderbar.on('click', () => {
+        adminContactSlide();
+    })
+
+    function adminContactSlide() {
+        if (isClosed == true) {
+            contactAgent.hide();
+            btnContact.show();
+            contactAgent.removeClass('toggled');
+            isClosed = false;
+        } else {
+            contactAgent.show();
+            btnContact.hide();
+            contactAgent.addClass('toggled');
+            isClosed = true;
+        }
+    }
+
+});
+
 function DeleteSavedListing(id) {
-    var saved_listings = r_cookie("saved_listings");
+    let saved_listings = r_cookie("saved_listings");
 
     if (saved_listings.indexOf(id + ",") != -1) {
         saved_listings = saved_listings.replace(id + ",", "");
@@ -13,7 +44,7 @@ function DeleteSavedListing(id) {
 }
 
 function SaveListing(id) {
-    var saved_listings = r_cookie("saved_listings");
+    let saved_listings = r_cookie("saved_listings");
 
     if (saved_listings.indexOf(id + ",") != -1) {
 
@@ -29,10 +60,10 @@ function SaveListing(id) {
 }
 
 function r_cookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i].trim();
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
         if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
     }
     return "";
@@ -59,22 +90,22 @@ function sub_loc_select(x) {
     xmlhttp.send(null);
 
 }
-var up_html = new Array();
-var i_last_level = -1;
+let up_html = new Array();
+let i_last_level = -1;
 
 function show_sub_locs(text, x) {
-    var i_level = (x.split(".").length - 1);
+    let i_level = (x.split(".").length - 1);
 
     for (i = i_level; i <= 4; i++) {
         document.getElementById("sub_locations" + i).innerHTML = "";
     }
 
-    var new_html = "";
-    var splitArray = text.split("~");
+    let new_html = "";
+    let splitArray = text.split("~");
 
-    var j = 0;
+    let j = 0;
     for (j = 0; j < splitArray.length; j++) {
-        var location = splitArray[j].split("#");
+        let location = splitArray[j].split("#");
 
         if (location[0] == "no suggestion") {
 

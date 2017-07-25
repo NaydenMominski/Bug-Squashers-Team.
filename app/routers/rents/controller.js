@@ -86,9 +86,11 @@ const getController = (data) => {
             const userdb = {
                 id: user.id,
                 username: user.username,
+                fullname: user.firstname + ' ' + user.lastname,
                 usertype: user.usertype,
                 phone: user.phone,
-
+                avatar: user.avatar || 'default-user.png',
+                email: user.email,
             };
 
             rent.avatar = req.file ? req.file.filename : 'no-image.png';
@@ -135,9 +137,11 @@ const getController = (data) => {
                     const userdb = {
                         id: user.id,
                         username: user.username,
+                        fullname: user.firstname + ' ' + user.lastname,
                         usertype: user.usertype,
                         phone: user.phone,
-                        avatar: user.avatar,
+                        avatar: user.avatar || 'default-user.png',
+                        email: user.email,
                     };
 
                     editedrent.avatar = req.file ? req.file.filename : 'no-image.png';

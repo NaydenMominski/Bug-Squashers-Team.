@@ -1945,3 +1945,27 @@ fieldset[disabled] .btn {
 .contact-agent-container .sidebar-link {
     color: #858585;
 }
+
+#sidebar-wrapper {
+    z-index: 1000;
+    right: 0;
+    left: 150%;
+    width: 0;
+    height: 100%;
+    margin-right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+}
+
+.toggled {
+    width: 100% !important;
+    left: 0 !important;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+}
