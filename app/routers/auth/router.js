@@ -1,12 +1,10 @@
 const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
-const { getController } = require( './controller');
 
 module.exports = {
     initRouter(data) {
         const router = new Router();
-        const controller = getController(data);
 
         router
             .get('/sign-up', (req, res) => {
@@ -17,7 +15,6 @@ module.exports = {
             })
             .post('/sign-up', upload('./static/pictures/img'), (req, res) => {
                 // console.log(req.file);
-                controller.create(req, res);
             })
             .post('/sign-in', passport.authenticate('local', {
                 successRedirect: '/',
