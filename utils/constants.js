@@ -1,4 +1,6 @@
 module.exports = {
+    PAGE_SIZE: 5,
+
     province: [
         'Blagoevgrad',
         'Burgas',
@@ -28,4 +30,10 @@ module.exports = {
         'Shumen',
         'Yambol',
     ],
+    convertNumberToCurrency: (number) =>
+        number.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+        }),
 };
