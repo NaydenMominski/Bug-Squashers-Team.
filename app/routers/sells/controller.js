@@ -1,5 +1,3 @@
-/* globals console*/
-
 const constants = require('../../../utils/constants');
 
 const isValid = (item) => {
@@ -16,38 +14,50 @@ const getController = (data) => {
             const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
             const price = { '$gte': min, '$lt': max };
             const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
-            const page = parseInt(req.query.page, 10) || 1;
-            const pagesize = parseInt(req.query.size, 10) || constants.PAGE_SIZE;
+            const page = parseInt(req.query.page, 10) || 0;
+            const pagesize = parseInt(req.query.size, 10) || 5;
 
             const query = location === 'All' ? { price } : { location, price };
             const queries = {
                 orderBy,
                 query,
-                pagesize,
-                page,
+            };
+            const searchQuery = {
+                location: location,
+                min: min,
+                max: max,
+                orderBy: req.query.order_by || 'date',
+                page: page,
             };
 
-            return Promise.all([data.getAll(queries), data.getAllCount(queries)])
-                .then(([sells, allSellsCount]) => {
-                    const pages = Math.ceil(allSellsCount / pagesize);
-                    const searchQuery = {
-                        location: location,
-                        min: min,
-                        max: max,
-                        orderBy: req.query.order_by || 'date',
-                    };
+            return data.getAll(queries)
+                .then((sells) => {
+                    const pagesLen = Math.ceil(sells.length / pagesize);
+                    const pages = [];
+                    const sellsResults = sells.length;
+
+                    for (let i = 0; i < pagesLen; i += 1) {
+                        pages.push({
+                            curentPage: page,
+                            searchQuery: searchQuery,
+                        });
+                    }
+                    sells = sells.slice(page * pagesize, (page + 1) * pagesize);
 
                     sells.forEach((sell) => {
                         const curency = parseInt(sell.price, 10);
-                        sell.price = constants.convertNumberToCurrency(curency);
+                        sell.price = curency.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                        });
                     });
-
-                    return res.status(200).render('sells/all', {
-                        sells: sells,
-                        searchQuery: searchQuery,
-                        page: page,
+                    return res.render('sells/all', {
+                        context: sells,
                         pages: pages,
-                        sellsCount: allSellsCount,
+                        results: sellsResults,
+                        searchQuery: req.query,
+
                     });
                 });
         },
@@ -60,9 +70,11 @@ const getController = (data) => {
                     sell.date = sell.date.toLocaleDateString('en-US');
 
                     const curency = parseInt(sell.price, 10);
-
-                    sell.price = constants.convertNumberToCurrency(curency);
-
+                    sell.price = curency.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                    });
                     return res.render('sells/details', {
                         context: sell,
                     });

@@ -1,5 +1,3 @@
-/* globals process */
-/* eslint-disable no-process-env */
 const { getApp } = require('./app/app');
 
 const port = 3005;
