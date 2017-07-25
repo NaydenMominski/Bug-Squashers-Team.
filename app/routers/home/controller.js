@@ -7,7 +7,11 @@ const getController = (data) => {
                 .then((sells) => {
                     sells.forEach((sell) => {
                         const curency = parseInt(sell.price, 10);
-                        sell.price = constants.convertNumberToCurrency(curency);
+                        sell.price = curency.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                        });
                     });
                     return res.render('home', {
                         context: sells,

@@ -1,8 +1,6 @@
-/* globals process */
-/* eslint-disable no-process-env */
 const { getApp } = require('./app/app');
 
-const port = process.env.PORT || 3005;
+const port = 3005;
 // ----mlab mongodb------
 // getApp({ connectionString: 'mongodb://nodeproject:project@ds161262.mlab.com:61262/nodeproject' })
 

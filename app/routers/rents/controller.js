@@ -14,38 +14,43 @@ const getController = (data) => {
             const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
             const price = { '$gte': min, '$lt': max };
             const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
-            const page = parseInt(req.query.page, 10) || 1;
-            const pagesize = parseInt(req.query.size, 10) || constants.PAGE_SIZE;
-
+            const page = parseInt(req.query.page, 10) || 0;
+            const pagesize = parseInt(req.query.size, 10) || 5;
             const query = location === 'All' ? { price } : { location, price };
+
             const queries = {
                 orderBy,
                 query,
-                pagesize,
-                page,
             };
 
-            return Promise.all([data.getAll(queries), data.getAllCount(queries)])
-                .then(([rents, allRentsCount]) => {
-                    const pages = Math.ceil(allRentsCount / pagesize);
-                    const searchQuery = {
-                        location: location,
-                        min: min,
-                        max: max,
-                        orderBy: req.query.order_by || 'date',
-                    };
+            return data.getAll(queries)
+                .then((rents) => {
+                    const pagesLen = Math.ceil(rents.length / pagesize);
+                    const pages = [];
+                    const rentsResults = rents.length;
+
+                    for (let i = 0; i < pagesLen; i += 1) {
+                        pages.push({
+                            curentPage: page,
+                            searchQuery: req.query,
+                        });
+                    }
+                    rents = rents.slice(page * pagesize, (page + 1) * pagesize);
 
                     rents.forEach((rent) => {
                         const curency = parseInt(rent.price, 10);
-                        rent.price = constants.convertNumberToCurrency(curency);
+                        rent.price = curency.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                        });
                     });
-
-                    return res.status(200).render('rents/all', {
-                        rents: rents,
-                        searchQuery: searchQuery,
-                        page: page,
+                    return res.render('rents/all', {
+                        context: rents,
                         pages: pages,
-                        rentsCount: allRentsCount,
+                        results: rentsResults,
+                        searchQuery: req.query,
+
                     });
                 });
         },
@@ -54,7 +59,11 @@ const getController = (data) => {
                 .then((rents) => {
                     rents.forEach((rent) => {
                         const curency = parseInt(rent.price, 10);
-                        rent.price = constants.convertNumberToCurrency(curency);
+                        rent.price = curency.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                        });
                     });
                     return res.render('rents/home', {
                         context: rents,
@@ -71,8 +80,11 @@ const getController = (data) => {
                     rent.date = rent.date.toLocaleDateString('en-US');
 
                     const curency = parseInt(rent.price, 10);
-                    rent.price = constants.convertNumberToCurrency(curency);
-
+                    rent.price = curency.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                    });
                     return res.render('rents/details', {
                         context: rent,
                     });
