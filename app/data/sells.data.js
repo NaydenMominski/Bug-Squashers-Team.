@@ -7,8 +7,8 @@ const getData = (db) => {
             return collection
                 .find(queries.query)
                 .sort(queries.orderBy)
-                // .skip(queries.pagesize * (queries.page - 1))
-                // .limit(queries.pagesize)
+                .skip(queries.pagesize * (queries.page - 1))
+                .limit(queries.pagesize)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {
@@ -16,6 +16,11 @@ const getData = (db) => {
                         return sell;
                     });
                 });
+        },
+        getAllCount(queries) {
+            return collection
+                .find(queries.query)
+                .count();
         },
         getById(id) {
             try {
@@ -49,8 +54,6 @@ const getData = (db) => {
                 });
         },
         remove(sell) {
-            // console.log(sell);
-
             return collection.remove({
                 _id: sell._id,
             });
