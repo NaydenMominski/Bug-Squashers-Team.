@@ -66,7 +66,7 @@ block content
                         a.page-link(href='#', tabindex='-1') Previous
                 else
                     li.page-item
-                        a.page-link(href='#') Previous                        
+                        a.page-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page-1}`) Previous                        
                 - for(let i = 1; i <= pages; i+=1 )
                     if(page===i)
                         li.page-item.active
@@ -79,4 +79,4 @@ block content
                         a.page-link(href='#', tabindex='-1') Next
                 else
                     li.page-item
-                        a.page-link(href='#') Next 
+                        a.page-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page+1}`) Next 
