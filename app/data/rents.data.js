@@ -7,8 +7,8 @@ const getData = (db) => {
             return collection
                 .find(queries.query)
                 .sort(queries.orderBy)
-                // .skip(queries.pagesize * (queries.page - 1))
-                // .limit(queries.pagesize)
+                .skip(queries.pagesize * (queries.page - 1))
+                .limit(queries.pagesize)
                 .toArray()
                 .then((rents) => {
                     return rents.map((rent) => {
@@ -16,6 +16,11 @@ const getData = (db) => {
                         return rent;
                     });
                 });
+        },
+        getAllCount(queries) {
+            return collection
+                .find(queries.query)
+                .count();
         },
         lastRents(n) {
             return collection

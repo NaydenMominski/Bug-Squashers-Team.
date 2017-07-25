@@ -12,35 +12,35 @@ block content
                 .number-results
                     | Total Results: 
                     b
-                        =results
+                        =sellsCount
                 .rfloat.r-margin-4.add-top-margin Results Format: 
                 .clear
             .clear
 
-             for item in context
+            for sell in sells
                 .results-container
                     .panel.panel-default.search-result
                         // template
                         // template
                         .panel-heading.featured-heading
                             h3.panel-title
-                                a.search-result-title.featured-r-title(href='sells/' + item._id)
-                                    =item.headline
+                                a.search-result-title.featured-r-title(href='sells/' + sell._id)
+                                    =sell.headline
                                 span.listing-price.r-margin-18
                                     b
-                                        =item.price
+                                        =sell.price
                         .panel-body
                             .row
                                 .col-sm-5.col-xs-12
-                                    a.btn-block.result-details-link(href='sells/' + item._id)
-                                        img.img-res(alt=item.headline, src='static/pictures/sell/'+ item.avatar)
+                                    a.btn-block.result-details-link(href='sells/' + sell._id)
+                                        img.img-res(alt=sell.headline, src='static/pictures/sell/'+ sell.avatar)
                                 .col-sm-7.col-xs-12
                                     .details
                                         p.description
                                             // template
                                             | Location: 
                                             b
-                                                =item.location
+                                                =sell.location
                                             br
                                             br
                                             | Bedrooms:
@@ -51,20 +51,32 @@ block content
                                             br
                                             br
                                             b
-                                            =item.description
+                                            =sell.description
                                         span.is_r_featured .
                             .row.margin-top-20
                                 .col-xs-6
                                 .col-xs-6
                                     .text-right
-                                        a.btn.btn-primary(href='sells/' + item._id) Details
+                                        a.btn.btn-primary(href='sells/' + sell._id) Details
 
             .clear
             ul.pagination
-                for page,index in pages
-                    if(page.curentPage===index)
+                if page===1
+                    li.page-item.disabled
+                        a.page-link(href='#', tabindex='-1') Previous
+                else
+                    li.page-item
+                        a.page-link(href='#') Previous                        
+                - for(let i = 1; i <= pages; i+=1 )
+                    if(page===i)
                         li.page-item.active
-                            a.pagination-link(href=`/sells?province=${page.searchQuery.location}&price_from=${page.searchQuery.min}&price_to=${page.searchQuery.max}&order_by=${page.searchQuery.orderBy}&page=${index}`)=index+1
+                            a.pagination-link(href=`/sells?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page}`)=page
                     else
                         li.page-item
-                            a.pagination-link(href=`/sells?province=${page.searchQuery.location}&price_from=${page.searchQuery.min}&price_to=${page.searchQuery.max}&order_by=${page.searchQuery.orderBy}&page=${index}`)=index+1
+                            a.pagination-link(href=`/sells?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${i}`)=i
+                if page===pages
+                    li.page-item.disabled
+                        a.page-link(href='#', tabindex='-1') Next
+                else
+                    li.page-item
+                        a.page-link(href='#') Next 
