@@ -1,3 +1,5 @@
+/* globals console*/
+
 const constants = require('../../../utils/constants');
 
 const isValid = (item) => {

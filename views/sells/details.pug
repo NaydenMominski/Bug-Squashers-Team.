@@ -71,15 +71,15 @@ block content
                     p
                         a.sidebar-link(href='#')
                             strong 
-                                = context.user.username
+                                = context.user.fullname
                     button.btn.btn-primary.overlay-btn
                         | Contact Agent
             nav#sidebar-wrapper(class='navbar navbar-default')
-                h3.category
+                h3.category.text-left
                     | Contact Agent
                 .sidebar-block
                     .row
-                        .col-lg-8
+                        .col-lg-8.text-left
                             form(action='#')
                                 .form-group.form-control-default.required
                                     label(for='fullname') Full Name
@@ -98,10 +98,11 @@ block content
                             .profile    
                                 img.img-circle(src='/static/pictures/img/'+ context.user.avatar)
                                 h4.sidebar-heading
-                                    = context.user.username
+                                    = context.user.fullname
                             ul  
                                 li 
                                     = context.user.phone
-                                li.sidebar-link 
-                                    = context.user.email
+                                li
+                                    a.sidebar-link(href='#')
+                                        = context.user.email
     script(src="/static/js/functions.js")
