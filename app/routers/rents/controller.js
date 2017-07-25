@@ -22,6 +22,7 @@ const getController = (data) => {
                 orderBy,
                 query,
                 pagesize,
+                page,
             };
 
             return Promise.all([data.getAll(queries), data.getAllCount(queries)])
