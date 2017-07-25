@@ -82,9 +82,7 @@ const chatData = (db) => {
             }
 
             usersDb.update(condition, data)
-                .then((result) => {
-                    console.log(result);
-                });
+                .then((result) => {});
         },
 
     };

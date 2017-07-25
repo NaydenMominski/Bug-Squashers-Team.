@@ -48,16 +48,5 @@ const bootstrapApp = () => {
     return app;
 };
 
-class Server {
-    constructor() {
-        this.port = process.env.PORT || 3005;
-        this.host = `localhost`;
-
-        this.app = express();
-        this.http = http.Server(this.app);
-        this.socket = socketio(this.http);
-    }
-
-}
 
 module.exports = { bootstrapApp };

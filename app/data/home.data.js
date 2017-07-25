@@ -1,5 +1,4 @@
 // const { ObjectID } = require('mongodb');
-
 const getData = (db) => {
     const collection = db.collection('sells');
     return {

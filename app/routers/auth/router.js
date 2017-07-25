@@ -2,6 +2,7 @@ const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
 const encryption = require('../../../utils/encryption');
+// const chat = require('../../data/chat.data');
 
 module.exports = {
     initRouter(data) {
@@ -32,6 +33,7 @@ module.exports = {
                     website: req.body.website,
                     avatar: req.file ? req.file.filename : 'default.png',
                     sellproperty: {},
+
                 };
 
                 return data.auth.signUp(user)
