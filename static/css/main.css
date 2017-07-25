@@ -1762,17 +1762,17 @@ small {
 }
 
 .btn {
-    -moz-border-radius: 0 !important;
-    -webkit-border-radius: 0 !important;
-    border-radius: 0 !important;
     display: inline-block;
     padding: 6px 12px;
+    margin: 0 10px;
+    white-space: nowrap;
+    line-height: 1.42857143;
+    border-radius: 4px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.428571429;
     text-align: center;
-    white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid transparent;
@@ -1968,4 +1968,81 @@ fieldset[disabled] .btn {
     -moz-transition: all 0.7s ease;
     -o-transition: all 0.7s ease;
     transition: all 0.7s ease;
+}
+
+#sidebar-wrapper .category {
+    padding: 16px;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: none;
+    letter-spacing: -0.2px;
+    margin: 0;
+    color: #fec721;
+    border-top: 1px solid #ebebeb;
+}
+
+#sidebar-wrapper .sidebar-block {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid transparent;
+    border-color: #ebebeb;
+}
+
+#sidebar-wrapper .sidebar-block .form-control-default {
+    background: #f7f7f7;
+    border-color: #efefef;
+    color: #212121;
+    padding: 6px 12px;
+    background-color: #f7f7f7;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    position: relative;
+}
+
+#sidebar-wrapper .sidebar-block .form-control-default::after {
+    color: #bd362f;
+    content: "*";
+    font-size: 20px;
+    position: absolute;
+    right: 12px;
+    top: 6px;
+}
+
+#sidebar-wrapper .sidebar-block .form-control-default label {
+    display: block;
+    margin: 6px 0 0;
+    line-height: 1.42857143;
+}
+
+#sidebar-wrapper .sidebar-block .form-control-default input {
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-transition: none;
+    transition: none;
+    border: none;
+    padding: 6px 0;
+    background: #f7f7f7;
+    border-color: #efefef;
+    color: #212121;
+}
+
+#sidebar-wrapper .sidebar-block .profile {
+    text-align: center;
+    display: block;
+    padding-top: 20px;
+}
+
+#sidebar-wrapper .sidebar-block .profile h4 {
+    margin-top: 5px;
+    color: inherit;
+    font-size: 20px;
+}
+
+#sidebar-wrapper .sidebar-block ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar-wrapper .sidebar-block ul li a.sidebar-link {
+    color: #858585;
 }
