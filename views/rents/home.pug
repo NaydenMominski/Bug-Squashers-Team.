@@ -5,18 +5,19 @@ block content
         .container
             #left_panel.text-left.col-md-3.no-left-padding
                 .search-panel
-                    h3.panel-title Search for a property
+                    h3.panel-title Search for a property for Rent
                     hr
                     // SEARCH FORM
                     form#search-form(method='get', action='/rents/all')
                         #search_form_container
                             .form-group
-                                label.control-label.col-sm-5(for='p_type')
-                                    small Type
+                                label.control-label.col-sm-5(for='property')
+                                    small Property
                                 .control-field.col-sm-7.no-right-padding
-                                    select.form-control.input-sm(name='ad_type')
-                                        //- option(value='1') Sale
-                                        option(value='2', selected='selected') Rent
+                                    select.form-control.input-sm(name='property')
+                                        option(value='All', selected='selected') All
+                                        option(value='Apartament') Apartament
+                                        option(value='House') House
                             .form-group
                                 label.control-label.col-sm-5(for='province')
                                     small Province

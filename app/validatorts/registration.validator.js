@@ -1,17 +1,30 @@
-const isValid = (model) => {
-    const registrationResponse = {};
+const getController = (data) => {
+    return {
+        check(user) {
+            user.checkBody({
+                'username': {
+                    notEmpty: true,
+                    matches: {
+                        options: [/^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/],
+                    },
+                    errorMessage: 'Invalid Username', // Error message for the parameter
+                },
+                'password': {
+                    notEmpty: true,
+                    matches: {
+                        options: [/^[0-9a-zA-Z]{5,30}$/],
+                    },
+                    errorMessage: 'Invalid Password', // Error message for the parameter
+                },
+            });
 
-    if (model.username === '') {
-        registrationResponse.error = true;
-        registrationResponse.message = 'username cant be empty';
-    } else if (model.email === '') {
-        registrationResponse.error = true;
-        registrationResponse.message = 'email cant be empty';
-    } else if (model.hashedPass === '') {
-        registrationResponse.error = true;
-        registrationResponse.message = 'password cant be empty';
-    }
-    return registrationResponse;
+            user.checkBody('password2', 'Passwords are not the same').equals(user.body.password);
+
+            const errors = user.validationErrors();
+
+            return errors;
+        },
+    };
 };
 
-module.exports = { isValid };
+module.exports = { getController };

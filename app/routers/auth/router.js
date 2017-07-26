@@ -2,12 +2,13 @@ const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
 const encryption = require('../../../utils/encryption');
-const { isValid } = require('../../validatorts').registrationValidator;
+const { getController } = require('../../validatorts/registration.validator');
+// const chat = require('../../data/chat.data');
 
 module.exports = {
     initRouter(data) {
         const router = new Router();
-
+        const validator = getController(data);
         router
             .get('/sign-up', (req, res) => {
                 return res.render('auth/sign-up');
@@ -35,15 +36,11 @@ module.exports = {
                     sellproperty: {},
                 };
 
-                // !TODO: Validation
-                const validation = isValid(user);
-
-                if (validation.error) {
-                    res.status(412).json(validation);
-                } else {
-                    user.timestamp = Math.floor(new Date() / 1000);
-                    user.online = 'N';
-                    user.socketId = '';
+                const errors = validator.check(req);
+                if (errors) {
+                   return res.render('auth/sign-up', {
+                       errors: errors,
+                   });
                 }
 
                 return data.auth.signUp(user)

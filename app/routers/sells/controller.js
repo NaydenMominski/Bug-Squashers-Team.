@@ -11,6 +11,7 @@ const isValid = (item) => {
 const getController = (data) => {
     return {
         getAll(req, res) {
+            const property = req.query.property || 'All';
             const location = req.query.province || 'All';
             const min = parseInt(req.query.price_from, 10) || 0;
             const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
@@ -18,8 +19,10 @@ const getController = (data) => {
             const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
             const page = parseInt(req.query.page, 10) || 1;
             const pagesize = parseInt(req.query.size, 10) || constants.PAGE_SIZE;
-
             const query = location === 'All' ? { price } : { location, price };
+            if (property !== 'All') {
+                query.property = property;
+            }
             const queries = {
                 orderBy,
                 query,
@@ -32,6 +35,7 @@ const getController = (data) => {
                     const pages = Math.ceil(allSellsCount / pagesize);
                     const searchQuery = {
                         location: location,
+                        property: property,
                         min: min,
                         max: max,
                         orderBy: req.query.order_by || 'date',
