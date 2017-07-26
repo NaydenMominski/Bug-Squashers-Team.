@@ -23,6 +23,11 @@ const attachTo = (app, data) => {
                 ('/' + dir.name);
             app.use(prefix, initRouter(data));
         });
+
+
+    app.get('*', (req, res) => {
+        res.redirect('/404');
+    });
 };
 
 module.exports = { attachTo };

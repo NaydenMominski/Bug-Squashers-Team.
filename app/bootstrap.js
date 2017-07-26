@@ -14,6 +14,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
+const socketEvents = require('../utils/socket');
+
 const logger = require('./logger/');
 
 const bootstrapApp = () => {
@@ -64,6 +66,8 @@ const bootstrapApp = () => {
     logger.attachTo(app);
 
     app.use(cookieParser());
+
+    socketEvents(socket).socketConfig();
     // app.use(flash());
 
     return app;

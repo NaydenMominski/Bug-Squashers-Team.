@@ -18,7 +18,7 @@ const getData = (db) => {
         },
         login(data) {
             usersDb
-                .findAndModify(data, [], { $set: { online: 'Y', available: 'Y' } });
+                .findAndModify(data, [], { $set: { online: 'Y' } });
         },
         userSessionCheck(data) {
             return usersDb
@@ -31,22 +31,37 @@ const getData = (db) => {
                     return user;
                 });
         },
-        // update the socket id of single user
-        addSocketId(data) {
-            usersDb.update({ _id: new ObjectID(data.id) }, data.value);
+        getUserInfo(userId, callback) {
+            return usersDb.findOne({ _id: new ObjectID(userId) },
+                (err, result) => {
+                    db.close();
+                    callback(err, result);
+                });
         },
-        getChatList(userId) {
+        // update the socket id of single user
+        addSocketId(data, callback) {
+            usersDb
+                .update({
+                        _id: new ObjectID(data.id),
+                    },
+                    data.value, (err, res) => {
+                        db.close();
+                        callback(err, res.result);
+                    });
+        },
+        getChatList(userId, callback) {
             return usersDb.find({ 'online': 'Y', socketId: { $ne: userId } })
-                .toArray()
-                .then((users) => {
-                    return users;
+                .toArray((err, result) => {
+                    db.close();
+                    callback(err, result);
                 });
         },
         // insert new message into db
-        insertMessages(data) {
-            return messagesDb.insertOne(data)
-                .then((result) => {
-                    return result;
+        insertMessages(data, callback) {
+            return messagesDb.insertOne(data,
+                (err, result) => {
+                    db.close();
+                    callback(err, result);
                 });
         },
         getMessages(userId, toUserId) {
@@ -73,7 +88,7 @@ const getData = (db) => {
                     return result;
                 });
         },
-        logout(userId, isSocketId) {
+        logout(userId, isSocketId, callback) {
             const data = {
                 $set: {
                     online: 'N',
@@ -87,8 +102,10 @@ const getData = (db) => {
                 condition._id = new ObjectID(userId);
             }
 
-            usersDb.update(condition, data)
-                .then((result) => {});
+            usersDb.update(condition, data, (err, result) => {
+                db.close();
+                callback(err, result);
+            });
         },
 
     };

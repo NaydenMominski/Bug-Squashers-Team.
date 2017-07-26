@@ -38,9 +38,13 @@ module.exports = {
 
                 const errors = validator.check(req);
                 if (errors) {
-                   return res.render('auth/sign-up', {
-                       errors: errors,
-                   });
+                    return res.render('auth/sign-up', {
+                        errors: errors,
+                    });
+                } else {
+                    user.timestamp = Math.floor(new Date() / 1000);
+                    user.online = 'N';
+                    user.socketId = '';
                 }
 
                 return data.auth.signUp(user)
