@@ -1,0 +1,15 @@
+extends ../_shared/_base
+
+block body
+    h1 Sells
+    ul
+        for sell in sells
+            li
+                a.todo-item(href="/sells/" + sell._id)
+                    =sell.headline
+    h1 Rentals
+    ul
+        for rent in rents
+            li
+                a.todo-item(href="/rents/" + rent._id)
+                    =rent.headline
