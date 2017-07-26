@@ -1,7 +1,7 @@
 const { ObjectID } = require('mongodb');
 
 
-const chatData = (db) => {
+const getData = (db) => {
     const usersDb = db.collection('users');
     const messagesDb = db.collection('messages');
     return {
@@ -35,7 +35,13 @@ const chatData = (db) => {
         addSocketId(data) {
             usersDb.update({ _id: new ObjectID(data.id) }, data.value);
         },
-        getChatList() {},
+        getChatList(userId) {
+            return usersDb.find({ 'online': 'Y', socketId: { $ne: userId } })
+                .toArray()
+                .then((users) => {
+                    return users;
+                });
+        },
         // insert new message into db
         insertMessages(data) {
             return messagesDb.insertOne(data)
@@ -60,7 +66,7 @@ const chatData = (db) => {
                 }],
             };
 
-            messagesDb
+            return messagesDb
                 .find(data)
                 .sort({ 'timestamp': 1 }).toArray()
                 .then((result) => {
@@ -88,4 +94,4 @@ const chatData = (db) => {
     };
 };
 
-module.exports = chatData;
+module.exports = { getData };

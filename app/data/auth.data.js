@@ -5,6 +5,8 @@ const getData = (db) => {
     const collection = db.collection('users');
     return {
         findBy(props) {
+            collection
+                .findAndModify(props, [], { $set: { online: 'Y' } });
             return collection.findOne(props);
         },
         getById(id) {

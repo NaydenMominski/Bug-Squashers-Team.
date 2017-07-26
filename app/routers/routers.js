@@ -4,6 +4,11 @@ const fs = require('fs');
 const path = require('path');
 
 const attachTo = (app, data) => {
+
+    app.get('/404', (req, res) => {
+        res.send('Page not found!');
+    });
+
     fs.readdirSync(__dirname)
         .map((dir) => ({
             name: dir,
@@ -13,9 +18,9 @@ const attachTo = (app, data) => {
         .forEach((dir) => {
             const { initRouter } = require(dir.path);
             const prefix =
-                dir.name === 'home'
-                    ? '/'
-                    : ('/' + dir.name);
+                dir.name === 'home' ?
+                '/' :
+                ('/' + dir.name);
             app.use(prefix, initRouter(data));
         });
 };

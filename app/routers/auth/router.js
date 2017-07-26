@@ -2,7 +2,7 @@ const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
 const encryption = require('../../../utils/encryption');
-// const chat = require('../../data/chat.data');
+const { isValid } = require('../../validatorts').registrationValidator;
 
 module.exports = {
     initRouter(data) {
@@ -33,8 +33,18 @@ module.exports = {
                     website: req.body.website,
                     avatar: req.file ? req.file.filename : 'default.png',
                     sellproperty: {},
-
                 };
+
+                // !TODO: Validation
+                const validation = isValid(user);
+
+                if (validation.error) {
+                    res.status(412).json(validation);
+                } else {
+                    user.timestamp = Math.floor(new Date() / 1000);
+                    user.online = 'N';
+                    user.socketId = '';
+                }
 
                 return data.auth.signUp(user)
                     .then(() => {
