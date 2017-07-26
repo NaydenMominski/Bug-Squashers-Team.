@@ -6,7 +6,7 @@ const path = require('path');
 const attachTo = (app, data) => {
 
     app.get('/404', (req, res) => {
-        res.send('Page not found!');
+        res.render('notfound');
     });
 
     fs.readdirSync(__dirname)
