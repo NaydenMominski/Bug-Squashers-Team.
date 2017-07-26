@@ -18,11 +18,22 @@ block body
                     label.control-label.col-sm-4(for='username') Username(*):
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='text', name='username', value='', required='', size='30')
+                        |It may contain only Latin letters or digits , "." and "_". It should start with a letter. Length from 3 to 30 characters.
+                        br
+                        br
                 .form-group
                     label.control-label.col-sm-4(for='password')
                         | Password(*):
                     .control-field.col-sm-8.no-right-padding
                         input.form-control.input-sm(type='password', name='password', required='', size='30')
+                        | The password must be 5 to 30 characters in length. Do not enter your username, other names or password dates.
+                        br
+                        br
+                .form-group
+                    label.control-label.col-sm-4(for='password')
+                        | Repeat password(*):
+                    .control-field.col-sm-8.no-right-padding
+                        input.form-control.input-sm(type='password', name='password2', required='', size='30')
                 .form-group
                     label.control-label.col-sm-4(for='usertype') I am:
                     .control-field.col-sm-8.no-right-padding
