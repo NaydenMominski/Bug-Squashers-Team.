@@ -1,10 +1,14 @@
-const isValid = (model) => {
-    const registrationResponse = {};
+const getController = (data) => {
+    return {
+        check(user) {
+            user.checkBody('username', 'Name is required').notEmpty();
+            user.checkBody('password', 'Password is required').notEmpty();
 
-    if (model.username === '') {
-        registrationResponse.error = true;
-        registrationResponse.message = 'username cant be empty';
-    }
+            const errors = user.validationErrors();
+
+            return errors;
+        },
+    };
 };
 
-module.exports = { isValid };
+module.exports = { getController };

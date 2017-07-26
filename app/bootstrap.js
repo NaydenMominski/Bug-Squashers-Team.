@@ -6,6 +6,7 @@
 const path = require('path');
 
 const express = require('express');
+const expressValidator = require('express-validator');
 const http = require('http');
 const socketio = require('socket.io');
 const bodyParser = require('body-parser');
@@ -23,7 +24,27 @@ const bootstrapApp = () => {
 
     app.set('view engine', 'pug');
 
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.urlencoded({
+        extended: false,
+    }));
+
+    app.use(expressValidator({
+        errorFormatter: function(param, msg, value) {
+            const namespace = param.split('.');
+            const root = namespace.shift();
+            let formParam = root;
+
+            while (namespace.length) {
+                formParam += '[' + namespace.shift() + ']';
+            }
+            return {
+                param: formParam,
+                msg: msg,
+                value: value,
+            };
+        },
+    }));
+
     app.use(flash());
 
     app.use('/static', express.static(path.join(__dirname, '../static')));

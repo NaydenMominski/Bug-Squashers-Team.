@@ -9,6 +9,10 @@ block body
             | In order to register and be able to submit listings, please fill the form below.
             br
             br
+            if errors
+                each err in errors
+                    div(class = "alert alert-danger")
+                        |#{err.msg}
             form(action='/auth/sign-up', method='post',enctype='multipart/form-data')
                 .form-group
                     label.control-label.col-sm-4(for='username') Username(*):

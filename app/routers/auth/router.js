@@ -2,12 +2,13 @@ const { Router } = require('express');
 const passport = require('passport');
 const { upload } = require('../../../utils/uploadfiles');
 const encryption = require('../../../utils/encryption');
+const { getController } = require('../../validatorts/registration.validator');
 // const chat = require('../../data/chat.data');
 
 module.exports = {
     initRouter(data) {
         const router = new Router();
-
+        const validator = getController(data);
         router
             .get('/sign-up', (req, res) => {
                 return res.render('auth/sign-up');
@@ -33,8 +34,14 @@ module.exports = {
                     website: req.body.website,
                     avatar: req.file ? req.file.filename : 'default.png',
                     sellproperty: {},
-
                 };
+
+                const errors = validator.check(req);
+                if (errors) {
+                   return res.render('auth/sign-up', {
+                       errors: errors,
+                   });
+                }
 
                 return data.auth.signUp(user)
                     .then(() => {
