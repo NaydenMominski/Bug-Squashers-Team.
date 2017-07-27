@@ -7,18 +7,21 @@ const getController = (data) => {
                     matches: {
                         options: [/^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/],
                     },
-                    errorMessage: 'Invalid Username', // Error message for the parameter
+                    // Error message for the parameter
+                    errorMessage: 'Invalid Username',
                 },
                 'password': {
                     notEmpty: true,
                     matches: {
                         options: [/^[0-9a-zA-Z]{5,30}$/],
                     },
-                    errorMessage: 'Invalid Password', // Error message for the parameter
+                    // Error message for the parameter
+                    errorMessage: 'Invalid Password',
                 },
             });
 
-            user.checkBody('password2', 'Passwords are not the same').equals(user.body.password);
+            user.checkBody('password2', 'Passwords are not the same')
+                .equals(user.body.password);
 
             const errors = user.validationErrors();
 

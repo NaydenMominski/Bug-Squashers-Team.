@@ -12,11 +12,20 @@ const getController = (data) => {
             const property = req.query.property || 'All';
             const location = req.query.province || 'All';
             const min = parseInt(req.query.price_from, 10) || 0;
-            const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
-            const price = { '$gte': min, '$lt': max };
-            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
+            const max = parseInt(req.query.price_to, 10) ||
+                Number.MAX_SAFE_INTEGER;
+
+            const price = {
+                '$gte': min,
+                '$lt': max,
+            };
+            const orderBy = req.query.order_by ===
+                'price' ? { price: 1 } : { date: -1 };
+
             const page = parseInt(req.query.page, 10) || 1;
-            const pagesize = parseInt(req.query.size, 10) || constants.PAGE_SIZE;
+            const pagesize = parseInt(req.query.size, 10) ||
+                constants.PAGE_SIZE;
+
             const query = location === 'All' ? { price } : { location, price };
             if (property !== 'All') {
                 query.property = property;
@@ -27,7 +36,9 @@ const getController = (data) => {
                 pagesize,
                 page,
             };
-            return Promise.all([data.getAll(queries), data.getAllCount(queries)])
+            return Promise.all([data.getAll(queries),
+                    data.getAllCount(queries),
+                ])
                 .then(([rents, allRentsCount]) => {
                     const pages = Math.ceil(allRentsCount / pagesize);
                     const searchQuery = {
@@ -148,8 +159,11 @@ const getController = (data) => {
                         email: user.email,
                     };
 
-                    editedrent.avatar = req.file ? req.file.filename : 'no-image.png';
+                    editedrent.avatar =
+                        req.file ? req.file.filename : 'no-image.png';
+
                     editedrent.price = parseInt(editedrent.price, 10);
+
                     editedrent.user = userdb;
                     editedrent.date = new Date();
 
@@ -179,7 +193,7 @@ const getController = (data) => {
                                 res.redirect('/rents');
                             });
                     }
-                    console.log('Wrong user');
+                    // console.log('Wrong user');
                     return res.redirect('/rents/' + id);
                 })
                 .catch((err) => {

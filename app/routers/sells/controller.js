@@ -14,11 +14,21 @@ const getController = (data) => {
             const property = req.query.property || 'All';
             const location = req.query.province || 'All';
             const min = parseInt(req.query.price_from, 10) || 0;
-            const max = parseInt(req.query.price_to, 10) || Number.MAX_SAFE_INTEGER;
-            const price = { '$gte': min, '$lt': max };
-            const orderBy = req.query.order_by === 'price' ? { price: 1 } : { date: -1 };
+            const max = parseInt(req.query.price_to, 10) ||
+                Number.MAX_SAFE_INTEGER;
+
+            const price = {
+                '$gte': min,
+                '$lt': max,
+            };
+
+            const orderBy = req.query.order_by ===
+                'price' ? { price: 1 } : { date: -1 };
+
             const page = parseInt(req.query.page, 10) || 1;
-            const pagesize = parseInt(req.query.size, 10) || constants.PAGE_SIZE;
+            const pagesize = parseInt(req.query.size, 10) ||
+                constants.PAGE_SIZE;
+
             const query = location === 'All' ? { price } : { location, price };
             if (property !== 'All') {
                 query.property = property;
@@ -30,7 +40,9 @@ const getController = (data) => {
                 page,
             };
 
-            return Promise.all([data.getAll(queries), data.getAllCount(queries)])
+            return Promise.all([data.getAll(queries),
+                    data.getAllCount(queries),
+                ])
                 .then(([sells, allSellsCount]) => {
                     const pages = Math.ceil(allSellsCount / pagesize);
                     const searchQuery = {
@@ -139,7 +151,8 @@ const getController = (data) => {
                         email: user.email,
                     };
 
-                    editedSell.avatar = req.file ? req.file.filename : 'no-image.png';
+                    editedSell.avatar =
+                        req.file ? req.file.filename : 'no-image.png';
                     editedSell.price = parseInt(editedSell.price, 10);
                     editedSell.user = userdb;
                     editedSell.date = new Date();
@@ -170,7 +183,7 @@ const getController = (data) => {
                                 res.redirect('/sells');
                             });
                     }
-                    console.log('Wrong user');
+                    // console.log('Wrong user');
                     return res.redirect('/sells/' + id);
                 })
                 .catch((err) => {
