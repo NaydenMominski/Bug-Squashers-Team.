@@ -1,8 +1,7 @@
 /* eslint new-cap: ["error", { "capIsNew": false }] */
 /* eslint-disable no-process-env */
 
-const bootstrapApp = () => {
-
+const bootstrapApp = (data, db) => {
     const express = require('express');
     const app = express();
 
@@ -11,10 +10,10 @@ const bootstrapApp = () => {
     // const cors = require('cors');
     const cookieParser = require('cookie-parser');
     // const socketEvents = require('../utils/socket');
-
     const logger = require('./logger/');
 
     require('./config').baseConfig(app);
+    require('./config').authConfig(app, data, db, 'Bug Squashers');
 
     // socketEvents(socket).socketConfig();
 

@@ -4,7 +4,7 @@ const { Strategy } = require('passport-local');
 const MongoStore = require('connect-mongo')(session);
 const encryption = require('../../utils/encryption');
 
-module.exports = (app, { auth }, db, secret) => {
+const configAuth = (app, { auth }, db, secret) => {
     passport.use(new Strategy((username, password, done) => {
         auth.findBy({ username: username })
             .then((user) => {
@@ -50,3 +50,5 @@ module.exports = (app, { auth }, db, secret) => {
         next();
     });
 };
+
+module.exports = configAuth;
