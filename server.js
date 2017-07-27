@@ -1,10 +1,19 @@
 /* globals process */
 /* eslint-disable no-process-env */
 /* eslint no-console: */
-const { getApp } = require('./app/app');
 const port = process.env.PORT || 3005;
+const async = require('./utils/async');
 
-getApp({ connectionString: 'mongodb://localhost/PropertyDb' })
-    .then((app) =>
-        app.listen(port, () =>
-            console.log(`Magic happens at :${port}`)));
+const db = require('./app/db');
+
+async()
+.then(() => db.connect('mongodb://localhost/PropertyDb'))
+    .then((database) => {
+        const data = require('./app/data').initData(database);
+        return require('./app').initApp(data, database);
+    })
+    .then((app) => {
+        return app.listen(port, () => {
+            console.log(`Magic happens at :${port}`);
+        });
+    });

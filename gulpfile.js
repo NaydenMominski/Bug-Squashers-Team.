@@ -32,10 +32,7 @@ gulp.task('start-server', ['lint'], () => {
         .then(() => require('./app/db').connect(config.connectionString))
         .then((db) => {
             const data = require('./app/data').initData(db);
-            const app = require('./app/bootstrap').bootstrapApp(data, db);
-
-            require('./app/routers').attachTo(app, data);
-
+            const app = require('./app').initApp(data, db);
             return app;
         })
         .then((app) => {

@@ -1,23 +1,28 @@
-const { connect } = require('./db');
-const { initData } = require('./data');
+/* eslint new-cap: ["error", { "capIsNew": false }] */
+/* eslint-disable no-process-env */
 
-const { bootstrapApp } = require('./bootstrap');
+const initApp = (data, db) => {
+    const express = require('express');
+    const app = express();
+    const server = require('http').Server(app);
+    const io = require('socket.io')(server);
 
-const routers = require('./routers');
+    // const cors = require('cors');
+    const cookieParser = require('cookie-parser');
+    const logger = require('./logger/');
 
-const async = require('../utils/async');
+    require('./config').baseConfig(app);
+    require('./config').authConfig(app, data, db, 'Bug Squashers');
+    // require('./config').chatConfig(io, data).socketConfig();
 
-module.exports = {
-    getApp(config) {
-        return async()
-            .then(() => connect(config.connectionString))
-            .then((db) => {
-                const data = initData(db);
-                const app = bootstrapApp(data, db);
+    require('../app/routers').attachTo(app, data);
 
-                routers.attachTo(app, data);
+    logger.attachTo(app);
 
-                return app;
-            });
-    },
+    app.use(cookieParser());
+
+    return Promise.resolve(server);
 };
+
+
+module.exports = { initApp };
