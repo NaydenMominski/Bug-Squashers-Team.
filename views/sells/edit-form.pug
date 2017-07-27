@@ -1,6 +1,6 @@
-extends _shared/_base
+extends ../_shared/_base
 
-block content
+block body
     .container
         br
         .col-md-9.text-left
@@ -44,12 +44,12 @@ block content
                                 option(value=`${location}`)= location
                 .form-group.col-md-4
                     br
-                    | 		Price ($):
+                    | Price ($):
                     br
                     input.form-control.input-sm(type='number', name='price', value = context.price)
                 .form-group.col-md-4
                     br
-                    | 		Size		
+                    | Size
                     br
                     input.form-control.input-sm(type='text', name='size', value = context.size)
                 .form-group.col-md-4
