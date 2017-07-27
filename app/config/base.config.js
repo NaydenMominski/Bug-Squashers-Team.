@@ -34,14 +34,11 @@ const configApp = (app) => {
     app.use('/static', express.static(path.join(__dirname, '../../static')));
     app.use('/libs', express.static(
         path.join(__dirname, '../../node_modules')));
-
-    app.use('/css', express
-        .static(path.join(__dirname,
-            '../../node_modules/font-awesome/css')));
     app.use('/js', express
         .static(path.join(__dirname, '../../node_modules/bootstrap/dist/js')));
     app.use('/js', express
         .static(path.join(__dirname, '../../node_modules/jquery/dist')));
+
     app.use('/css', express
         .static(path.join(__dirname, '../../node_modules/bootstrap/dist/css')));
 };

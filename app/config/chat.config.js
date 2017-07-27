@@ -1,5 +1,4 @@
-/* globals console */
-/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+/* eslint no-console: */
 
 const configChat = (io, data) => {
     const chat = data.chat;
@@ -58,7 +57,7 @@ const configChat = (io, data) => {
                                 'Select a user to chat');
                     } else {
                         const toSocketId = chatData.toSocketId;
-                        const fromSocketId = chatData.fromSocketId;
+                        // const fromSocketId = chatData.fromSocketId;
                         delete data.toSocketId;
                         chatData.timestamp = Math.floor(new Date() / 1000);
 
