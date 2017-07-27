@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const attachTo = (app, data) => {
-
     app.get('/404', (req, res) => {
         res.render('notfound');
     });
@@ -23,7 +22,6 @@ const attachTo = (app, data) => {
                 ('/' + dir.name);
             app.use(prefix, initRouter(data));
         });
-
 
     app.get('*', (req, res) => {
         res.redirect('/404');

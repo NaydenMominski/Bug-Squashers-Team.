@@ -41,11 +41,10 @@ module.exports = {
                     return res.render('auth/sign-up', {
                         errors: errors,
                     });
-                } else {
-                    user.timestamp = Math.floor(new Date() / 1000);
-                    user.online = 'N';
-                    user.socketId = '';
                 }
+                user.timestamp = Math.floor(new Date() / 1000);
+                user.online = 'N';
+                user.socketId = '';
 
                 return data.auth.signUp(user)
                     .then(() => {
