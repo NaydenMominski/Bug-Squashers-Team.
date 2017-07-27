@@ -1,6 +1,5 @@
 const { ObjectID } = require('mongodb');
 
-
 const getData = (db) => {
     const usersDb = db.collection('users');
     const messagesDb = db.collection('messages');

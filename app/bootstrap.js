@@ -14,6 +14,7 @@ const bootstrapApp = (data, db) => {
 
     require('./config').baseConfig(app);
     require('./config').authConfig(app, data, db, 'Bug Squashers');
+    require('./config').chatConfig(io, data).socketConfig();
 
     // socketEvents(socket).socketConfig();
 

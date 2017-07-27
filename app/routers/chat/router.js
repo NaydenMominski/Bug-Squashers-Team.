@@ -1,11 +1,8 @@
 const { Router } = require('express');
 
-const { getController } = require('./controller');
-
 module.exports = {
     initRouter(data) {
         const router = new Router();
-        const chat = getController(data.chat);
 
         router
             .post('/userSessionCheck', (req, res) => {
@@ -19,7 +16,7 @@ module.exports = {
                     sessionCheckResponse.message = `User Id cant be empty.`;
                     res.status(412).json(sessionCheckResponse);
                 }
-                chat.userSessionCheck({ id: userId })
+                data.chat.userSessionCheck({ id: userId })
                     .then((user) => {
                         if (!user) {
                             sessionCheckResponse.error = true;
@@ -36,7 +33,6 @@ module.exports = {
                 const userId = req.body.id;
                 const toUserId = req.body.toUserId;
                 const messagesResponse = {};
-
                 // !TODO: Validation
                 // Test 
                 const messages = data.chat.getMessages(userId, toUserId);
