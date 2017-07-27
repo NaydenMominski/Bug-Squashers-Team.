@@ -11,6 +11,9 @@ mixin nav(user)
                         a(href='/user')
                             | My Account
                     li
+                        a(href="/chat/user-session")
+                            | Messages 
+                    li
                         a(href="/auth/sign-out")
                             | Logout 
         else

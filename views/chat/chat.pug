@@ -8,13 +8,15 @@ block body
                     h3 Online Users
                     #users(class="list-group")
             .col-md-8
-                #chat(class="chat")
+                form#messageForm(action='javascript:void(0)')
+                    ul.list-messages
+                    .form-group.chat
+                        .msj-rta.macro(style='margin:auto')
+                            .text.text-r(style='background:whitesmoke !important')
+                                input.message-text(placeholder='Type a message')  
 
-                form#messageForm
-                    .form-group 
-                        label Enter a Message
-                        textarea#message(class="form-control")
-                        br
-                        input.btn.btn-primary(type='submit', value="Send Message")
+                    
+                    
     script(src='/libs/socket.io-client/dist/socket.io.js')
     script(src='/static/js/chat.js')
+

@@ -74,5 +74,37 @@ block body
                                 = context.user.username
                     a.btn.btn-primary.overlay-btn(href="#", data-toggle="sidebar-menu")
                         | Contact Agent
+             nav#sidebar-wrapper(class='navbar navbar-default')
+                h3.category.text-left
+                    | Contact Agent
+                .sidebar-block
+                    .row
+                        .col-lg-8.text-left
+                            form(action='#')
+                                .form-group.form-control-default.required
+                                    label(for='fullname') Full Name
+                                    input#fullname(type='text', placeholder='Your Full Name', class='form-control')
+                                .form-group.form-control-default.required
+                                    label(for='phone') Phone
+                                    input#phone(type='text', placeholder='Contact Phone', class='form-control')
+                                .form-group.form-control-default.required
+                                    label(for='email') Email Address
+                                    input#email(type='text', placeholder='Enter your Email', class='form-control')
+                                button.btn.btn-primary(type='submit') Submit
+                                button.btn.btn-default.close-sidebar
+                                    i.fa.fa-times.fa-fw
+                                    | Cancel
+                        .col-md-4.visible-lg.text-center
+                            .profile    
+                                img.img-circle(src='/static/pictures/img/'+ context.user.avatar)
+                                h4.sidebar-heading
+                                    = context.user.fullname
+                            ul  
+                                li 
+                                    = context.user.phone
+                                li
+                                    a.sidebar-link(href='#')
+                                        = context.user.email
+        
     script(src="/static/js/functions.js")
     

@@ -2,10 +2,14 @@
 
 const configChat = (io, data) => {
     const chat = data.chat;
+    const users = [];
+    const connections = [];
     return {
         socketEvents() {
             io.on('connection', (socket) => {
-                console.log('Client connected...');
+                connections.push(socket);
+                console.log('Connected: %s sockets connected',
+                    connections.length);
                 /**
                  * get the user's Chat list
                  */
@@ -87,7 +91,10 @@ const configChat = (io, data) => {
                 });
 
                 // sending the disconnected user to all socket users
-                socket.on('disconnected', () => {
+                socket.on('disconnect', (index) => {
+                    connections.splice(connections.indexOf(index));
+                    console.log('Disconnected: %s sockets connected',
+                        connections.length);
                     socket.broadcast.emit('chat-list-response', {
                         error: false,
                         userDisconnected: true,
@@ -97,28 +104,28 @@ const configChat = (io, data) => {
             });
         },
 
-        socketConfig() {
-            io.use((websock, next) => {
-                const userID = websock.require._query.id;
-                const userSocketId = websock.id;
-                const configData = {
-                    id: userID,
-                    value: {
-                        $set: {
-                            socketId: userSocketId,
-                            online: 'Y',
-                        },
-                    },
-                };
+        // socketConfig() {
+        //     io.use((websock, next) => {
+        //         const userID = websock.require._query.id;
+        //         const userSocketId = websock.id;
+        //         const configData = {
+        //             id: userID,
+        //             value: {
+        //                 $set: {
+        //                     socketId: userSocketId,
+        //                     online: 'Y',
+        //                 },
+        //             },
+        //         };
 
-                chat.addSocketId(configData, (err, res) => {
-                    // socket id updated 
-                });
-                next();
-            });
+        //         chat.addSocketId(configData, (err, res) => {
+        //             // socket id updated 
+        //         });
+        //         next();
+        //     });
 
-            this.socketEvents();
-        },
+        //     this.socketEvents();
+        // },
     };
 };
 
