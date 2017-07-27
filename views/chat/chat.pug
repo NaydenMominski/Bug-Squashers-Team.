@@ -1,0 +1,20 @@
+extends ../_shared/_base
+
+block body
+    .container
+        .row
+            .col-md-4
+                .well
+                    h3 Online Users
+                    #users(class="list-group")
+            .col-md-8
+                #chat(class="chat")
+
+                form#messageForm
+                    .form-group 
+                        label Enter a Message
+                        textarea#message(class="form-control")
+                        br
+                        input.btn.btn-primary(type='submit', value="Send Message")
+    script(src='/libs/socket.io-client/dist/socket.io.js')
+    script(src='/static/js/chat.js')

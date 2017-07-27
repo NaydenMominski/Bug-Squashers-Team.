@@ -3,9 +3,12 @@ const { Router } = require('express');
 module.exports = {
     initRouter(data) {
         const router = new Router();
-
+        const chat = data.chat;
         router
-            .post('/userSessionCheck', (req, res) => {
+            .get('/user-session', (req, res) => {
+                return res.render('chat/chat');
+            })
+            .post('/user-session', (req, res) => {
                 const userId = req.body.id;
                 const sessionCheckResponse = {};
 
@@ -16,7 +19,7 @@ module.exports = {
                     sessionCheckResponse.message = `User Id cant be empty.`;
                     res.status(412).json(sessionCheckResponse);
                 }
-                data.chat.userSessionCheck({ id: userId })
+                chat.userSessionCheck({ id: userId })
                     .then((user) => {
                         if (!user) {
                             sessionCheckResponse.error = true;
@@ -29,13 +32,13 @@ module.exports = {
                         }
                     });
             })
-            .post('/getMessages', (req, res) => {
+            .post('/get-messages', (req, res) => {
                 const userId = req.body.id;
                 const toUserId = req.body.toUserId;
                 const messagesResponse = {};
                 // !TODO: Validation
                 // Test 
-                const messages = data.chat.getMessages(userId, toUserId);
+                const messages = chat.getMessages(userId, toUserId);
 
                 if (messages) {
                     messagesResponse.error = true;
@@ -47,7 +50,6 @@ module.exports = {
                     res.status(200).json(messagesResponse);
                 }
             });
-
         return router;
     },
 };
