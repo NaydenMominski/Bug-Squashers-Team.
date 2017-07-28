@@ -7,7 +7,8 @@ $(() => {
         url: 'http://localhost:3005/user',
         dataType: 'json',
         success: (res) => {
-            result(res);
+            console.log(res.user);
+            result(res.user);
         },
         error: (err) => {
             error(err);
@@ -26,7 +27,6 @@ $(() => {
     }
 
     $(".message-text").on("keyup", (e) => {
-        debugger;
         const $input = $(".message-text");
         if (e.which === 13) {
             let $text = $input.val();
@@ -61,7 +61,7 @@ $(() => {
 
             control = '<li style="width:100%">' +
                 '<div class="msj macro">' +
-                '<div class="avatar"><img class="img-circle" style="width:100%;" src="' + me.avatar + '" /></div>' +
+                '<div class="avatar"><img class="img-circle" style="height: 75%; width:100%;" src="' + me.avatar + '" /></div>' +
                 '<div class="text text-l">' +
                 '<p>' + text + '</p>' +
                 '<p><small>' + date + '</small></p>' +
@@ -80,7 +80,6 @@ $(() => {
         }
         setTimeout(
             function() {
-                debugger;
                 $("ul.list-messages").append(control);
             }, time);
 
