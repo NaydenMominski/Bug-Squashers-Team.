@@ -8,6 +8,10 @@ block body
                 h3.panel-title Sign In
                 hr
                 // Sing-In FORM
+                if success_msg && success_msg.length > 0
+                    div(class = "alert alert-success")|#{success_msg}
+                if error_msg && error_msg.length > 0
+                    div(class = "alert alert-danger")|#{error_msg}
                 form.no-marginform(action="/auth/sign-in" method="POST")
                     table.bcollapse
                         tbody

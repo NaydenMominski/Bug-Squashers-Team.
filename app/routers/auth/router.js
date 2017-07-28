@@ -48,6 +48,7 @@ module.exports = {
 
                 return data.auth.signUp(user)
                     .then(() => {
+                        req.flash('success_msg', 'You are registered and can now login');
                         res.redirect('/auth/sign-in');
                     });
             })

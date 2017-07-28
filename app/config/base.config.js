@@ -31,6 +31,13 @@ const configApp = (app) => {
 
     app.use(flash());
 
+    app.use(function (req, res, next) {
+        res.locals.success_msg = req.flash('success_msg');
+        res.locals.error_msg = req.flash('error_msg');
+        res.locals.error = req.flash('error');
+        next();
+    })
+
     app.use('/static', express
         .static(path.join(__dirname, '../../static')));
     app.use('/libs', express

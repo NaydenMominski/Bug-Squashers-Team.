@@ -11,8 +11,8 @@ const initApp = (data, db) => {
     const cookieParser = require('cookie-parser');
     const logger = require('./logger/');
 
-    require('./config').baseConfig(app);
     require('./config').authConfig(app, data, db, 'Bug Squashers');
+    require('./config').baseConfig(app);
     require('./config').chatConfig(io, data).socketEvents();
 
     require('../app/routers').attachTo(app, data);
