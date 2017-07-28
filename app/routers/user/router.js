@@ -9,9 +9,9 @@ module.exports = {
 
         router
             .get('/', (req, res) => {
-                if (!req.user) {
-                    return res.redirect('/auth/sign-in');
-                }
+                // if (!req.user) {
+                //     return res.redirect('/auth/sign-in');
+                // }
                 return controller.getUserAllProperty(req, res);
             });
         return router;
