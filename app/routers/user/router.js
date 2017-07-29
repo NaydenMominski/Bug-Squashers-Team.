@@ -10,6 +10,9 @@ const initRouter = (controllerFactory) => {
         })
         .get('/agents', (req, res) => {
             return controller.getAllUsers(req, res);
+        })
+        .get('/contact', (req, res) => {
+            return res.render('user/contact');
         });
     return router;
 };
