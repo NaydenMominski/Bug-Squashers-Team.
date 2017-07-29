@@ -1,13 +1,10 @@
-const getController = (data) => {
-    return {
-        check(user) {
+const isValid = (user) => {
             user.checkBody({
                 'username': {
                     notEmpty: true,
                     matches: {
                         options: [/^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/],
                     },
-                    // Error message for the parameter
                     errorMessage: 'Invalid Username',
                 },
                 'password': {
@@ -15,7 +12,6 @@ const getController = (data) => {
                     matches: {
                         options: [/^[0-9a-zA-Z]{5,30}$/],
                     },
-                    // Error message for the parameter
                     errorMessage: 'Invalid Password',
                 },
             });
@@ -26,8 +22,6 @@ const getController = (data) => {
             const errors = user.validationErrors();
 
             return errors;
-        },
-    };
 };
 
-module.exports = { getController };
+module.exports = { isValid };
