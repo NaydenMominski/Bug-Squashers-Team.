@@ -26,7 +26,7 @@ block body
                     br
                     | Property:
                     br
-                    select.form-control.input-sm(name='property')
+                    select.form-control.input-sm(name='property', required='')
                         option(value='') Please Select
                         each value in ["Apartament", "House"]
                             option(value=value)
@@ -35,7 +35,7 @@ block body
                     br
                     | Province:
                     br
-                    select#user_type.form-control.input-sm(name='location')
+                    select#user_type.form-control.input-sm(name='location', required='')
 
                         option(value='') Please Select
                         each value in province
@@ -45,17 +45,17 @@ block body
                     br
                     | 		Price ($):
                     br
-                    input.form-control.input-sm(type='text', name='price', value='')
+                    input.form-control.input-sm(type='text', name='price', value='', required='')
                 .form-group.col-md-4
                     br
                     | 		Size		
                     br
-                    input.form-control.input-sm(type='text', name='size', value='')
+                    input.form-control.input-sm(type='text', name='size', value='', required='')
                 .form-group.col-md-4
                     br
                     | Bedrooms:
                     br
-                    select.form-control.input-sm(name='bedrooms')
+                    select.form-control.input-sm(name='bedrooms', required='')
                         option(value='') Please Select
                         option 1
                         option 2
@@ -68,7 +68,7 @@ block body
                     br
                     | Bathrooms:
                     br
-                    select.form-control.input-sm(name='bathrooms')
+                    select.form-control.input-sm(name='bathrooms', required='')
                         option(value='') Please Select
                         option 1
                         option 2
@@ -79,12 +79,12 @@ block body
                     br
                     | Floor:
                     br
-                    input.form-control.input-sm(type='text', value='', name='floor')
+                    input.form-control.input-sm(type='text', value='', name='floor', required='')
                 .form-group.col-md-4
                     br
                     | Floors in building:
                     br
-                    input.form-control.input-sm(type='text', value='', name='buildingfloors')
+                    input.form-control.input-sm(type='text', value='', name='buildingfloors', required='')
                 .clearfix
                 br
                 h3
@@ -117,7 +117,7 @@ block body
                     label.control-label.col-sm-2(for='address')
                         | Address
                     .control-field.col-sm-10.no-right-padding
-                        input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property")
+                        input(type="text", style="float:left !important", size="60", id="address", name="address", value="", placeholder="The address of the property", required='')
                     div#map-location
                     input#lat(type="hidden", name="lat", value="")
                     input#lng(type="hidden", name="lng", value="")

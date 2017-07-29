@@ -222,7 +222,7 @@ class RentsController {
         if (!req.user) {
             return res.redirect('/auth/sign-in');
         }
-        return res.render('ents/form', {
+        return res.render('rents/form', {
             province: constants.province,
         });
     }
