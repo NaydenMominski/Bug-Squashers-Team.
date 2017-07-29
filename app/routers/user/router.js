@@ -13,6 +13,9 @@ module.exports = {
                 //     return res.redirect('/auth/sign-in');
                 // }
                 return controller.getUserAllProperty(req, res);
+            })
+            .get('/agents', (req, res) => {
+                return controller.getAllUsers(req, res);
             });
         return router;
     },

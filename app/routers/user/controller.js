@@ -14,10 +14,17 @@ const getController = (data) => {
                         users: users,
                         user: req.user,
                     });
-                    //     return res.render('user/dashboard', {
-                    //         sells: sells,
-                    //         rents: rents,
-                    //     });
+                })
+                .catch((err) => {
+                    return res.redirect(404, '/home');
+                });
+        },
+        getAllUsers(req, res) {
+            return data.getUserAllUsers()
+                .then((users) => {
+                    return res.render('user/agents', {
+                        users: users,
+                    });
                 })
                 .catch((err) => {
                     return res.redirect(404, '/sells');

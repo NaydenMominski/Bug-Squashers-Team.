@@ -1,0 +1,31 @@
+extends ../_shared/_base
+
+block body
+    .body-rev.fx
+        #content
+            br
+            .h1
+                | All agents of PROPERTY PORTAL
+            br
+            for user in users
+                .managers.br
+                    .manager-box
+                        .wrap
+                            .l.fx
+                                p
+                                    a(href='#')
+                                        img(border='0', alt='', src='/static/pictures/img/'+ user.avatar, width='100')
+                            .r.fx
+                                h3
+                                    =user.firstname + ' ' +user.lastname
+                                h5
+                                    =user.usertype
+                                    br
+                                    br
+                                    br
+                                    =user.address
+                                ul.m-contacts(style='list-style-type : none')
+                                    li.mc3(title='Phone') Phone: 
+                                         =user.phone
+                                    li.mc6(title='E-mail') E-mail: 
+                                        =user.email
