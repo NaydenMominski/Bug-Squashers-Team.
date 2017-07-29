@@ -2,6 +2,7 @@ const getData = (db) => {
     const collectionSells = db.collection('sells');
     const collectionRents = db.collection('rents');
     const collectionUsers = db.collection('users');
+    const collectionMessages = db.collection('messages');
     return {
         getUserAllSells(curentUser) {
             return collectionSells.find({
@@ -23,11 +24,21 @@ const getData = (db) => {
         },
         getUserAllUsers() {
             return collectionUsers.find()
+                .sort({ 'online': -1, 'firstname': 1 })
                 .toArray()
                 .then((users) => {
                     return users;
                 });
         },
+        getAllMessages() {
+            return collectionUsers
+                .find()
+                .sort({ 'online': -1, 'firstname': 1 })
+                .toArray()
+                .then((users) => {
+                    return users;
+                });
+        }
     };
 };
 

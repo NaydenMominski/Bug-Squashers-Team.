@@ -48,6 +48,7 @@ const configChat = (io, data) => {
 
                 // send the messages to the user 
                 socket.on('add-message', (chatData) => {
+                    console.log(chatData);
                     if (chatData.message === '') {
                         io.to(socket.id)
                             .emit('add-message-response',
@@ -105,28 +106,29 @@ const configChat = (io, data) => {
             });
         },
 
-        // socketConfig() {
-        //     io.use((websock, next) => {
-        //         const userID = websock.require._query.id;
-        //         const userSocketId = websock.id;
-        //         const configData = {
-        //             id: userID,
-        //             value: {
-        //                 $set: {
-        //                     socketId: userSocketId,
-        //                     online: 'Y',
-        //                 },
-        //             },
-        //         };
+        socketConfig() {
+            io.use((socket, next) => {
+                console.log(socket);
+                const userID = socket.request._query.id;
+                const userSocketId = socket.id;
+                const configData = {
+                    id: userID,
+                    value: {
+                        $set: {
+                            socketId: userSocketId,
+                            // online: 'Y',
+                        },
+                    },
+                };
 
-        //         chat.addSocketId(configData, (err, res) => {
-        //             // socket id updated 
-        //         });
-        //         next();
-        //     });
+                chat.addSocketId(configData, (err, res) => {
+                    // socket id updated 
+                });
+                next();
+            });
 
-        //     this.socketEvents();
-        // },
+            this.socketEvents();
+        },
     };
 };
 

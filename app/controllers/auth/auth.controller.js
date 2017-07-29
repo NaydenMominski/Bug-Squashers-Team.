@@ -72,6 +72,11 @@ class AuthController {
                 res.redirect('/auth/sign-in');
             });
     }
+
+    logout(req, res) {
+        const userId = req.user._id;
+        this.data.chat.logout(userId, false, (req, res));
+    }
 }
 
 module.exports = AuthController;

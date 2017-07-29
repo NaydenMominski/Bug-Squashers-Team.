@@ -83,7 +83,7 @@ const getData = (db) => {
                     return result;
                 });
         },
-        logout(userId, isSocketId, callback) {
+        logout(userId, isSocketId) {
             const data = {
                 $set: {
                     online: 'N',
@@ -98,7 +98,7 @@ const getData = (db) => {
             }
 
             usersDb.update(condition, data, (err, result) => {
-                callback(err, result);
+                // callback(err, result);
             });
         },
 

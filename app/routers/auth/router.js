@@ -22,11 +22,10 @@ const initRouter = (controllerFactory) => {
             failureFlash: true,
         }))
         .get('/sign-out', (req, res) => {
+            controller.logout(req, res);
             req.logout();
             res.redirect('/');
         });
-    // .post('/sign-out', (req, res) => {
-    // });
     return router;
 };
 

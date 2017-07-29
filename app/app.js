@@ -13,7 +13,7 @@ const initApp = (data, db) => {
 
     require('./config').authConfig(app, data, db, 'Bug Squashers');
     require('./config').baseConfig(app);
-    require('./config').chatConfig(io, data).socketEvents();
+    require('./config').chatConfig(io, data).socketConfig();
 
     require('../app/routers').attachTo(app, data);
 

@@ -11,6 +11,9 @@ const initRouter = (controllerFactory) => {
         .post('/user-session', (req, res) => {
             return controller.userSession(req, res);
         })
+        .get('/get-messages', (req, res) => {
+            return controller.getMessages(req, res);
+        })
         .post('/get-messages', (req, res) => {
             return controller.getMessages(req, res);
         });

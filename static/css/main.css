@@ -2145,16 +2145,17 @@ fieldset[disabled] .btn {
     margin: 10px auto;
 }
 
-#chat-container .frame>div:last-of-type {
+
+/* #chat-container .frame>div:last-of-type {
     position: absolute;
     bottom: 5px;
     width: 100%;
     display: flex;
-}
+} */
 
 #messageForm ul.list-messages {
     width: 100%;
-    height: 450px;
+    height: 300px;
     list-style-type: none;
     overflow-y: auto;
     padding: 18px;
@@ -2285,4 +2286,12 @@ fieldset[disabled] .btn {
     height: 12px;
     margin-left: 4px;
     width: 12px;
+}
+
+.selected-user {
+    background-color: #03A9F4;
+}
+
+.selected-user:hover {
+    background-color: #2196f3 !important;
 }

@@ -5,7 +5,8 @@ block body
         .row
             .col-md-5
                 .well
-                    h3 Users
+                    .panel-heading
+                        h3.card-heading Users
                     #users(class="list-group")
                         table.table-users.table(border='0')
                             tbody
@@ -17,7 +18,7 @@ block body
                                                     img.pull-left.img-circle.nav-user-photo(width='50', src='/static/pictures/img/'+ user.avatar)
                                                 else
                                                     i.fa.fa-2x.fa-user.fw
-                                            td
+                                            td.fullname
                                                 = user.firstname + ' ' + user.lastname
                                                 br
                                                 i.fa.fa-envelope
@@ -32,7 +33,8 @@ block body
                                                     br
                                                     small.text-muted 2 days ago
 
-            .col-md-5.frame
+            .col-md-5.frame.well.hidden
+                .panel-heading.username-chat
                 form#messageForm(action='javascript:void(0)')
                     ul.list-messages
                     .form-group.chat

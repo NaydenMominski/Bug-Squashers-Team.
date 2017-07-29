@@ -22,22 +22,8 @@ $(() => {
     function result(user) {
         me.avatar = '/static/pictures/img/' + user.avatar;
         me.fromUserId = user.id;
-        me.toUserId = user.id;
+        me.toUserId = '';
     }
-
-    $(".message-text").on("keyup", (e) => {
-        const $input = $(".message-text");
-        if (e.which === 13) {
-            let $text = $input.val();
-            if ($text !== "") {
-                me.message = $text;
-                socket.emit('add-message', me);
-                insertChat("me", $text);
-                $input.val('');
-            }
-        }
-    });
-    // result();
 
     function formatAMPM(date) {
         let hours = date.getHours();
@@ -89,5 +75,32 @@ $(() => {
         $("ul").empty();
     }
 
+    // Events
+    $(".message-text").on("keyup", (e) => {
+        const $input = $(".message-text");
+        if (e.which === 13) {
+            let $text = $input.val();
+            if ($text !== "") {
+                me.message = $text;
+                socket.emit('add-message', me);
+                insertChat("me", $text);
+                $input.val('');
+            }
+        }
+    });
 
+    $('table.table-users>tbody>tr').on('click', (e) => {
+        debugger;
+        const user = e.target.parentElement;
+        const $tr = $(user);
+        const $id = $(user).attr('data-id');
+        const $fullname = $(user).find('.fullname').text();
+
+        $('table.table-users tr').removeClass('selected-user');
+        $tr.addClass('selected-user');
+        me.toUserId = $id;
+        $('.col-md-5.frame.well').removeClass('hidden');
+        $('.username-chat').html($fullname);
+
+    })
 });

@@ -40,6 +40,7 @@ class ChatController {
         const messagesResponse = {};
 
         const messages = this.data.chat.getMessages(userId, toUserId);
+        console.log(messages);
         if (messages) {
             messagesResponse.error = true;
             messagesResponse.message = 'Server error.';
