@@ -2229,6 +2229,29 @@ fieldset[disabled] .btn {
 
 /* Chat List */
 
+#users {
+    height: 350px;
+}
+
+#users table {
+    height: 350px;
+    overflow-y: auto;
+}
+
+#users table::-webkit-scrollbar {
+    width: 12px;
+}
+
+#users table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+#users table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
 #users i {
     vertical-align: middle;
 }
@@ -2253,4 +2276,13 @@ fieldset[disabled] .btn {
 #users small {
     font-weight: 100;
     top: 0;
+}
+
+.green-dot {
+    background: rgb(66, 183, 42);
+    border-radius: 50%;
+    display: inline-block;
+    height: 12px;
+    margin-left: 4px;
+    width: 12px;
 }

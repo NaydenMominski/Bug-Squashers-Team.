@@ -23,10 +23,14 @@ block body
                                                 i.fa.fa-envelope
                                             td
                                                 = user.usertype 
-                                            td(align='center')
-                                                | Last Login:  6/14/2017
-                                                br
-                                                small.text-muted 2 days ago
+                                            if user.online==='Y'
+                                                td(align='center')
+                                                    span.green-dot
+                                            else
+                                                td(align='center')
+                                                    | Last Login:  6/14/2017
+                                                    br
+                                                    small.text-muted 2 days ago
 
             .col-md-5.frame
                 form#messageForm(action='javascript:void(0)')
