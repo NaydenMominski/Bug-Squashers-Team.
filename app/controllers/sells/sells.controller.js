@@ -1,5 +1,5 @@
 const constants = require('../../../utils/constants');
-const isValid = require('../../validatorts/rents.validator');
+const { isValid } = require('../../validatorts/rents.validator');
 
 class SellsController {
     constructor(data) {
@@ -105,10 +105,14 @@ class SellsController {
         sell.user = userdb;
         sell.date = new Date();
 
-        if (!isValid(sell)) {
-            return Promise.resolve()
-                .then(() => res.redirect(400, '/sells/form'));
-        }
+        const errors = isValid(req);
+
+         if (errors) {
+            errors.forEach(function(error) {
+                req.flash('error_msg', error.msg);
+            }, this);
+             return res.redirect('/sells/form');
+         }
 
         return this.data.sells.create(sell)
             .then((result) => {
