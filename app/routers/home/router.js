@@ -1,11 +1,8 @@
 const { Router } = require('express');
 
-// const { getController } = require('./controller');
-
-const initRouter = (data, controllerFactory) => {
+const initRouter = (controllerFactory) => {
     const router = new Router();
     const controller = controllerFactory.getHomeController();
-    // const controller = getController(data.home);
 
     router
         .get('/', (req, res) => {

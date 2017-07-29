@@ -1,17 +1,11 @@
 const { Router } = require('express');
 
-const { getController } = require('./controller');
-
-
-const initRouter = (data) => {
+const initRouter = (controllerFactory) => {
     const router = new Router();
-    const controller = getController(data.user);
+    const controller = controllerFactory.getUserController();
 
     router
         .get('/', (req, res) => {
-            // if (!req.user) {
-            //     return res.redirect('/auth/sign-in');
-            // }
             return controller.getUserAllProperty(req, res);
         })
         .get('/agents', (req, res) => {

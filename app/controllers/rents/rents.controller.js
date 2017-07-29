@@ -1,6 +1,230 @@
+const constants = require('../../../utils/constants');
+const isValid = require('../../validatorts/rents.validator');
+
 class RentsController {
     constructor(data) {
         this.data = data;
+    }
+
+    // !TODO: need to separate paging!!
+    getAll(req, res) {
+        const property = req.query.property || 'All';
+        const location = req.query.province || 'All';
+        const min = parseInt(req.query.price_from, 10) || 0;
+        const max = parseInt(req.query.price_to, 10) ||
+            Number.MAX_SAFE_INTEGER;
+
+        const price = {
+            '$gte': min,
+            '$lt': max,
+        };
+
+        const orderBy = req.query.order_by ===
+            'price' ? { price: 1 } : { date: -1 };
+
+        const page = parseInt(req.query.page, 10) || 1;
+        const pagesize = parseInt(req.query.size, 10) ||
+            constants.PAGE_SIZE;
+
+        const query = location === 'All' ? { price } : { location, price };
+        if (property !== 'All') {
+            query.property = property;
+        }
+        const queries = {
+            orderBy,
+            query,
+            pagesize,
+            page,
+        };
+
+        return Promise.all([this.data.rents.getAll(queries),
+                this.data.rents.getAllCount(queries),
+            ])
+            .then(([rents, allRentsCount]) => {
+                const pages = Math.ceil(allRentsCount / pagesize);
+                const searchQuery = {
+                    location: location,
+                    property: property,
+                    min: min,
+                    max: max,
+                    orderBy: req.query.order_by || 'date',
+                };
+
+                rents.forEach((rent) => {
+                    const curency = parseInt(rent.price, 10);
+                    rent.price = constants.convertNumberToCurrency(curency);
+                });
+
+                return res.status(200).render('rents/all', {
+                    rents: rents,
+                    searchQuery: searchQuery,
+                    page: page,
+                    pages: pages,
+                    rentsCount: allRentsCount,
+                });
+            });
+    }
+
+    lastRents(req, res) {
+        return this.data.rents.lastRents(3)
+            .then((rents) => {
+                rents.forEach((rent) => {
+                    const curency = parseInt(rent.price, 10);
+                    rent.price = constants.convertNumberToCurrency(curency);
+                });
+                return res.render('rents/home', {
+                    context: rents,
+                    province: constants.province,
+                });
+            });
+    }
+
+    getDetails(req, res) {
+        return this.data.rents.getById(req.params.id)
+            .then((rent) => {
+                if (!rent) {
+                    return res.redirect(404, '/rents');
+                }
+                rent.date = rent.date.toLocaleDateString('en-US');
+
+                const curency = parseInt(rent.price, 10);
+                rent.price = constants.convertNumberToCurrency(curency);
+
+                return res.render('rents/details', {
+                    context: rent,
+                });
+            })
+            .catch((err) => {
+                return res.redirect(404, '/rents');
+            });
+    }
+
+    create(req, res) {
+        if (!req.user) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        const rent = req.body;
+        const user = req.user;
+        const userdb = {
+            id: user.id,
+            username: user.username,
+            fullname: user.firstname + ' ' + user.lastname,
+            usertype: user.usertype,
+            phone: user.phone,
+            avatar: user.avatar || 'default-user.png',
+            email: user.email,
+        };
+
+        rent.avatar = req.file ? req.file.filename : 'no-image.png';
+        rent.price = parseInt(rent.price, 10);
+        rent.user = userdb;
+        rent.date = new Date();
+
+        if (!isValid(rent)) {
+            return Promise.resolve()
+                .then(() => res.redirect(400, '/rents/form'));
+        }
+
+        return this.data.rents.create(rent)
+            .then((result) => {
+                res.redirect('/rents/' + result.id);
+            });
+    }
+
+    editGet(req, res) {
+        return this.data.rents.getById(req.params.id)
+            .then((rent) => {
+                if (!rent) {
+                    return res.redirect(404, '/rents');
+                }
+                return res.render('rents/edit-form', {
+                    context: rent,
+                    province: constants.province,
+                });
+            })
+            .catch((err) => {
+                return res.redirect(404, '/rents');
+            });
+    }
+
+    editPost(req, res) {
+        if (!req.user) {
+            return res.redirect('/auth/sign-in');
+        }
+        const id = req.params.id;
+        // console.log(editedrent);
+        return this.data.rents.getById(id)
+            .then((rent) => {
+                if (!rent) {
+                    return res.redirect(404, '/rents');
+                }
+
+                const editedrent = req.body;
+                const user = req.user;
+                const userdb = {
+                    id: user.id,
+                    username: user.username,
+                    fullname: user.firstname + ' ' + user.lastname,
+                    usertype: user.usertype,
+                    phone: user.phone,
+                    avatar: user.avatar || 'default-user.png',
+                    email: user.email,
+                };
+
+                editedrent.avatar =
+                    req.file ? req.file.filename : 'no-image.png';
+
+                editedrent.price = parseInt(editedrent.price, 10);
+
+                editedrent.user = userdb;
+                editedrent.date = new Date();
+
+
+                if (rent.user.id.equals(user._id)) {
+                    return this.data.rents.update(rent, editedrent)
+                        .then((result) => {
+                            res.redirect('/rents/' + result.id);
+                        });
+                }
+                return res.redirect('/rents/' + id);
+            })
+            .catch((err) => {
+                return res.redirect(404, '/rents');
+            });
+    }
+
+    deletePost(req, res) {
+        if (!req.user) {
+            return res.redirect('/auth/sign-in');
+        }
+        const id = req.params.id;
+        return this.data.rents.getById(id)
+            .then((rent) => {
+                if (!rent) {
+                    return res.redirect(404, '/rents');
+                }
+                if (rent.user.id.equals(req.user._id)) {
+                    return this.data.rents.remove(rent)
+                        .then((result) => {
+                            res.redirect('/rents');
+                        });
+                }
+                // console.log('Wrong user');
+                return res.redirect('/rents/' + id);
+            })
+            .catch((err) => {
+                return res.redirect(404, '/rents');
+            });
+    }
+
+    addRent(req, res) {
+        if (!req.user) {
+            return res.redirect('/auth/sign-in');
+        }
+        return res.render('ents/form', {
+            province: constants.province,
+        });
     }
 }
 

@@ -23,7 +23,7 @@ const attachTo = (app, data) => {
                 '/' :
                 ('/' + dir.name);
             const controller = new ControllersFactory(controllers, data);
-            app.use(prefix, initRouter(data, controller));
+            app.use(prefix, initRouter(controller));
         });
 
     app.get('*', (req, res) => {
