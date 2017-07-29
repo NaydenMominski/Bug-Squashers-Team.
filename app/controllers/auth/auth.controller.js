@@ -1,5 +1,4 @@
 const encryption = require('../../../utils/encryption');
-const { upload } = require('../../../utils/uploadfiles');
 const { isValid } = require('../../validatorts/registration.validator');
 
 class AuthController {
@@ -22,7 +21,6 @@ class AuthController {
             email: req.body.email,
             website: req.body.website,
             avatar: req.file ? req.file.filename : 'default.png',
-            sellproperty: {},
         };
 
         const errors = isValid(req);
@@ -40,7 +38,7 @@ class AuthController {
         return this.data.auth.signUp(user)
             .then(() => {
                 req.flash('success_msg',
-                        'You are registered and can now login');
+                    'You are registered and can now login');
                 res.redirect('/auth/sign-in');
             });
     }

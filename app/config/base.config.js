@@ -13,7 +13,7 @@ const configApp = (app) => {
     }));
 
     app.use(expressValidator({
-        errorFormatter: function(param, msg, value) {
+        errorFormatter: (param, msg, value) => {
             const namespace = param.split('.');
             const root = namespace.shift();
             let formParam = root;
@@ -31,23 +31,18 @@ const configApp = (app) => {
 
     app.use(flash());
 
-    app.use(function (req, res, next) {
+    app.use((req, res, next) => {
         res.locals.success_msg = req.flash('success_msg');
         res.locals.error_msg = req.flash('error_msg');
         res.locals.error = req.flash('error');
         next();
-    })
+    });
 
     app.use('/static', express
         .static(path.join(__dirname, '../../static')));
     app.use('/libs', express
-        .static(path.join(__dirname, '../../node_modules')));
-    app.use('/js', express
-        .static(path.join(__dirname, '../../node_modules/bootstrap/dist/js')));
-    app.use('/js', express
-        .static(path.join(__dirname, '../../node_modules/jquery/dist')));
-    app.use('/css', express
-        .static(path.join(__dirname, '../../node_modules/bootstrap/dist/css')));
+        .static(path.join(__dirname,
+            '../../node_modules')));
 };
 
 module.exports = configApp;
