@@ -6,7 +6,10 @@ module.exports = {
         const chat = data.chat;
         router
             .get('/user-session', (req, res) => {
-                return res.render('chat/chat');
+                data.user.getUserAllUsers()
+                    .then((users) => {
+                        return res.render('chat/chat', { users: users });
+                    });
             })
             .post('/user-session', (req, res) => {
                 const userId = req.body.id;

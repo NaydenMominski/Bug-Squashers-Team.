@@ -2225,3 +2225,28 @@ fieldset[disabled] .btn {
     /* Firefox 18- */
     color: #d4d4d4;
 }
+
+
+/* Chat List */
+
+#users i {
+    vertical-align: middle;
+}
+
+.table-users tbody tr:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+#users .nav-user-photo {
+    vertical-align: middle;
+}
+
+#users .user_panel {
+    width: 50%;
+}
+
+#users small {
+    font-weight: 100;
+    top: 0;
+}

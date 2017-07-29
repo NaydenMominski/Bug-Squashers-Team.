@@ -22,7 +22,7 @@ const getData = (db) => {
                 });
         },
         getUserAllUsers() {
-            return collectionUsers.find({})
+            return collectionUsers.find()
                 .toArray()
                 .then((users) => {
                     return users;

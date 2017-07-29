@@ -7,6 +7,27 @@ block body
                 .well
                     h3 Online Users
                     #users(class="list-group")
+                        table.table-users.table(border='0')
+                            tbody
+                                if users
+                                    each user in users
+                                        tr
+                                        td(width='10', align='center')
+                                            if user.avatar
+                                                img.pull-left.img-circle.nav-user-photo(width='50', src='/static/pictures/img/'+ user.avatar)
+                                            else
+                                                i.fa.fa-2x.fa-user.fw
+                                        td
+                                            = user.firstname + ' ' + user.lastname
+                                            br
+                                            i.fa.fa-envelope
+                                        td
+                                            = user.usertype 
+                                        td(align='center')
+                                            | Last Login:  6/14/2017
+                                            br
+                                            small.text-muted 2 days ago
+
             .col-md-5.frame
                 form#messageForm(action='javascript:void(0)')
                     ul.list-messages
