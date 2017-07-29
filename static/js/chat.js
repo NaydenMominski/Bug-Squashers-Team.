@@ -7,7 +7,6 @@ $(() => {
         url: 'http://localhost:3005/user',
         dataType: 'json',
         success: (res) => {
-            console.log(res.user);
             result(res.user);
         },
         error: (err) => {

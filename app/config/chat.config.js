@@ -8,6 +8,7 @@ const configChat = (io, data) => {
         socketEvents() {
             io.on('connection', (socket) => {
                 connections.push(socket);
+                // users.push();
                 console.log('Connected: %s sockets connected',
                     connections.length);
                 /**

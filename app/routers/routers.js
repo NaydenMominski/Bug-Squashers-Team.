@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const { ControllersFactory } = require('../../utils/controllerfactory');
+const controllers = require('../controllers');
 
 const attachTo = (app, data) => {
     app.get('/404', (req, res) => {
@@ -20,7 +22,8 @@ const attachTo = (app, data) => {
                 dir.name === 'home' ?
                 '/' :
                 ('/' + dir.name);
-            app.use(prefix, initRouter(data));
+            const controller = new ControllersFactory(controllers, data);
+            app.use(prefix, initRouter(data, controller));
         });
 
     app.get('*', (req, res) => {

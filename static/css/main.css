@@ -2233,9 +2233,13 @@ fieldset[disabled] .btn {
     vertical-align: middle;
 }
 
-.table-users tbody tr:hover {
+#users table tbody tr:hover {
     cursor: pointer;
     background-color: #eee;
+}
+
+#users table tr td:first-child {
+    width: 40px;
 }
 
 #users .nav-user-photo {
