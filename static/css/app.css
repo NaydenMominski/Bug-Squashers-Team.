@@ -11,3 +11,43 @@
     -webkit-line-clamp: 4;
     /* -webkit-box-orient: vertical; */
 }
+
+.fx {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+}
+
+.body-rev {
+    width: 715px;
+}
+
+.managers .manager-box {
+    float: left;
+    margin: 0 0 2% 2%;
+    width: 48%;
+    height: 215px;
+    overflow: hidden;
+    border: solid 1px #ddd;
+}
+
+.manager-box .l {
+    width: 45%;
+}
+
+.managers .manager-box .l {
+    width: 35%;
+}
+
+.manager-box .l ul {
+    margin: 0;
+    padding: 0;
+}
+
+.manager-box .r {
+    width: 55%;
+}
+
+.managers .manager-box .r {
+    width: 65%;
+}
