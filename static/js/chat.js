@@ -78,23 +78,17 @@ $(() => {
                 '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + you.avatar + '" /></div>' +
                 '</li>';
         }
+
         setTimeout(
             function() {
                 $("ul.list-messages").append(control);
             }, time);
-
+        $('ul.list-messages').animate({ scrollTop: $('ul.list-messages').prop("scrollHeight") }, 500);
     }
 
     function resetChat() {
         $("ul").empty();
     }
 
-
-    //-- Clear Chat
-    // resetChat();
-
-    // //-- Print Messages
-    // insertChat("me", "Hello Tom...", 0);
-    // insertChat("you", "Hi, Pablo", 1500);
 
 });

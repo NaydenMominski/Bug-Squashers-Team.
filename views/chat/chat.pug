@@ -1,13 +1,13 @@
 extends ../_shared/_base
 
 block body
-    .container
+    #chat-container.container
         .row
             .col-md-4
                 .well
                     h3 Online Users
                     #users(class="list-group")
-            .col-md-8
+            .col-md-5.frame
                 form#messageForm(action='javascript:void(0)')
                     ul.list-messages
                     .form-group.chat

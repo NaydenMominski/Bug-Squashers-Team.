@@ -33,7 +33,6 @@ const getData = (db) => {
         getUserInfo(userId, callback) {
             return usersDb.findOne({ _id: new ObjectID(userId) },
                 (err, result) => {
-                    db.close();
                     callback(err, result);
                 });
         },
@@ -44,14 +43,12 @@ const getData = (db) => {
                         _id: new ObjectID(data.id),
                     },
                     data.value, (err, res) => {
-                        db.close();
                         callback(err, res.result);
                     });
         },
         getChatList(userId, callback) {
             return usersDb.find({ 'online': 'Y', socketId: { $ne: userId } })
                 .toArray((err, result) => {
-                    db.close();
                     callback(err, result);
                 });
         },
@@ -59,7 +56,6 @@ const getData = (db) => {
         insertMessages(data, callback) {
             return messagesDb.insertOne(data,
                 (err, result) => {
-                    db.close();
                     callback(err, result);
                 });
         },
@@ -102,7 +98,6 @@ const getData = (db) => {
             }
 
             usersDb.update(condition, data, (err, result) => {
-                db.close();
                 callback(err, result);
             });
         },
