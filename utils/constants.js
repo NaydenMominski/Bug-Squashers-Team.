@@ -31,9 +31,9 @@ module.exports = {
         'Yambol',
     ],
     convertNumberToCurrency: (number) =>
-        number.toLocaleString('en-US', {
+        number.toLocaleString('de-DE', {
             style: 'currency',
-            currency: 'USD',
+            currency: 'EUR',
             minimumFractionDigits: 0,
         }),
 };

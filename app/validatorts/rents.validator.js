@@ -3,7 +3,7 @@ const isValid = (rent) => {
                 'headline': {
                     matches: {
                     notEmpty: false,
-                        options: [/((^$)|^[a-zA-Z ]{0,120}$)/],
+                        options: [/((^$)|^[a-zA-Z -[\]{}()*+?.,\\^$|#\s]{0,120}$)/],
                     },
                     errorMessage: 'Invalid headline',
                 },

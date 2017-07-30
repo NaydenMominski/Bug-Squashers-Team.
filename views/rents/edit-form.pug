@@ -116,8 +116,21 @@ block body
                 .clear
                 br
                 .form-group
+                    br
+                    h3
+                        | Add a Google Map to Your Listing
+                    .clear
+                    hr
+                    label.control-label.col-sm-2(for='address')
+                        | Address
+                    .control-field.col-sm-10.no-right-padding
+                        input(type="text", style="float:left !important", size="60", id="address", name="address", value=context.address, placeholder="The address of the property")
+                    div#map-location
+                    input#lat(type="hidden", name="lat", value=context.lat)
+                    input#lng(type="hidden", name="lng", value=context.lng)
+                .form-group
                     label.control-label.col-sm-2(for='avatar')
-                        | Images:
+                        | Avatar:
                     .control-field.col-sm-6.no-right-padding
                         input.form-control.input-sm(type='file', name='avatar', accept='.jpg,.jpeg,.png')
                 br
@@ -126,5 +139,5 @@ block body
                 .clear
                 br
                 br
-                        
-
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')
+    script(src='/static/js/googlemap-api.js')

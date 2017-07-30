@@ -16,8 +16,10 @@ head
     link(rel='stylesheet', href='/static/css/main.css')
     script(src='/libs/jquery/dist/jquery.min.js')
     script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/static/js/facebook.js')
     
 body
+    #fb-root
     .row.top-container
         .container
             .col-md-4.no-left-padding.center-xs
@@ -38,8 +40,6 @@ body
                     li
                         a(href='/rents') Rentals
                     li
-                        a(href='#') Latest Ads
-                    li
                         ul.nav.navbar-nav.navbar-right
                             li
                                 a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle 
@@ -56,10 +56,6 @@ body
                     li
                         a(href='/user/agents') Agents
                     li
-                        a(href='#') Email Alerts
-                    li
-                        a(href='#') Questions
-                    li
                         a(href='/user/contact') Contact
                 +nav(user)
     block body
@@ -72,14 +68,14 @@ body
                 li
                     a(href='#') Rentals
                 li
-                    a(href='#') Latest Ads
-                li
-                    a(href='/sells/form') Post a New Ad
-                li
                     a(href='#') Agents
                 li
-                    a(href='#') Email Alerts
-                li
-                    a(href='#') Questions
-                li
                     a(href='/user/contact') Contact
+                li
+                    a.btn-social.btn-outline(href='https://github.com/NDoroteya93/Bug-Squashers-Team.')
+                        span.sr-only github
+                        i.fa.fa-github(aria-hidden='true')
+                        | GitHub
+                li
+                    .fb-share-button(data-href='http://52.14.0.173', data-layout='button', data-size='small', data-mobile-iframe='true')
+                        a.fb-xfbml-parse-ignore(target='_blank', href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F52.14.0.173%2F&src=sdkpreparse') Споделяне

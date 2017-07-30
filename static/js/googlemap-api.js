@@ -3,8 +3,8 @@ jQuery(function($) {
     function initMap($map, coords) {
         $map = $map || $('#map-location');
         const options = {
-            zoom: 12,
-            center: new google.maps.LatLng(42.698334, 42.698334)
+            zoom: 7,
+            center: new google.maps.LatLng(42.733883, 25.485829999999964)
         }
 
         let marker;
