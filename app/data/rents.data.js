@@ -4,36 +4,48 @@ const getData = (db) => {
     const collection = db.collection('rents');
     return {
         getAll(queries) {
-            return collection
-                .find(queries.query)
-                .sort(queries.orderBy)
-                .skip(queries.pagesize * (queries.page - 1))
-                .limit(queries.pagesize)
-                .toArray()
-                .then((rents) => {
-                    return rents.map((rent) => {
-                        rent.id = rent._id;
-                        return rent;
+            try {
+                return collection
+                    .find(queries.query)
+                    .sort(queries.orderBy)
+                    .skip(queries.pagesize * (queries.page - 1))
+                    .limit(queries.pagesize)
+                    .toArray()
+                    .then((rents) => {
+                        return rents.map((rent) => {
+                            rent.id = rent._id;
+                            return rent;
+                        });
                     });
-                });
+            } catch (err) {
+                return Promise.reject('Invalid queryes');
+            }
         },
         getAllCount(queries) {
-            return collection
-                .find(queries.query)
-                .count();
+            try {
+                return collection
+                    .find(queries.query)
+                    .count();
+            } catch (err) {
+                return Promise.reject('Invalid id');
+            }
         },
-        lastRents(n) {
-            return collection
-                .find({})
-                .sort({ date: -1 })
-                .limit(n)
-                .toArray()
-                .then((rents) => {
-                    return rents.map((rent) => {
-                        rent.id = rent._id;
-                        return rent;
+        lastRents(lastRents) {
+            try {
+                return collection
+                    .find({})
+                    .sort({ date: -1 })
+                    .limit(lastRents)
+                    .toArray()
+                    .then((rents) => {
+                        return rents.map((rent) => {
+                            rent.id = rent._id;
+                            return rent;
+                        });
                     });
-                });
+            } catch (err) {
+                return Promise.reject('Invalid id');
+            }
         },
         getById(id) {
             try {
@@ -51,27 +63,37 @@ const getData = (db) => {
             }
         },
         create(rent) {
-            return collection.insert(rent)
-                .then((result) => {
-                    rent.id = rent._id;
-                    return rent;
-                });
+            try {
+                return collection.insert(rent)
+                    .then((result) => {
+                        rent.id = rent._id;
+                        return rent;
+                    });
+            } catch (err) {
+                return Promise.reject('Invalid rent');
+            }
         },
         update(rent, editedrent) {
-            return collection.updateOne({
-                    _id: rent._id,
-                }, editedrent)
-                .then((result) => {
-                    rent.id = rent._id;
-                    return rent;
-                });
+            try {
+                return collection.updateOne({
+                        _id: rent._id,
+                    }, editedrent)
+                    .then((result) => {
+                        rent.id = rent._id;
+                        return rent;
+                    });
+            } catch (err) {
+                return Promise.reject('Invalid update');
+            }
         },
         remove(rent) {
-            // console.log(rent);
-
-            return collection.remove({
-                _id: rent._id,
-            });
+            try {
+                return collection.remove({
+                    _id: rent._id,
+                });
+            } catch (err) {
+                return Promise.reject('Error the rent i not removed');
+            }
         },
     };
 };

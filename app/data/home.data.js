@@ -2,11 +2,11 @@
 const getData = (db) => {
     const collection = db.collection('sells');
     return {
-        lastSells(n) {
+        lastSells(lastSells) {
             return collection
                 .find({})
                 .sort({ date: -1 })
-                .limit(n)
+                .limit(lastSells)
                 .toArray()
                 .then((sells) => {
                     return sells.map((sell) => {

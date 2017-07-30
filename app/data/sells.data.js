@@ -4,23 +4,31 @@ const getData = (db) => {
     const collection = db.collection('sells');
     return {
         getAll(queries) {
-            return collection
-                .find(queries.query)
-                .sort(queries.orderBy)
-                .skip(queries.pagesize * (queries.page - 1))
-                .limit(queries.pagesize)
-                .toArray()
-                .then((sells) => {
-                    return sells.map((sell) => {
-                        sell.id = sell._id;
-                        return sell;
+            try {
+                return collection
+                    .find(queries.query)
+                    .sort(queries.orderBy)
+                    .skip(queries.pagesize * (queries.page - 1))
+                    .limit(queries.pagesize)
+                    .toArray()
+                    .then((sells) => {
+                        return sells.map((sell) => {
+                            sell.id = sell._id;
+                            return sell;
+                        });
                     });
-                });
+            } catch (err) {
+                return Promise.reject('Invalid queryes');
+            }
         },
         getAllCount(queries) {
-            return collection
-                .find(queries.query)
-                .count();
+            try {
+                return collection
+                    .find(queries.query)
+                    .count();
+            } catch (err) {
+                return Promise.reject('Invalid queryes');
+            }
         },
         getById(id) {
             try {
@@ -38,25 +46,37 @@ const getData = (db) => {
             }
         },
         create(sell) {
-            return collection.insert(sell)
-                .then((result) => {
-                    sell.id = sell._id;
-                    return sell;
-                });
+            try {
+                return collection.insert(sell)
+                    .then(() => {
+                        sell.id = sell._id;
+                        return sell;
+                    });
+            } catch (err) {
+                return Promise.reject('Invalid sell');
+            }
         },
         update(sell, editedSell) {
-            return collection.updateOne({
-                    _id: sell._id,
-                }, editedSell)
-                .then((result) => {
-                    sell.id = sell._id;
-                    return sell;
-                });
+            try {
+                return collection.updateOne({
+                        _id: sell._id,
+                    }, editedSell)
+                    .then(() => {
+                        sell.id = sell._id;
+                        return sell;
+                    });
+            } catch (err) {
+                return Promise.reject('Invalid update');
+            }
         },
         remove(sell) {
-            return collection.remove({
-                _id: sell._id,
-            });
+            try {
+                return collection.remove({
+                    _id: sell._id,
+                });
+            } catch (err) {
+                return Promise.reject('Error the sell i not removed');
+            }
         },
     };
 };
