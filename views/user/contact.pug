@@ -1,13 +1,29 @@
+
 extends ../_shared/_base
 
 block body       
-    .container
-        #signin.text-center.col.align-self-center.no-center-padding
-            .search-panel
-                h3 We are the Bug Squashers Team
-                p
-                    | "Bug Squashers Team." is a Telerik Academy - Web Applications with Node.js Course
-                br
-                p Doroteya Nikolova 
-                p Nayden Mominski
-                p Arushev
+    .container.content
+        .row
+            .col-md-8.col-md-offset-2
+                .testimonials
+                    .active.item
+                        blockquote
+                            h3 We are the Bug Squashers Team
+                            p
+                                | in a Telerik Academy - Web Applications with Node.js Course
+                        .carousel-info
+                            img.pull-center(alt='', src='/static/pictures/img/female.png')
+                            a(href="https://github.com/NDoroteya93")
+                                span.testimonials-name Doroteq Nikolova
+                        .carousel-info
+                            img.pull-center(alt='', src='/static/pictures/img/photo-example__58769f28d6943.jpg')
+                            a(href="https://github.com/NaydenMominski")
+                                span.testimonials-name Nayden Mominski
+                        .carousel-info
+                            img.pull-center(alt='', src='/static/pictures/img/photo-example__58769f28d6943.jpg')
+                            a(href="https://github.com/arushev")
+                                span.testimonials-name Desislav Arushev
+                        br
+  
+  
+
