@@ -1,94 +1,46 @@
 /* eslint no-console: */
 
 const configChat = (io, data) => {
-    const chat = data.chat;
-    const users = [];
+    // const chat = data.chat;
     const connections = [];
+    let users = [];
     return {
         socketEvents() {
             io.on('connection', (socket) => {
                 connections.push(socket);
-                // users.push();
                 console.log('Connected: %s sockets connected',
                     connections.length);
-                /**
-                 * get the user's Chat list
-                 */
-                socket.on('chat-list', (chatData) => {
-                    console.log(chatData);
-                    const chatListResponse = {};
 
-                    if (chatData.id === '') {
-                        chatListResponse.error = true;
-                        chatListResponse.message = `User does not exits.`;
-                        io.emit('chat-list-response', chatListResponse);
-                    } else {
-                        chat.getUserInfo(chatData.userId,
-                            (err, UserInfoResponse) => {
-                                delete UserInfoResponse.password;
-                                chat.getChatList(socket.id,
-                                    (error, res) => {
-                                        io.to(socket.id)
-                                            .emit('chat-list-response', {
-                                                error: false,
-                                                singleUser: false,
-                                                chatList: res,
-                                            });
+                socket.on('join', (userdata) => {
+                    socket.username = userdata.user.username;
+                    const obj = {
+                        username: userdata.user.username,
+                        socketId: socket.id,
+                        avatar: userdata.user.avatar,
+                        id: userdata.user._id,
+                        usertype: userdata.user.usertype,
+                    };
 
-                                        socket.broadcast
-                                            .emit('chat-list-response', {
-                                                error: false,
-                                                singleUser: true,
-                                                chatList: UserInfoResponse,
-                                            });
-                                    });
-                            });
-                    }
+                    users.push(obj);
+
+                    io.emit('all-users', users);
                 });
 
-                // send the messages to the user 
-                socket.on('add-message', (chatData) => {
-                    console.log(chatData);
-                    if (chatData.message === '') {
-                        io.to(socket.id)
-                            .emit('add-message-response',
-                                'Message cant be empty');
-                    } else if (chatData.fromUserId === '') {
-                        io.to(socket.id)
-                            .emit('add-message-response',
-                                'Unexpected error, Login Again.');
-                    } else if (chatData.toUserId === '') {
-                        io.to(socket.id)
-                            .emit('add-message-response',
-                                'Select a user to chat');
-                    } else {
-                        const toSocketId = chatData.toSocketId;
-                        // const fromSocketId = chatData.fromSocketId;
-                        delete data.toSocketId;
-                        chatData.timestamp = Math.floor(new Date() / 1000);
-
-                        chat.insertMessages(chatData, (err, res) => {
-                            io.to(toSocketId)
-                                .emit('add-message-response', chatData);
-                        });
-                    }
+                socket.on('get-users', () => {
+                    io.emit('all-users', users);
                 });
 
-                // logout the user 
-                socket.on('logout', (chatData) => {
-                    const userId = chatData.id;
-
-                    chat.logout(userId, false, (err, result) => {
-                        io.to(socket.id)
-                            .emit('logout-response', {
-                                error: false,
-                            });
-
-                        socket.broadcast.emit('chat-list-response', {
-                            error: false,
-                            userDisconnected: true,
-                            socketId: socket.id,
-                        });
+                socket.on('send-message', (dataMsg) => {
+                    console.log(dataMsg);
+                    const message = {
+                        message: dataMsg.message,
+                        time: dataMsg.time,
+                        timestamp: Math.floor(new Date() / 1000),
+                        username: dataMsg.username,
+                        avatar: dataMsg.avatar,
+                    };
+                    io.emit('message-recieved', {
+                        message,
                     });
                 });
 
@@ -97,37 +49,14 @@ const configChat = (io, data) => {
                     connections.splice(connections.indexOf(index));
                     console.log('Disconnected: %s sockets connected',
                         connections.length);
-                    socket.broadcast.emit('chat-list-response', {
-                        error: false,
-                        userDisconnected: true,
-                        socketId: socket.id,
+
+                    users = users.filter((user) => {
+                        return user.username !== socket.username;
                     });
+
+                    io.emit('all-users');
                 });
             });
-        },
-
-        socketConfig() {
-            io.use((socket, next) => {
-                console.log(socket);
-                const userID = socket.request._query.id;
-                const userSocketId = socket.id;
-                const configData = {
-                    id: userID,
-                    value: {
-                        $set: {
-                            socketId: userSocketId,
-                            // online: 'Y',
-                        },
-                    },
-                };
-
-                chat.addSocketId(configData, (err, res) => {
-                    // socket id updated 
-                });
-                next();
-            });
-
-            this.socketEvents();
         },
     };
 };

@@ -23,14 +23,6 @@ const getData = (db) => {
                 });
         },
         getUserAllUsers() {
-            return collectionUsers.find()
-                .sort({ 'online': -1, 'firstname': 1 })
-                .toArray()
-                .then((users) => {
-                    return users;
-                });
-        },
-        getAllMessages() {
             return collectionUsers
                 .find()
                 .sort({ 'online': -1, 'firstname': 1 })
@@ -38,7 +30,17 @@ const getData = (db) => {
                 .then((users) => {
                     return users;
                 });
-        }
+        },
+        getAllMessages() {
+            return collectionMessages
+                .find()
+                .sort({ 'fromUserId': 1, 'toUserId': 1, 'timestamp': 1 })
+                .toArray()
+                .then((messages) => {
+                    console.log(messages);
+                    return messages;
+                });
+        },
     };
 };
 

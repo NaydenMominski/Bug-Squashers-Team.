@@ -39,17 +39,23 @@ class ChatController {
         const toUserId = req.body.toUserId;
         const messagesResponse = {};
 
-        const messages = this.data.chat.getMessages(userId, toUserId);
-        console.log(messages);
-        if (messages) {
-            messagesResponse.error = true;
-            messagesResponse.message = 'Server error.';
-            res.status(200).json(messagesResponse);
-        } else {
-            messagesResponse.error = false;
-            messagesResponse.message = messages;
-            res.status(200).json(messagesResponse);
-        }
+        return this.data.chat.getMessages(userId, toUserId)
+            .then((messages) => {
+                if (!messages) {
+                    messagesResponse.error = true;
+                    messagesResponse.message = 'Server error.';
+                    return res.status(200).json(messagesResponse);
+                } else {
+                    messagesResponse.error = false;
+                    messagesResponse.message = messages;
+                    return res.status(200).json(messagesResponse);
+                }
+            });
+    }
+
+    getChatList(req, res) {
+        const userId = req.body.id;
+        const chatList = [];
     }
 }
 

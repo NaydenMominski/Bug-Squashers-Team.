@@ -10,33 +10,36 @@ block body
                     #users(class="list-group")
                         table.table-users.table(border='0')
                             tbody
-                                if users
-                                    each user in users
-                                        tr(data-id = user._id)
-                                            td(align='center')
-                                                if user.avatar
-                                                    img.pull-left.img-circle.nav-user-photo(width='50', src='/static/pictures/img/'+ user.avatar)
-                                                else
-                                                    i.fa.fa-2x.fa-user.fw
-                                            td.fullname
-                                                = user.firstname + ' ' + user.lastname
-                                                br
-                                                i.fa.fa-envelope
-                                            td
-                                                = user.usertype 
-                                            if user.online==='Y'
-                                                td(align='center')
-                                                    span.green-dot
-                                            else
-                                                td(align='center')
-                                                    | Last Login:  6/14/2017
-                                                    br
-                                                    small.text-muted 2 days ago
+                                //- if users
+                                //-     each user in users
+                                //-         tr(data-id = user._id, data-socketid = user.socketId, data-username=user.username)
+                                //-             td(align='center')
+                                //-                 if user.avatar
+                                //-                     img.pull-left.img-circle.nav-user-photo(width='50', src='/static/pictures/img/'+ user.avatar)
+                                //-                 else
+                                //-                     i.fa.fa-2x.fa-user.fw
+                                //-             td.fullname
+                                //-                 = user.firstname + ' ' + user.lastname
+                                //-                 br
+                                //-                 i.fa.fa-envelope
+                                //-             td
+                                //-                 = user.usertype 
+                                //-             if user.online==='Y'
+                                //-                 td(align='center')
+                                //-                     span.green-dot
+                                //-             else
+                                //-                 td(align='center')
+                                //-                     | Last Login:  6/14/2017
+                                //-                     br
+                                //-                     small.text-muted 2 days ago
 
             .col-md-5.frame.well.hidden
                 .panel-heading.username-chat
-                form#messageForm(action='javascript:void(0)')
+                    button.close(type='button', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                div#messageForm
                     ul.list-messages
+                form#messageSend(action='javascript:void(0)')
                     .form-group.chat
                         .msj-rta.macro(style='margin:auto')
                             .text.text-r(style='background:whitesmoke !important')

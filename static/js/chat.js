@@ -1,8 +1,8 @@
 'use strict';
 
 $(() => {
+    let messages = [];
 
-    const socket = io.connect('http://localhost:3005');
     $.ajax({
         url: 'http://localhost:3005/user',
         dataType: 'json',
@@ -15,15 +15,57 @@ $(() => {
         type: 'GET',
     });
 
-    const me = {};
-    const you = {};
-    you.avatar = '../pictures/img/default-user.png';
-
     function result(user) {
-        me.avatar = '/static/pictures/img/' + user.avatar;
-        me.fromUserId = user.id;
-        me.toUserId = '';
-    }
+        const socket = io.connect();
+        let users = [];
+        let username = user.username;
+        let text;
+
+        socket.emit('join', {
+            user,
+        });
+
+        socket.emit('get-users');
+
+        socket.on('all-users', (data) => {
+            users = data.filter((user) => {
+                return user.username !== username;
+            });
+
+            users.forEach((user) => {
+                allUsers(user);
+            });
+        });
+
+        socket.on('message-recieved', (data) => {
+            if (data.message.username !== username) {
+                insertChat('you', data.message);
+            } else {
+                insertChat('me', data.message);
+            }
+        });
+        // Events
+        $('#messageSend').on('submit', () => {
+            const $message = $(".message-text").val();
+            text = $message
+            let data = sendMessage($message, user);
+            socket.emit('send-message', data);
+            $(".message-text").val('');
+        });
+
+        $('.table-users').on('click', 'tr', (e) => {
+            const user = e.target.parentElement;
+            const $tr = $(user);
+            const $id = $(user).attr('data-id');
+            const $username = $(user).find('.username').text();
+
+            $('table.table-users tr').removeClass('selected-user');
+            $tr.addClass('selected-user');
+            $('.col-md-5.frame.well').removeClass('hidden');
+            $('.username-chat').html($username);
+
+        });
+    };
 
     function formatAMPM(date) {
         let hours = date.getHours();
@@ -37,8 +79,30 @@ $(() => {
         return strTime;
     }
 
+    function allUsers(data) {
+        $('.table-users tbody').empty();
+        let content = `
+        <tr data-id=${data.socketId} class=${data.username}>
+            <td width="10" align="center" data-id="">
+                <img class="pull-left img-circle nav-user-photo" width='50' src='/static/pictures/img/${data.avatar}'/>
+            </td>
+            <td class='username'>
+                    ${data.username}<br><i class="fa fa-envelope"></i>
+            </td>
+            <td>
+                ${data.usertype}
+            </td>
+            <td align="center">
+                <span class='green-dot'></span>
+            </td>
+        </tr>`;
+        $('.table-users tbody').append(content);
+
+    }
+
+
     //-- No use time. It is a javaScript effect.
-    function insertChat(who, text, time = 0) {
+    function insertChat(who, user, time = 0) {
         let control = "";
         let date = formatAMPM(new Date());
 
@@ -46,9 +110,9 @@ $(() => {
 
             control = '<li style="width:100%">' +
                 '<div class="msj macro">' +
-                '<div class="avatar"><img class="img-circle" style="height: 75%; width:100%;" src="' + me.avatar + '" /></div>' +
+                '<div class="avatar"><img class="img-circle" style="height: 75%; width:100%;" src="/static/pictures/img/' + user.avatar + '" /></div>' +
                 '<div class="text text-l">' +
-                '<p>' + text + '</p>' +
+                '<p>' + user.message + '</p>' +
                 '<p><small>' + date + '</small></p>' +
                 '</div>' +
                 '</div>' +
@@ -57,10 +121,10 @@ $(() => {
             control = '<li style="width:100%;">' +
                 '<div class="msj-rta macro">' +
                 '<div class="text text-r">' +
-                '<p>' + text + '</p>' +
+                '<p>' + user.message + '</p>' +
                 '<p><small>' + date + '</small></p>' +
                 '</div>' +
-                '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + you.avatar + '" /></div>' +
+                '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="/static/pictures/img/' + user.avatar + '" /></div>' +
                 '</li>';
         }
 
@@ -72,35 +136,28 @@ $(() => {
     }
 
     function resetChat() {
-        $("ul").empty();
+        $("ul.list-messages").empty();
     }
 
-    // Events
-    $(".message-text").on("keyup", (e) => {
-        const $input = $(".message-text");
-        if (e.which === 13) {
-            let $text = $input.val();
-            if ($text !== "") {
-                me.message = $text;
-                socket.emit('add-message', me);
-                insertChat("me", $text);
-                $input.val('');
+    function sendMessage(message, user) {
+        if (message === '' || message === null) {
+            alert(`Message can't be empty.`);
+        } else {
+
+            if (message === '') {
+                alert(`Message can't be empty.`);
+            } else {
+                let date = formatAMPM(new Date());
+                const data = {
+                    message: message,
+                    username: user.username,
+                    time: date,
+                    avatar: user.avatar,
+                }
+                messages.push(data);
+                return data;
             }
         }
-    });
+    };
 
-    $('table.table-users>tbody>tr').on('click', (e) => {
-        debugger;
-        const user = e.target.parentElement;
-        const $tr = $(user);
-        const $id = $(user).attr('data-id');
-        const $fullname = $(user).find('.fullname').text();
-
-        $('table.table-users tr').removeClass('selected-user');
-        $tr.addClass('selected-user');
-        me.toUserId = $id;
-        $('.col-md-5.frame.well').removeClass('hidden');
-        $('.username-chat').html($fullname);
-
-    })
 });

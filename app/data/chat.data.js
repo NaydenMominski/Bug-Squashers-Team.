@@ -54,7 +54,7 @@ const getData = (db) => {
         },
         // insert new message into db
         insertMessages(data, callback) {
-            return messagesDb.insertOne(data,
+            return messagesDb.insert(data,
                 (err, result) => {
                     callback(err, result);
                 });
@@ -78,7 +78,8 @@ const getData = (db) => {
 
             return messagesDb
                 .find(data)
-                .sort({ 'timestamp': 1 }).toArray()
+                .sort({ 'timestamp': 1 })
+                .toArray()
                 .then((result) => {
                     return result;
                 });
