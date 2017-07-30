@@ -33,6 +33,8 @@ block body
                                         i.fa.fa-fw.icon.fa-home
                                         =context.property
                                     li.property-meta-item
+                                        =context.size + " m2"
+                                    li.property-meta-item
                                         i.fa.fa-fw.icon.fa-bed
                                         =context.bedrooms
                                     li.property-meta-item
@@ -46,20 +48,20 @@ block body
                                     =context.description
                                 br
                                 br
-                                //- .row.margin-top-20
-                                //-     .col-md-6
-                                //-         a#save_124.btn.btn-default(href='/sells/edit/' + context._id) Edit
-                                //-     .col-md-6
-                                //-         form(action='/sells/edit/'+context._id , method='POST')
-                                //-             input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
+                                .row.margin-top-20
+                                    .col-md-6
+                                        a#save_124.btn.btn-default(href='/sells/edit/' + context._id) Edit
+                                    .col-md-6
+                                        form(action='/sells/edit/'+context._id , method='POST')
+                                            input.btn.btn-default.btn-gradient.pull-left(type='submit', value=' Delete ')
                             .clear
                             hr
                             | Posted on:
                             b
                                 = context.date
-                            | , 
-                            | Total Hits: 
-                            b 760
+                            //- | , 
+                            //- | Total Hits: 
+                            //- b 760
                         #tab-location.tab-pane  
                             .maps
                                 img(src='https://maps.googleapis.com/maps/api/staticmap?center='+context.lat+','+context.lng+'&markers=color:red%7C'+context.lat+','+context.lng+'&zoom=7&size=800x400&key=AIzaSyAUEyyA9gmlFmNHzLDhagVdO1cTtCvp5DE')

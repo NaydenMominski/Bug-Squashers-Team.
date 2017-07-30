@@ -23,7 +23,7 @@ block body
                         #tab-details.tab-pane.active
                             .col-md-12
                                 a(href='/static/pictures/rent/' + context.avatar, rel='prettyPhoto[ad_gal]')
-                                    img(src='/static/pictures/rent/' + context.avatar, width='300', alt='Exclusive apartment in downtown Bristol 43234')
+                                    img(src='/static/pictures/rent/' + context.avatar, width='300')
                             .col-md-6.final-result-image
                                 ul  
                                     li.property-meta-item
@@ -32,6 +32,8 @@ block body
                                     li.property-meta-item
                                         i.fa.fa-fw.icon.fa-home
                                         =context.property
+                                    li.property-meta-item
+                                        =context.size + " m2"
                                     li.property-meta-item
                                         i.fa.fa-fw.icon.fa-bed
                                         =context.bedrooms
@@ -57,9 +59,9 @@ block body
                             | Posted on:
                             b
                                 = context.date
-                            | , 
-                            | Total Hits: 
-                            b 760
+                            //- | , 
+                            //- | Total Hits: 
+                            //- b 760
                         #tab-location.tab-pane  
                              .maps
                                 img(src='https://maps.googleapis.com/maps/api/staticmap?center='+context.lat+','+context.lng+'&markers=color:red%7C'+context.lat+','+context.lng+'&zoom=7&size=800x400&key=AIzaSyAUEyyA9gmlFmNHzLDhagVdO1cTtCvp5DE')
