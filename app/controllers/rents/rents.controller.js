@@ -1,5 +1,8 @@
+/* eslint no-console: */
+
 const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
+const nodemailer = require('nodemailer');
 
 class RentsController {
     constructor(data) {
@@ -127,8 +130,8 @@ class RentsController {
             errors.forEach(function(error) {
                 req.flash('error_msg', error.msg);
             }, this);
-             return res.redirect('/rents/form');
-         }
+            return res.redirect('/rents/form');
+        }
 
         return this.data.rents.create(rent)
             .then((result) => {
@@ -229,6 +232,49 @@ class RentsController {
         return res.render('rents/form', {
             province: constants.province,
         });
+    }
+
+    sendMail(req, res) {
+        const message = req.body;
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'propertyportalteam@gmail.com',
+                pass: 'propertyportal123456',
+            },
+            tls: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        // setup email data with unicode symbols
+        const mailOptions = {
+            from: message.email,
+            to: 'propertyportalteam@gmail.com',
+            subject: message.subject,
+            template: 'recover',
+            context: {
+                username: 'doroteya@gmail.com',
+                password: 'some_pass',
+            },
+            text: message.message,
+            html: '<b>' + message.message + '</b>',
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions,
+            (error, info) => {
+                if (error) {
+                    console.log(error);
+                    return res.send('bad email');
+                }
+                console.log('Message %s sent: %s',
+                    info.messageId, info.response);
+                return res.redirect('/rents/' + message.id);
+            });
     }
 }
 

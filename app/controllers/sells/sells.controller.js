@@ -1,5 +1,8 @@
+/* eslint no-console: */
+
 const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
+const nodemailer = require('nodemailer');
 
 class SellsController {
     constructor(data) {
@@ -78,6 +81,7 @@ class SellsController {
 
                 return res.render('sells/details', {
                     context: sell,
+                    user: req.user,
                 });
             })
             .catch((err) => {
@@ -107,12 +111,12 @@ class SellsController {
 
         const errors = isValid(req);
 
-         if (errors) {
+        if (errors) {
             errors.forEach(function(error) {
                 req.flash('error_msg', error.msg);
             }, this);
-             return res.redirect('/sells/form');
-         }
+            return res.redirect('/sells/form');
+        }
 
         return this.data.sells.create(sell)
             .then((result) => {
@@ -208,6 +212,51 @@ class SellsController {
         return res.render('sells/form', {
             province: constants.province,
         });
+    }
+
+    sendMail(req, res) {
+        const message = req.body;
+
+        // !TODO: need to separate in config
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'propertyportalteam@gmail.com',
+                pass: 'propertyportal123456',
+            },
+            tls: {
+                rejectUnauthorized: false,
+            },
+        });
+
+        // setup email data with unicode symbols
+        const mailOptions = {
+            from: message.email,
+            to: 'propertyportalteam@gmail.com',
+            subject: message.subject,
+            template: 'recover',
+            context: {
+                username: 'doroteya@gmail.com',
+                password: 'some_pass',
+            },
+            text: message.message,
+            html: '<b>' + message.message + '</b>',
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions,
+            (error, info) => {
+                if (error) {
+                    console.log(error);
+                    return res.send('bad email');
+                }
+                console.log('Message %s sent: %s',
+                    info.messageId, info.response);
+                return res.redirect('/sells/' + message.id);
+            });
     }
 }
 

@@ -82,16 +82,34 @@ block body
                 .sidebar-block
                     .row
                         .col-lg-8.text-left
-                            form(action='#')
+                             form(action='/sells/sendmail', method='post')
                                 .form-group.form-control-default.required
                                     label(for='fullname') Full Name
-                                    input#fullname(type='text', placeholder='Your Full Name', class='form-control')
+                                    if user 
+                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', class='form-control', value=user.firstname )
+                                    else
+                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='phone') Phone
-                                    input#phone(type='text', placeholder='Contact Phone', class='form-control')
+                                    if user.phone
+                                        input#phone(type='text',name='phone', placeholder='Contact Phone', class='form-control', value=user.phone)
+                                    else
+                                        input#phone(type='text',name='phone', placeholder='Contact Phone', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='email') Email Address
-                                    input#email(type='text', placeholder='Enter your Email', class='form-control')
+                                    if user.email
+                                        input#email(type='text', name='email', placeholder='Enter your Email', class='form-control', value=user.email)
+                                    else
+                                        input#email(type='text', name='email', placeholder='Enter your Email', class='form-control')
+                                .form-group.form-control-default.required
+                                    label(for='subject') Subject
+                                    input#subject(type='text',name='subject', placeholder='Enter your Subject', class='form-control', value=context.headline)
+                                .form-group.form-control-default.required
+                                    label(for='message') Message
+                                    textarea#message(type='text',name='message', placeholder='Enter your Message', class='form-control', maxlength='140', rows='7')
+                                    span.help-block
+                                        p#characterLeft(class='help-block140') 140 characters left
+                                    input(type='hidden', name='id', value=context.id)
                                 button.btn.btn-primary(type='submit') Submit
                                 button.btn.btn-default.close-sidebar
                                     i.fa.fa-times.fa-fw

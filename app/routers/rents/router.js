@@ -21,6 +21,9 @@ const initRouter = (controllerFactory) => {
         .get('/:id', (req, res) => {
             return controller.getDetails(req, res);
         })
+        .post('/sendmail', (req, res, next) => {
+            return controller.sendMail(req, res);
+        })
         .post('/all', upload('./static/pictures/rent'), (req, res) => {
             return controller.create(req, res);
         })
