@@ -5,6 +5,9 @@ const nodemon = require('gulp-nodemon');
 const eslint = require('gulp-eslint');
 const async = require('./utils/async');
 
+const mocha = require('gulp-mocha');
+const istanbul = require('gulp-istanbul');
+
 gulp.task('dev', () => {
     return nodemon({
         ext: 'js html',
@@ -40,4 +43,25 @@ gulp.task('start-server', ['lint'], () => {
                 config.port,
                 () => console.log(`Magic happends at :${config.port}`));
         });
+});
+gulp.task('pre-test', () => {
+    return gulp.src([
+        './app/**/*.js',
+        './server.js',
+    ])
+        .pipe(istanbul({
+            includeUntested: true,
+        }))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('test:unit', ['pre-test'], () => {
+    return gulp.src([
+        './test/unit/**/*.js',
+        './test/integration/**/*.js',
+    ])
+        .pipe(mocha({
+            reporter: 'nyan',
+        }))
+        .pipe(istanbul.writeReports());
 });
