@@ -23,7 +23,7 @@ $.fn.pageMe = function(opts) {
         pager = $(settings.pagerSelector);
     }
 
-    var numItems = children.size();
+    var numItems = children.length;
     var numPages = Math.ceil(numItems / perPage);
 
     $("#total_reg").html(numItems + " Entries In Total");
@@ -31,7 +31,7 @@ $.fn.pageMe = function(opts) {
     pager.data("curr", 0);
 
     if (settings.showPrevNext) {
-        $('<li><a href="#" class="prev_link" title="' + settings.prevText + '"><i class="material-icons">chevron_left</i></a></li>').appendTo(pager);
+        $('<li><a href="#" class="prev_link" title="' + settings.prevText + '"><i class="fa fa-chevron-left"></i></a></li>').appendTo(pager);
     }
 
     var curr = 0;
@@ -41,7 +41,7 @@ $.fn.pageMe = function(opts) {
     }
 
     if (settings.showPrevNext) {
-        $('<li><a href="#" class="next_link"  title="' + settings.nextText + '"><i class="material-icons">chevron_right</i></a></li>').appendTo(pager);
+        $('<li><a href="#" class="next_link"  title="' + settings.nextText + '"><i class="fa fa-chevron-right"></i></a></li>').appendTo(pager);
     }
 
     pager.find('.page_link:first').addClass('active');

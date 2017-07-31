@@ -14,5 +14,6 @@ SystemJS.config({
         'dropdown': '/static/js/dropdown.js',
         'service': '/static/js/service.js',
         'pagination': '/static/js/plugins/pagination.js',
+        'paging': '/static/js/paging.js'
     }
 });
