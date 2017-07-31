@@ -2337,3 +2337,7 @@
     #dashboard td.img-data {
         width: 10%
     }
+    
+    #dashboard td form button {
+        margin-top: -15px;
+    }

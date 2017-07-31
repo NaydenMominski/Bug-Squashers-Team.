@@ -5,7 +5,7 @@ block body
 		h1.page-header Dashboard
 		.row.placeholders
 			#map-dashboard(class="col-md-12")
-		h2.sub-header List Added Estates
+		h2.sub-header List Sells Estates
 		.table-responsive
 			table.table.table-striped
 				thead
@@ -39,16 +39,50 @@ block body
 								= sell.bathrooms
 							td
 								p(data-placement='top', data-toggle='tooltip', title='Edit')
-									button.btn.btn-primary.btn-xs(data-title='Edit', data-toggle='modal', data-target='#edit')
+									a.btn.btn-primary.btn-xs(href='/sells/edit/' + sell._id, data-title='Edit', data-toggle='modal', data-target='#edit')
 										i.fa.fa-pencil(aria-hidden='true')
 							td
 								p(data-placement='top', data-toggle='tooltip', title='Delete')
-									button.btn.btn-danger.btn-xs(data-title='Delete', data-toggle='modal', data-target='#delete')
-										i.fa.fa-trash(aria-hidden='true')
-
-						each rent in rents
+									form(action='/sells/edit/'+sell._id , method='POST')
+										button.btn.btn-danger.btn-xs(type='submit', data-title='Delete', data-toggle='modal', data-target='#delete')
+											i.fa.fa-trash(aria-hidden='true')
+			div.clearfix
+			div.row
+				ul.pagination.pull-right
+					li.disabled
+						a(href="#")
+							i.fa.fa-chevron-left
+					li.active
+						a(href="#") 1
+					li
+						a(href="#") 2
+					li
+						a(href="#") 3
+					li
+						a(href="#") 4
+					li
+						a(href="#") 4
+					li
+						a(href="#")
+							i.fa.fa-chevron-right
+		h2.sub-header List Rents Estates
+		.table-responsive
+			table.table.table-striped.table-bordred
+				thead
+					tr
+						th #
+						th Headline
+						th Property
+						th Location
+						th Price
+						th Size
+						th Bedrooms
+						th Bathrooms
+				tbody
+					each rent in rents
+						tr
 							td.img-data
-								img(src='/static/pictures/sell/' + rent.avatar)
+								img(src='/static/pictures/rent/' + rent.avatar)
 							td 
 								= rent.headline
 							td 
@@ -65,15 +99,35 @@ block body
 								= rent.bathrooms
 							td
 								p(data-placement='top', data-toggle='tooltip', title='Edit')
-									button.btn.btn-primary.btn-xs(data-title='Edit', data-toggle='modal', data-target='#edit')
+									a.btn.btn-primary.btn-xs(data-title='Edit', href='/rents/edit/' + rent._id,  data-toggle='modal', data-target='#edit')
 										i.fa.fa-pencil(aria-hidden='true')
 							td
 								p(data-placement='top', data-toggle='tooltip', title='Delete')
-									button.btn.btn-danger.btn-xs(data-title='Delete', data-toggle='modal', data-target='#delete')
-										i.fa.fa-trash(aria-hidden='true')
-
-				
-block script			
+									form(action="/rents/edit/"+rent._id , method="POST")
+										button.btn.btn-danger.btn-xs(type='submit', data-title='Delete', data-toggle='modal', data-target='#delete')
+											i.fa.fa-trash(aria-hidden='true')
+			div.clearfix
+			div.row
+				ul.pagination.pull-right
+					li.disabled
+						a(href="#")
+							i.fa.fa-chevron-left
+					li.active
+						a(href="#") 1
+					li
+						a(href="#") 2
+					li
+						a(href="#") 3
+					li
+						a(href="#") 4
+					li
+						a(href="#") 4
+					li
+						a(href="#")
+							i.fa.fa-chevron-right
+block script
 	script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')
 	script
 		| System.import("googlemap");
+	script
+		| System.import("pagination");

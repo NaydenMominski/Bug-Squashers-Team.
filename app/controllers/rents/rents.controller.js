@@ -219,7 +219,7 @@ class RentsController {
                         });
                 }
                 // console.log('Wrong user');
-                return res.redirect('/rents/' + id);
+                return res.redirect('/user/dashboard');
             })
             .catch((err) => {
                 return res.redirect(404, '/rents');

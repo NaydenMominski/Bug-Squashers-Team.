@@ -13,5 +13,6 @@ SystemJS.config({
         'facebook': '/static/js/facebook.js',
         'dropdown': '/static/js/dropdown.js',
         'service': '/static/js/service.js',
+        'pagination': '/static/js/plugins/pagination.js',
     }
 });

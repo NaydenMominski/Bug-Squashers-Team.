@@ -199,7 +199,7 @@ class SellsController {
                         });
                 }
                 // console.log('Wrong user');
-                return res.redirect('/sells/' + id);
+                return res.redirect('/user/dashboard');
             })
             .catch((err) => {
                 return res.redirect(404, '/sells');
@@ -266,7 +266,7 @@ class SellsController {
                 req.flash('success_msg', 'Message successfully sent!');
                 return res.redirect('/sells/' + message.id);
             });
-            return this;
+        return this;
     }
 }
 
