@@ -3,6 +3,15 @@ extends _shared/_base
 block body
     .gray-wrapper
         .container
+            if success_msg && success_msg.length > 0
+                 each msg in success_msg
+                    div(class = "alert alert-success")|#{msg}
+            if error_msg && error_msg.length > 0
+                each msg in error_msg
+                    div(class = "alert alert-danger")|#{msg}
+            if error && error.length > 0
+                each msg in error
+                    div(class = "alert alert-danger")|#{msg}
             #left_panel.text-left.col-md-3.no-left-padding
                 .search-panel
                     h3.panel-title Search for a property for Sell

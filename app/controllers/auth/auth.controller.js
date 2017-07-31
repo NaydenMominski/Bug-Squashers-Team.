@@ -36,7 +36,13 @@ class AuthController {
         user.socketId = '';
 
         return this.data.auth.signUp(user)
-            .then(() => {
+            .then((data) => {
+                if (data === 'Error') {
+                    const err = [{ msg: 'Username already registered' }];
+                    res.render('auth/sign-up', {
+                    errors: err,
+                });
+                }
                 req.flash('success_msg',
                     'You are registered and can now login');
                 res.redirect('/auth/sign-in');

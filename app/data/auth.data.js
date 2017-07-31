@@ -25,11 +25,14 @@ const getData = (db) => {
             return this.findBy({ username: newUser.username })
                 .then((user) => {
                     if (user) {
-                        throw new Error('Duplicated user');
+                        return 'Error'; 
                     }
                     return newUser;
                 })
                 .then((user) => {
+                    if (user === 'Error'){
+                        return user;
+                    }
                     return collection.insert(user)
                         .then((result) => {
                             return user;
