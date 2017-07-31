@@ -101,13 +101,13 @@ block body
                                         input#fullname(type='text', name='fullname', placeholder='Your Full Name', required='', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='phone') Phone
-                                    if user.phone
+                                    if user && user.phone
                                         input#phone(type='text',name='phone', placeholder='Contact Phone', required='', class='form-control', value=user.phone)
                                     else
                                         input#phone(type='text',name='phone', placeholder='Contact Phone', required='', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='email') Email Address
-                                    if user.email
+                                    if user && user.email
                                         input#email(type='text', name='email', placeholder='Enter your Email', required='', class='form-control', value=user.email)
                                     else
                                         input#email(type='text', name='email', placeholder='Enter your Email', required='', class='form-control')
