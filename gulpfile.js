@@ -95,7 +95,7 @@ gulp.task('test-server:stop', () => {
         });
 });
 
-gulp.task('test:browser', ['test-server:start', 'pre-test'], () => {
+gulp.task('test:browser', ['test-server:start'], () => {
     return gulp.src('./test/browser/**/*.js')
         .pipe(mocha({
             reporter: 'nyan',
@@ -103,6 +103,5 @@ gulp.task('test:browser', ['test-server:start', 'pre-test'], () => {
         }))
         .once('end', () => {
             gulp.start('test-server:stop');
-        })
-        .pipe(istanbul.writeReports());
+        });
 });
