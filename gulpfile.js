@@ -30,6 +30,10 @@ const config = {
     port: 3005,
 };
 
+const testConfig = {
+    connectionString: 'mongodb://localhost/PropertyDb-test',
+    port: 3004,
+};
 gulp.task('start-server', ['lint'], () => {
     return async()
         .then(() => require('./app/db').connect(config.connectionString))
@@ -63,5 +67,42 @@ gulp.task('test:unit', ['pre-test'], () => {
         .pipe(mocha({
             reporter: 'nyan',
         }))
+        .pipe(istanbul.writeReports());
+});
+
+gulp.task('test-server:start', () => {
+    return Promise.resolve()
+        .then(() => require('./app/db').connect(testConfig.connectionString))
+        .then((db) => {
+        const data = require('./app/data').initData(db);
+        const app = require('./app').initApp(data, db);
+        return app;
+    })
+        .then((app) => {
+             app.listen(testConfig.port, () => {
+            console.log(`Magic happens at :${testConfig.port}`);
+        });
+    });
+    });
+
+
+const { MongoClient } = require('mongodb');
+
+gulp.task('test-server:stop', () => {
+    return MongoClient.connect(testConfig.connectionString)
+        .then((db) => {
+            return db.dropDatabase();
+        });
+});
+
+gulp.task('test:browser', ['test-server:start', 'pre-test'], () => {
+    return gulp.src('./test/browser/**/*.js')
+        .pipe(mocha({
+            reporter: 'nyan',
+            timeout: 10000,
+        }))
+        .once('end', () => {
+            gulp.start('test-server:stop');
+        })
         .pipe(istanbul.writeReports());
 });

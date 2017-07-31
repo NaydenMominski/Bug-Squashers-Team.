@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-describe('/items tests', () => {
+describe('/rents tests', () => {
     const connectionString = 'mongodb://localhost/items-db-test';
     let app = null;
 

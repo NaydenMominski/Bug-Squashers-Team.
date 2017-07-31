@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-describe('/items tests', () => {
+describe('/chat tests', () => {
     const connectionString = 'mongodb://localhost/items-db-test';
     let app = null;
 
@@ -20,21 +20,6 @@ describe('/items tests', () => {
         it('expect to return 200', (done) => {
             request(app)
                 .get('/chat/user-session')
-                .expect(200)
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    return done();
-                });
-        });
-    });
-
-    describe('GET chat/get-messages', () => {
-        it('expect to return 200', (done) => {
-            request(app)
-                .get('/chat/get-messages')
                 .expect(200)
                 .end((err, res) => {
                     if (err) {

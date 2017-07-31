@@ -95,27 +95,27 @@ block body
                                 .form-group.form-control-default.required
                                     label(for='fullname') Full Name
                                     if user 
-                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', class='form-control', value=user.firstname )
+                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', class='form-control', required='', value=user.firstname )
                                     else
-                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', class='form-control')
+                                        input#fullname(type='text', name='fullname', placeholder='Your Full Name', required='', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='phone') Phone
                                     if user.phone
-                                        input#phone(type='text',name='phone', placeholder='Contact Phone', class='form-control', value=user.phone)
+                                        input#phone(type='text',name='phone', placeholder='Contact Phone', required='', class='form-control', value=user.phone)
                                     else
-                                        input#phone(type='text',name='phone', placeholder='Contact Phone', class='form-control')
+                                        input#phone(type='text',name='phone', placeholder='Contact Phone', required='', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='email') Email Address
                                     if user.email
-                                        input#email(type='text', name='email', placeholder='Enter your Email', class='form-control', value=user.email)
+                                        input#email(type='text', name='email', placeholder='Enter your Email', required='', class='form-control', value=user.email)
                                     else
-                                        input#email(type='text', name='email', placeholder='Enter your Email', class='form-control')
+                                        input#email(type='text', name='email', placeholder='Enter your Email', required='', class='form-control')
                                 .form-group.form-control-default.required
                                     label(for='subject') Subject
-                                    input#subject(type='text',name='subject', placeholder='Enter your Subject', class='form-control', value=context.headline)
+                                    input#subject(type='text',name='subject', placeholder='Enter your Subject', required='', class='form-control', value=context.headline)
                                 .form-group.form-control-default.required
                                     label(for='message') Message
-                                    textarea#message(type='text',name='message', placeholder='Enter your Message', class='form-control', maxlength='140', rows='7')
+                                    textarea#message(type='text',name='message', placeholder='Enter your Message', required='', class='form-control', maxlength='140', rows='7')
                                     span.help-block
                                         p#characterLeft(class='help-block140') 140 characters left
                                     input(type='hidden', name='id', value=context.id)
