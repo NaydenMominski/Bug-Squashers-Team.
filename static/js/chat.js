@@ -39,7 +39,8 @@ $(function() {
             $('#messageSend').on('submit', () => {
                 const $message = $(".message-text").val();
                 text = $message
-                let data = sendMessage($message, user);
+                text = text.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'_');
+                let data = sendMessage(text, user);
                 socket.emit('send-message', data);
                 $(".message-text").val('');
             });
