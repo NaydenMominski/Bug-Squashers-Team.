@@ -22,16 +22,10 @@ class UserController {
     }
 
     getAllUsers(req, res) {
-        const userObj = {};
         return this.data.user.getUserAllUsers()
             .then((users) => {
-                userObj = users;
-                return this.data.chat.getAllMessages();
-            })
-            .then((messages) => {
-                userObj.messages = messages;
                 return res.render('user/agents', {
-                    users: userObj,
+                    users: users,
                 });
             })
             .catch((err) => {

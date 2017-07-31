@@ -59,31 +59,7 @@ const getData = (db) => {
                     callback(err, result);
                 });
         },
-        getMessages(userId, toUserId) {
-            const data = {
-                '$or': [{
-                    '$and': [{
-                        'toUserId': userId,
-                    }, {
-                        'fromUserId': toUserId,
-                    }],
-                }, {
-                    '$and': [{
-                        'toUserId': toUserId,
-                    }, {
-                        'fromUserId': userId,
-                    }],
-                }],
-            };
 
-            return messagesDb
-                .find(data)
-                .sort({ 'timestamp': 1 })
-                .toArray()
-                .then((result) => {
-                    return result;
-                });
-        },
         logout(userId, isSocketId) {
             const data = {
                 $set: {
