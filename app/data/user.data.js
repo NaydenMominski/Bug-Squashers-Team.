@@ -31,6 +31,15 @@ const getData = (db) => {
                     return users;
                 });
         },
+        getAllAgents() {
+            return collectionUsers
+                .find({ 'usertype': 'Agency' })
+                .toArray()
+                .then((users) => {
+                    return users;
+                });
+        },
+
         getAllMessages() {
             return collectionMessages
                 .find()

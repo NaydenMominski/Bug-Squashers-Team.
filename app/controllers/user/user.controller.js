@@ -22,7 +22,7 @@ class UserController {
     }
 
     getAllUsers(req, res) {
-        return this.data.user.getUserAllUsers()
+        return this.data.user.getAllAgents()
             .then((users) => {
                 return res.render('user/agents', {
                     users: users,
