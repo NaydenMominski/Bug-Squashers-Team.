@@ -1,24 +1,23 @@
+import service from 'service';
+
 (() => {
-    let coordinates = {};
-    $.ajax({
-        url: 'http://localhost:3005/user',
-        dataType: 'json',
-        success: (res) => {
-            Promise.resolve(res)
-                .then((res) => {
-                    coordinates.sells = res.sells;
-                    coordinates.rents = res.rents;
-                    return coordinates;
-                }).then((coordinates) => {
-                    convertCoords(coordinates.sells);
-                    convertCoords(coordinates.rents);
-                });
-        },
-        error: (err) => {
-            console(err);
-        },
-        type: 'GET',
-    });
+    if (window.location.href.indexOf("dashboard") > -1) {
+        let $dashboardMmap = $('#map-dashboard');
+
+        service.get('http://localhost:3005/user')
+            .then((data) => {
+                let coordinates = {};
+                coordinates.sells = data.sells;
+                coordinates.rents = data.rents;
+                return coordinates;
+            })
+            .then((coords) => {
+                initMap($dashboardMmap, coords);
+            });
+    } else {
+        initMap();
+    }
+
 
     function initMap($map, coords) {
         $map = $map || $('#map-location');
@@ -79,12 +78,45 @@
 
             });
         } else if ($map[0].id === 'map-dashboard') {
-            Promise.resolve(coordinates)
-                .then()
-            convertCoords(coordinates.sells);
-            convertCoords(coordinates.rents);
 
+            Promise.resolve(coords)
+                .then((coords) => {
+                    coords.sells.forEach((coord) => {
+                        const props = {};
+                        let latLng = new google.maps.LatLng(parseFloat(coord.lat), parseFloat(coord.lng));
+                        props.coords = latLng;
+                        props.content = coord.address;
+                        addMarker(map, props);
+                    });
+
+                    return coords;
+                })
+                .then((coords) => {
+                    coords.rents.forEach((coord) => {
+                        const props = {};
+                        let latLng = new google.maps.LatLng(parseFloat(coord.lat), parseFloat(coord.lng));
+                        props.coords = latLng;
+                        props.content = coord.address;
+                        addMultipleMarkers(map, props);
+                    });
+                });
         }
+        // add marker
+        function addMultipleMarkers(map, props) {
+            let markers = new google.maps.Marker({
+                position: props.coords,
+                icon: '/static/pictures/house-02.png',
+                map: map,
+                draggable: true
+            });
+
+
+            let infoWindows = new google.maps.InfoWindow({ content: props.content });
+            markers.addListener('click', () => {
+                infoWindows.open(map, markers);
+            });
+        }
+
         // add marker
         function addMarker(map, props) {
             if (!marker) {
@@ -108,26 +140,4 @@
 
     }
 
-    function convertCoords(coords) {
-
-        const props = {};
-        coords.forEach((coord) => {
-            let latLng = new google.maps.LatLng(parseFloat(coord.lat), parseFloat(coord.lng));
-            props.coords = latLng;
-            props.content = coord.address;
-        });
-
-        return props;
-    }
-
-    google.maps.event.addDomListener(window, 'load', () => {
-        if (window.location.href.indexOf("dashboard") > -1) {
-            let $dashboardMmap = $('#map-dashboard');
-            initMap($dashboardMmap, coordinates);
-            coordinates = {};
-        } else {
-            initMap();
-        }
-
-    });
 })();
