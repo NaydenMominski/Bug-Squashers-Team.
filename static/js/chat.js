@@ -4,70 +4,62 @@ import userService from 'service';
 
 $(function() {
     let messages = [];
+    userService.get('http://localhost:3005/user')
+        .then((data) => {
+            const socket = io.connect();
+            let user = data.user;
+            let users = [];
+            let username = user.username;
+            let text;
 
-    $.ajax({
-        url: 'http://localhost:3005/user',
-        dataType: 'json',
-        success: (res) => {
-            result(res.user);
-        },
-        error: (err) => {
-            error(err);
-        },
-        type: 'GET',
-    });
-
-    function result(user) {
-        const socket = io.connect();
-        let users = [];
-        let username = user.username;
-        let text;
-
-        socket.emit('join', {
-            user,
-        });
-
-        socket.emit('get-users');
-
-        socket.on('all-users', (data) => {
-            users = data.filter((user) => {
-                return user.username !== username;
+            socket.emit('join', {
+                user,
             });
 
-            users.forEach((user) => {
-                allUsers(user);
+            socket.emit('get-users');
+
+            socket.on('all-users', (data) => {
+                users = data.filter((user) => {
+                    return user.username !== username;
+                });
+
+                users.forEach((user) => {
+                    allUsers(user);
+                });
             });
-        });
 
-        socket.on('message-recieved', (data) => {
-            if (data.message.username !== username) {
-                insertChat('you', data.message);
-            } else {
-                insertChat('me', data.message);
-            }
-        });
-        // Events
-        $('#messageSend').on('submit', () => {
-            const $message = $(".message-text").val();
-            text = $message
-            let data = sendMessage($message, user);
-            socket.emit('send-message', data);
-            $(".message-text").val('');
-        });
+            socket.on('message-recieved', (data) => {
+                if (data.message.username !== username) {
+                    insertChat('you', data.message);
+                } else {
+                    insertChat('me', data.message);
+                }
+            });
+            // Events
+            $('#messageSend').on('submit', () => {
+                const $message = $(".message-text").val();
+                text = $message
+                let data = sendMessage($message, user);
+                socket.emit('send-message', data);
+                $(".message-text").val('');
+            });
 
-        $('.table-users').on('click', 'tr', (e) => {
-            const user = e.target.parentElement;
-            const $tr = $(user);
-            const $id = $(user).attr('data-id');
-            const $username = $(user).find('.username').text();
+            $('.table-users').on('click', 'tr', (e) => {
+                const user = e.target.parentElement;
+                const $tr = $(user);
+                const $id = $(user).attr('data-id');
+                const $username = $(user).find('.username').text();
 
-            $('table.table-users tr').removeClass('selected-user');
-            $tr.addClass('selected-user');
-            $('.col-md-5.frame.well').removeClass('hidden');
-            $('.username-chat').html($username);
+                $('table.table-users tr').removeClass('selected-user');
+                $tr.addClass('selected-user');
+                $('.col-md-5.frame.well').removeClass('hidden');
+                $('.username-chat').html($username);
 
+            });
+        })
+        .catch((err) => {
+            console.log(err);
         });
-    };
 
     function formatAMPM(date) {
         let hours = date.getHours();

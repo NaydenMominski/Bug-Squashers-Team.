@@ -121,12 +121,12 @@
     }
 
     google.maps.event.addDomListener(window, 'load', () => {
-        if (window.location.href.indexOf("form") > -1) {
-            initMap();
-        } else if (window.location.href.indexOf("dashboard") > -1) {
+        if (window.location.href.indexOf("dashboard") > -1) {
             let $dashboardMmap = $('#map-dashboard');
             initMap($dashboardMmap, coordinates);
             coordinates = {};
+        } else {
+            initMap();
         }
 
     });
