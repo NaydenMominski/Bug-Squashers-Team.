@@ -4,6 +4,9 @@ block body
     .container
         br
         .col-md-9.text-left
+            if error_msg && error_msg.length > 0
+                each msg in error_msg
+                    div(class = "alert alert-danger")|#{msg}
             h3.no-top-margin Create your free account
             hr
             | In order to register and be able to submit listings, please fill the form below.
