@@ -24,6 +24,7 @@ const initRouter = (controllerFactory) => {
         .get('/sign-out', (req, res) => {
             controller.logout(req, res);
             req.logout();
+            req.flash('success_msg', 'Logged out')
             res.redirect('/');
         });
     return router;
