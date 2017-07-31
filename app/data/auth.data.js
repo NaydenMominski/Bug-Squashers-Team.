@@ -25,17 +25,14 @@ const getData = (db) => {
             return this.findBy({ username: newUser.username })
                 .then((user) => {
                     if (user) {
-                        return 'Error'; 
+                        return Promise.reject('Username already registered');
                     }
                     return newUser;
                 })
                 .then((user) => {
-                    if (user === 'Error'){
-                        return user;
-                    }
                     return collection.insert(user)
                         .then((result) => {
-                            return user;
+                            return (user);
                         });
                 });
         },
