@@ -32,6 +32,22 @@ class UserController {
                 return res.redirect(404, '/sells');
             });
     }
+
+    userProfile(req, res) {
+        return Promise.all([this.data.user.getUserAllRents(req.user.username),
+                this.data.user.getUserAllSells(req.user.username),
+            ])
+            .then(([rents, sells]) => {
+                return res.render('user/dashboard', {
+                    sells: sells,
+                    rents: rents,
+                    user: req.user,
+                });
+            })
+            .catch((err) => {
+                return res.redirect(404, '/home');
+            });
+    }
 }
 
 module.exports = UserController;

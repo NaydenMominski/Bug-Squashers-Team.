@@ -8,6 +8,9 @@ const initRouter = (controllerFactory) => {
         .get('/', (req, res) => {
             return controller.getUserAllProperty(req, res);
         })
+        .get('/dashboard', (req, res) => {
+            return controller.userProfile(req, res);
+        })
         .get('/agents', (req, res) => {
             return controller.getAllUsers(req, res);
         })

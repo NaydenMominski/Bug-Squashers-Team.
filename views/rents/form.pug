@@ -141,5 +141,7 @@ block body
                 .clear
                 br
                 br
+block script                
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDfC5X1qhmU-V6X5WUhfCyF7-UIWgZO4m4&sensor=false&libraries=places,drawing')
-    script(src='../../static/js/googlemap-api.js')
+    script
+        | System.import("googlemap");

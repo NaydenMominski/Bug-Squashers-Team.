@@ -134,4 +134,6 @@ block body
                                 li
                                     a.sidebar-link(href='#')
                                         = context.user.email
-    script(src="/static/js/functions.js")
+block script                                        
+    script
+        | System.import('functions');

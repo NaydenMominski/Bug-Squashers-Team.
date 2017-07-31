@@ -1,4 +1,24 @@
-jQuery(function($) {
+(() => {
+    let coordinates = {};
+    $.ajax({
+        url: 'http://localhost:3005/user',
+        dataType: 'json',
+        success: (res) => {
+            Promise.resolve(res)
+                .then((res) => {
+                    coordinates.sells = res.sells;
+                    coordinates.rents = res.rents;
+                    return coordinates;
+                }).then((coordinates) => {
+                    convertCoords(coordinates.sells);
+                    convertCoords(coordinates.rents);
+                });
+        },
+        error: (err) => {
+            console(err);
+        },
+        type: 'GET',
+    });
 
     function initMap($map, coords) {
         $map = $map || $('#map-location');
@@ -58,6 +78,12 @@ jQuery(function($) {
                 });
 
             });
+        } else if ($map[0].id === 'map-dashboard') {
+            Promise.resolve(coordinates)
+                .then()
+            convertCoords(coordinates.sells);
+            convertCoords(coordinates.rents);
+
         }
         // add marker
         function addMarker(map, props) {
@@ -81,7 +107,27 @@ jQuery(function($) {
         }
 
     }
+
+    function convertCoords(coords) {
+
+        const props = {};
+        coords.forEach((coord) => {
+            let latLng = new google.maps.LatLng(parseFloat(coord.lat), parseFloat(coord.lng));
+            props.coords = latLng;
+            props.content = coord.address;
+        });
+
+        return props;
+    }
+
     google.maps.event.addDomListener(window, 'load', () => {
-        initMap();
+        if (window.location.href.indexOf("form") > -1) {
+            initMap();
+        } else if (window.location.href.indexOf("dashboard") > -1) {
+            let $dashboardMmap = $('#map-dashboard');
+            initMap($dashboardMmap, coordinates);
+            coordinates = {};
+        }
+
     });
-});
+})();

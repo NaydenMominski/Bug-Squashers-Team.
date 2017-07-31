@@ -63,12 +63,12 @@
         min-height: 140px;
     }
     
-    ::-moz-selection {
+     ::-moz-selection {
         background: #b3d4fc;
         text-shadow: none;
     }
     
-    ::selection {
+     ::selection {
         background: #b3d4fc;
         text-shadow: none;
     }
@@ -2286,4 +2286,54 @@
     
     .selected-user:hover {
         background-color: #2196f3 !important;
+    }
+    /* Dashboard */
+    
+    #dashboard {
+        padding: 20px;
+    }
+    
+    @media (min-width: 768px) {
+        #dashboard {
+            padding-right: 40px;
+            padding-left: 40px;
+        }
+    }
+    
+    #dashboard .page-header {
+        margin-top: 0;
+    }
+    
+    #dashboard .placeholders {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    #dashboard .placeholders h4 {
+        margin-bottom: 0;
+    }
+    
+    #dashboard .placeholder {
+        margin-bottom: 20px;
+    }
+    
+    #dashboard .placeholder img {
+        display: inline-block;
+        border-radius: 50%;
+    }
+    
+    #map-dashboard {
+        height: 300px;
+    }
+    
+    #dashboard th {
+        text-align: center;
+    }
+    
+    #dashboard td {
+        vertical-align: middle;
+    }
+    
+    #dashboard td.img-data {
+        width: 10%
     }

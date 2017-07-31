@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function() {
     let trigger = $('.overlay-btn'),
         closeSiderbar = $('.close-sidebar'),
         contactAgent = $('#sidebar-wrapper'),
