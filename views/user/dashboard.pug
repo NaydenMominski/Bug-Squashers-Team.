@@ -7,7 +7,7 @@ block body
 			#map-dashboard(class="col-md-12")
 		h2.sub-header List Sells Estates
 		.table-responsive
-			table#sellTable.table.table-striped
+			table.table.table-striped
 				thead
 					tr
 						th #
@@ -18,7 +18,7 @@ block body
 						th Size
 						th Bedrooms
 						th Bathrooms
-				tbody
+				tbody#sellTable
 					each sell in sells
 						tr(data-id=sell._id)
 							td.img-data
@@ -51,7 +51,7 @@ block body
 				ul#pagerSell.pagination.pull-right
 		h2.sub-header List Rents Estates
 		.table-responsive
-			table#rentTable.table.table-striped.table-bordred
+			table.table.table-striped.table-bordred
 				thead
 					tr
 						th #
@@ -62,7 +62,7 @@ block body
 						th Size
 						th Bedrooms
 						th Bathrooms
-				tbody
+				tbody#rentTable
 					each rent in rents
 						tr(data-id=rent._id)
 							td.img-data

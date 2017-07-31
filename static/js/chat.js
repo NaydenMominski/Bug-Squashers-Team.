@@ -1,5 +1,7 @@
 'use strict';
 
+import userService from 'service';
+
 $(function() {
     let messages = [];
 
