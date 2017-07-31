@@ -168,6 +168,14 @@ class RentsController {
                     return res.redirect(404, '/rents');
                 }
 
+                const errors = isValid(req)
+                if (errors) {
+                    errors.forEach(function(error) {
+                        req.flash('error_msg', error.msg);
+                    }, this);
+                    return res.redirect('/rents/edit/'+ id);
+                }
+
                 const editedrent = req.body;
                 const user = req.user;
                 const userdb = {

@@ -151,6 +151,14 @@ class SellsController {
                     return res.redirect(404, '/sells');
                 }
 
+                                const errors = isValid(req)
+                if (errors) {
+                    errors.forEach(function(error) {
+                        req.flash('error_msg', error.msg);
+                    }, this);
+                    return res.redirect('/sells/edit/' + id);
+                }
+
                 const editedSell = req.body;
                 const user = req.user;
                 const userdb = {

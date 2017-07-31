@@ -11,6 +11,15 @@ block body
                         | Property Details
                     hr
                     br
+                    if success_msg && success_msg.length > 0
+                        each msg in success_msg
+                            div(class = "alert alert-success")|#{msg}
+                    if error_msg && error_msg.length > 0
+                        each msg in error_msg
+                            div(class = "alert alert-danger")|#{msg}
+                    if error && error.length > 0
+                        each msg in error
+                            div(class = "alert alert-danger")|#{msg}
                     label.control-label.col-sm-2(for='headline')
                         | Headline:
                     .control-field.col-sm-10.no-right-padding
