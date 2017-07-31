@@ -2,6 +2,7 @@
 
 const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
+const { isValidMail } = require('../../validatorts/sendmail.validator');
 const nodemailer = require('nodemailer');
 
 class RentsController {
@@ -235,7 +236,15 @@ class RentsController {
     }
 
     sendMail(req, res) {
+        const errors = isValidMail(req);
+        if (errors) {
+            errors.forEach(function(error) {
+                req.flash('error_msg', error.msg);
+            }, this);
+            return res.redirect('/rents/' + req.body.id);
+        }
         const message = req.body;
+
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             host: 'smtp.gmail.com',
@@ -273,8 +282,10 @@ class RentsController {
                 }
                 console.log('Message %s sent: %s',
                     info.messageId, info.response);
+                req.flash('success_msg', 'Message successfully sent!');
                 return res.redirect('/rents/' + message.id);
             });
+        return this;
     }
 }
 

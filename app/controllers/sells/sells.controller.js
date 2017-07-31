@@ -2,6 +2,7 @@
 
 const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
+const { isValidMail } = require('../../validatorts/sendmail.validator');
 const nodemailer = require('nodemailer');
 
 class SellsController {
@@ -215,6 +216,13 @@ class SellsController {
     }
 
     sendMail(req, res) {
+        const errors = isValidMail(req);
+        if (errors) {
+            errors.forEach(function(error) {
+                req.flash('error_msg', error.msg);
+            }, this);
+            return res.redirect('/sells/' + req.body.id);
+        }
         const message = req.body;
 
         // !TODO: need to separate in config
@@ -255,8 +263,10 @@ class SellsController {
                 }
                 console.log('Message %s sent: %s',
                     info.messageId, info.response);
+                req.flash('success_msg', 'Message successfully sent!');
                 return res.redirect('/sells/' + message.id);
             });
+            return this;
     }
 }
 
