@@ -14,6 +14,8 @@ SystemJS.config({
         'dropdown': '/static/js/dropdown.js',
         'service': '/static/js/service.js',
         'pagination': '/static/js/plugins/pagination.js',
-        'paging': '/static/js/paging.js'
+        'paging': '/static/js/paging.js',
+        'loaderlib': '/static/js/plugins/loader.js',
+        'loader': '/static/js/loading.js',
     }
 });

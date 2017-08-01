@@ -68,6 +68,14 @@
         text-shadow: none;
     }
     
+    .fb-share-button {
+        font-size: 12px;
+        margin-left: 5px;
+        margin-right: 5px;
+        position: relative;
+        top: 5px;
+    }
+    
      ::selection {
         background: #b3d4fc;
         text-shadow: none;
@@ -1034,8 +1042,7 @@
             width: 100%;
         }
     }
-    
-    @media (max-width: 992px) {
+    /* @media (max-width: 992px) {
         .container {
             width: 100% !important;
             min-width: 100% !important;
@@ -1067,7 +1074,7 @@
         .main-search-text {
             display: none;
         }
-    }
+    } */
     
     @media (max-width: 560px) {
         .top-links {
@@ -2362,7 +2369,7 @@
         padding: 15px;
     }
     
-    #post-container .post-footer .input-group-addon a {
+    #post-container .post-footer .input-group-addon button {
         color: #454545;
     }
     

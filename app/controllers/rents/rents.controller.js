@@ -140,6 +140,20 @@ class RentsController {
             });
     }
 
+    addComment(req, res) {
+        if (!req.user) {
+            return res.redirect('/auth/sign-in');
+        }
+        const comment = req.body;
+        const id = req.params.id;
+        const user = req.user;
+
+        return this.data.addComment(comment)
+            .then((result) => {
+                res.redirect('/rents/' + id);
+            });
+    }
+
     editGet(req, res) {
         return this.data.rents.getById(req.params.id)
             .then((rent) => {
@@ -173,7 +187,7 @@ class RentsController {
                     errors.forEach(function(error) {
                         req.flash('error_msg', error.msg);
                     }, this);
-                    return res.redirect('/rents/edit/'+ id);
+                    return res.redirect('/rents/edit/' + id);
                 }
 
                 const editedrent = req.body;

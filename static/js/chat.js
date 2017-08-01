@@ -34,9 +34,9 @@ $(function() {
                 } else {
                     insertChat('me', data.message);
                 }
-                });
-                // Events
-                $('#messageSend').on('submit', () => {
+            });
+            // Events
+            $('#messageSend').on('submit', () => {
 
                 const entityMap = {
                     '&': '&amp;',
@@ -48,8 +48,9 @@ $(function() {
                     '`': '&#x60;',
                     '=': '&#x3D;',
                 }
+
                 function escapeHtml(string) {
-                    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+                    return String(string).replace(/[&<>"'`=\/]/g, function(s) {
                         return entityMap[s];
                     });
                 };

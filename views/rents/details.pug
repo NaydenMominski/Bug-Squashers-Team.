@@ -136,21 +136,24 @@ block body
                 a.btn.btn-default.stat-item(href="#")
                     i.fa.fa-share                      
             .post-footer
-                .input-group
-                    input.form-control(placeholder='Add a comment', type='text')
-                    span.input-group-addon
-                        a(href='#')
-                            i.fa.fa-edit
+                form#commentSend(action='javascript:void(0)')
+                    .input-group
+                        input#commentText.form-control(placeholder='Add a comment', name='comment', type='text')
+                        span.input-group-addon
+                            button(type='submit')
+                                i.fa.fa-edit
                 ul.comments-list
                     li.comment
                         a.pull-left(href='#')
                             img.avatar(src='http://bootdey.com/img/Content/user_1.jpg', alt='avatar')
                         .comment-body
                             .comment-heading
-                                h4.user Gavino Free
+                                h4.user Doroteya Nikolova
                                 h5.time 5 minutes ago
-                            p Sure, oooooooooooooooohhhhhhhhhhhhhhhh
-block script            
+                            p Some text
+block script
+    script(src='/libs/socket.io-client/dist/socket.io.js')
     script
         | System.import('functions');
-    
+    script
+        | System/import('comments');

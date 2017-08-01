@@ -73,6 +73,21 @@ const getData = (db) => {
                 return Promise.reject('Invalid rent');
             }
         },
+        addComment(comment) {
+            try {
+                return this.getById(comment._id)
+                    .then((rent) => {
+                        return rent.insert(comment)
+                            .then((result) => {
+                                rent.id = rent._id;
+                                return rent;
+                            });
+                    });
+            } catch (err) {
+                return Promise.reject('Invalid rent');
+            }
+        },
+
         update(rent, editedrent) {
             try {
                 return collection.updateOne({
