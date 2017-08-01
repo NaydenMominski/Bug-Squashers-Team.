@@ -34,12 +34,29 @@ $(function() {
                 } else {
                     insertChat('me', data.message);
                 }
-            });
-            // Events
-            $('#messageSend').on('submit', () => {
+                });
+                // Events
+                $('#messageSend').on('submit', () => {
+
+                const entityMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    '\'': '&#39;',
+                    '/': '&#x2F;',
+                    '`': '&#x60;',
+                    '=': '&#x3D;',
+                }
+                function escapeHtml(string) {
+                    return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+                        return entityMap[s];
+                    });
+                };
+
                 const $message = $(".message-text").val();
-                text = $message
-                let data = sendMessage($message, user);
+                text = escapeHtml($message);
+                let data = sendMessage(text, user);
                 socket.emit('send-message', data);
                 $(".message-text").val('');
             });
