@@ -128,28 +128,7 @@ block body
                                 li
                                     a.sidebar-link(href='#')
                                         = context.user.email
-        #post-container.col-md-8.text-left  
-            div.stats.row
-                a.btn.btn-default.stat-item(href="#")
-                    i.fa.fa-thumbs-up.icon
-                a.btn.btn-default.stat-item(href="#")
-                    i.fa.fa-share                                           
-            .post-footer
-                form#commentSend(action='javascript:void(0)')
-                    .input-group
-                        input#commentText.form-control(placeholder='Add a comment', name='comment',type='text')
-                        span.input-group-addon
-                            a(href='#')
-                                i.fa.fa-edit
-                ul.comments-list
-                    li.comment
-                        a.pull-left(href='#')
-                            img.avatar(src='http://bootdey.com/img/Content/user_1.jpg', alt='avatar')
-                        .comment-body
-                            .comment-heading
-                                h4.user Doroteya Nikolova
-                                h5.time 5 minutes ago
-                            p Some text
+
 block script
     script(src='/libs/socket.io-client/dist/socket.io.js')                                           
     script

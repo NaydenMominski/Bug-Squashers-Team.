@@ -53,7 +53,7 @@ const getData = (db) => {
                         return sell;
                     });
             } catch (err) {
-                return Promise.reject('Invalid sell');
+                return Promise.reject('Error the sell i not created');
             }
         },
         update(sell, editedSell) {

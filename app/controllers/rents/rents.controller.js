@@ -146,7 +146,7 @@ class RentsController {
         }
         const comment = req.body;
         const id = req.params.id;
-        const user = req.user;
+        // const user = req.user;
 
         return this.data.addComment(comment)
             .then((result) => {
@@ -182,7 +182,7 @@ class RentsController {
                     return res.redirect(404, '/rents');
                 }
 
-                const errors = isValid(req)
+                const errors = isValid(req);
                 if (errors) {
                     errors.forEach(function(error) {
                         req.flash('error_msg', error.msg);

@@ -6,7 +6,7 @@ $(function() {
         nextText: 'Next',
         showPrevNext: true,
         hidePageNumbers: false,
-        perPage: 1
+        perPage: 3
     });
 
     $('#rentTable').pageMe({
@@ -16,6 +16,6 @@ $(function() {
         nextText: 'Next',
         showPrevNext: true,
         hidePageNumbers: false,
-        perPage: 1
+        perPage: 3
     });
 });

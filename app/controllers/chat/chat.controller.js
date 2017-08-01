@@ -45,18 +45,17 @@ class ChatController {
                     messagesResponse.error = true;
                     messagesResponse.message = 'Server error.';
                     return res.status(200).json(messagesResponse);
-                } else {
-                    messagesResponse.error = false;
-                    messagesResponse.message = messages;
-                    return res.status(200).json(messagesResponse);
                 }
+                messagesResponse.error = false;
+                messagesResponse.message = messages;
+                return res.status(200).json(messagesResponse);
             });
     }
 
-    getChatList(req, res) {
-        const userId = req.body.id;
-        const chatList = [];
-    }
+    // getChatList(req, res) {
+    //     const userId = req.body.id;
+    //     const chatList = [];
+    // }
 }
 
 module.exports = ChatController;

@@ -44,7 +44,7 @@ const getData = (db) => {
                         });
                     });
             } catch (err) {
-                return Promise.reject('Invalid id');
+                return Promise.reject('Error Last Rents');
             }
         },
         getById(id) {
@@ -70,7 +70,7 @@ const getData = (db) => {
                         return rent;
                     });
             } catch (err) {
-                return Promise.reject('Invalid rent');
+                return Promise.reject('Error the rent i not created');
             }
         },
         addComment(comment) {
@@ -84,7 +84,7 @@ const getData = (db) => {
                             });
                     });
             } catch (err) {
-                return Promise.reject('Invalid rent');
+                return Promise.reject('Error the comment i not added');
             }
         },
 
@@ -98,7 +98,7 @@ const getData = (db) => {
                         return rent;
                     });
             } catch (err) {
-                return Promise.reject('Invalid update');
+                return Promise.reject('Error the rent i not updated');
             }
         },
         remove(rent) {
