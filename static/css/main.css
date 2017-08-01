@@ -2341,3 +2341,72 @@
     #dashboard td form button {
         margin-top: -15px;
     }
+    /* Comments */
+    
+    #post-container .stats {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    #post-container .stats .stat-item {
+        display: inline-block;
+        margin-right: 15px;
+    }
+    
+    #post-container .stats .stat-item .icon {
+        margin-right: 8px;
+    }
+    
+    #post-container .post-footer {
+        border-top: 1px solid #ddd;
+        padding: 15px;
+    }
+    
+    #post-container .post-footer .input-group-addon a {
+        color: #454545;
+    }
+    
+    #post-container .post-footer .comments-list {
+        padding: 0;
+        margin-top: 20px;
+        list-style-type: none;
+    }
+    
+    #post-container .post-footer .comments-list .comment {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+    }
+    
+    #post-container .post-footer .comments-list .comment .avatar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    #post-container .post-footer .comments-list .comment .comment-heading {
+        display: block;
+        width: 100%;
+    }
+    
+    #post-container .post-footer .comments-list .comment .comment-heading .user {
+        font-size: 14px;
+        font-weight: bold;
+        display: inline;
+        margin-top: 0;
+        margin-right: 10px;
+    }
+    
+    #post-container .post-footer .comments-list .comment .comment-heading .time {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 0;
+        display: inline;
+    }
+    
+    #post-container .post-footer .comments-list .comment .comment-body {
+        margin-left: 50px;
+    }
+    
+    #post-container .post-footer .comments-list .comment>.comments-list {
+        margin-left: 50px;
+    }
