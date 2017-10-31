@@ -32,8 +32,12 @@ block body
                         .panel-body
                             .row
                                 .col-sm-5.col-xs-12
-                                    a.btn-block.result-details-link(href='sells/' + sell._id)
-                                        img.img-res(alt=sell.headline, src='static/pictures/sell/'+ sell.avatar)
+                                    if(sell.avatarUrl)
+                                        a.btn-block.result-details-link(href=sell.avatarUrl)
+                                            img.img-res(alt=sell.headline, src=sell.avatarUrl)
+                                    else
+                                        a.btn-block.result-details-link(href='sells/' + sell._id)
+                                            img.img-res(alt=sell.headline, src='static/pictures/sell/'+ sell.avatar)
                                 .col-sm-7.col-xs-12
                                     .details
                                         p.description

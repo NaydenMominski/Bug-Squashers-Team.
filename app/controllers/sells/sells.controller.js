@@ -104,8 +104,9 @@ class SellsController {
             avatar: user.avatar || 'default-user.png',
             email: user.email,
         };
-
-        sell.avatar = req.file ? req.file.filename : 'no-image.png';
+        if (!sell.avatarUrl) {
+            sell.avatar = req.file ? req.file.filename : 'no-image.png';
+        }
         sell.price = parseInt(sell.price, 10);
         sell.user = userdb;
         sell.date = new Date();
@@ -151,7 +152,7 @@ class SellsController {
                     return res.redirect(404, '/sells');
                 }
 
-                                const errors = isValid(req)
+                const errors = isValid(req)
                 if (errors) {
                     errors.forEach(function(error) {
                         req.flash('error_msg', error.msg);
@@ -161,6 +162,7 @@ class SellsController {
 
                 const editedSell = req.body;
                 const user = req.user;
+
                 const userdb = {
                     id: user.id,
                     username: user.username,
@@ -170,6 +172,7 @@ class SellsController {
                     avatar: user.avatar || 'default-user.png',
                     email: user.email,
                 };
+
 
                 editedSell.avatar =
                     req.file ? req.file.filename : 'no-image.png';

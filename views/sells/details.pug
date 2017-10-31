@@ -31,8 +31,12 @@ block body
                         br
                         #tab-details.tab-pane.active
                             .col-md-12
-                                a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')
-                                    img(src='/static/pictures/sell/' + context.avatar, width='300', alt='Exclusive apartment in downtown Bristol 43234')
+                                if context.avatarUrl
+                                    a(href=context.avatarUrl, rel='prettyPhoto[ad_gal]')
+                                        img(src=context.avatarUrl, width='300')
+                                else
+                                    a(href='/static/pictures/sell/' + context.avatar, rel='prettyPhoto[ad_gal]')
+                                        img(src='/static/pictures/sell/' + context.avatar, width='300')
                             .col-md-6.final-result-image
                                 ul  
                                     li.property-meta-item

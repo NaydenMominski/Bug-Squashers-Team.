@@ -95,19 +95,19 @@ block body
                     br
                     input.form-control.input-sm(type='text', value='', name='buildingfloors', required='')
                 .clearfix
-                br
-                h3
-                    | Property Amenities
-                hr
-                .form-group.col-md-4
-                    input(type='checkbox', value='lift', name='lift')
-                    span.listing-feature-span
-                    | asansior
-                .form-group.col-md-4
-                    input(type='checkbox', value='garden', name='garden')
-                    span.listing-feature-span
-                    | garden
-                .clearfix
+                //- br
+                //- h3
+                //-     | Property Amenities
+                //- hr
+                //- .form-group.col-md-4
+                //-     input(type='checkbox', value='lift', name='lift')
+                //-     span.listing-feature-span
+                //-     | asansior
+                //- .form-group.col-md-4
+                //-     input(type='checkbox', value='garden', name='garden')
+                //-     span.listing-feature-span
+                //-     | garden
+                //- .clearfix
                 .form-group
                 br
                 h3
@@ -131,12 +131,22 @@ block body
                     input#lat(type="hidden", name="lat", value="")
                     input#lng(type="hidden", name="lng", value="")
                 .form-group
+                    h3
+                        | Please fill one of following
+                    .clear
+                    hr
+                    label.control-label.col-sm-2(for='avatarUrl')
+                        | AvatarURL:
+                    .control-field.col-sm-10.no-right-padding
+                        input.form-control.input-sm(type='text', name='avatarUrl', value='')
+                br
+               
+                .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
                     .control-field.col-sm-6.no-right-padding
                         input.form-control.input-sm(type='file', name='avatar', accept='.jpg,.jpeg,.png')
-                br
-                br
+                    br
                 input.btn.btn-default.btn-gradient.pull-right(type='submit', value=' Submit ')
                 .clear
                 br

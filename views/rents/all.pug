@@ -66,17 +66,17 @@ block body
                         a.page-link(href='#', tabindex='-1') Previous
                 else
                     li.page-item
-                        a.page-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page-1}`) Previous                        
+                        a.page-link(href=`/rents/all?property=${searchQuery.property}&province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page-1}`) Previous                        
                 - for(let i = 1; i <= pages; i+=1 )
                     if(page===i)
                         li.page-item.active
-                            a.pagination-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page}`)=page
+                            a.pagination-link(href='#')=page
                     else
                         li.page-item
-                            a.pagination-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${i}`)=i
+                            a.pagination-link(href=`/rents/all?property=${searchQuery.property}&province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${i}`)=i
                 if page===pages
                     li.page-item.disabled
                         a.page-link(href='#', tabindex='-1') Next
                 else
                     li.page-item
-                        a.page-link(href=`/rents?province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page+1}`) Next 
+                        a.page-link(href=`/rents/all?property=${searchQuery.property}&province=${searchQuery.location}&price_from=${searchQuery.min}&price_to=${searchQuery.max}&order_by=${searchQuery.orderBy}&page=${page+1}`) Next 

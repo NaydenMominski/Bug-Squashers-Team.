@@ -64,14 +64,20 @@ block body
                     ol.carousel-indicators
                         each item,index in context
                             li(data-target='#myCarousel', data-slide-to=index)
-                                img.img-shadow.indicator-image(src='static/pictures/sell/'+ item.avatar)
+                                if item.avatarUrl
+                                    img.img-shadow.indicator-image(src=item.avatarUrl)
+                                else
+                                    img.img-shadow.indicator-image(src='static/pictures/sell/'+ item.avatar)
                     .carousel-inner
                         .item.slide-back
                             .container
                                 .xcarousel-caption
                                     if context[0]
                                         a.carousel-link(href='sells/' + context[0]._id)
-                                            img.img-shadow(src='static/pictures/sell/'+ context[0].avatar, style='margin-left:15px', height='160', align='right')
+                                            if context[0].avatarUrl
+                                                img.img-shadow.indicator-image(src=context[0].avatarUrl, style='margin-left:15px', height='160', align='right')
+                                            else
+                                                img.img-shadow(src='static/pictures/sell/'+ context[0].avatar, style='margin-left:15px', height='160', align='right')
                                             h3.no-top-margin.hide-xs=context[0].headline + ' , ' +context[0].price
                                             .carousel-text-container
                                                 p.hide-xs=context[0].description
@@ -81,7 +87,10 @@ block body
                                 .xcarousel-caption
                                     if context[1]
                                         a.carousel-link(href='sells/' + context[1]._id)
-                                            img.img-shadow(src='static/pictures/sell/'+ context[1].avatar, style='margin-left:15px', height='160', align='right')
+                                            if context[1].avatarUrl
+                                                img.img-shadow(src=context[1].avatarUrl, style='margin-left:15px', height='160', align='right')
+                                            else
+                                                img.img-shadow(src='static/pictures/sell/'+ context[1].avatar, style='margin-left:15px', height='160', align='right')
                                             h3.no-top-margin.hide-xs=context[1].headline + ' , ' +context[1].price
                                             .carousel-text-container
                                                 p.hide-xs=context[1].description
@@ -91,7 +100,10 @@ block body
                                 .xcarousel-caption
                                     if context[2]
                                         a.carousel-link(href='sells/' + context[2]._id)
-                                            img.img-shadow(src='static/pictures/sell/'+ context[2].avatar, style='margin-left:15px', height='160', align='right')
+                                            if context[2].avatarUrl
+                                                img.img-shadow(src=context[2].avatarUrl, style='margin-left:15px', height='160', align='right')
+                                            else
+                                                img.img-shadow(src='static/pictures/sell/'+ context[2].avatar, style='margin-left:15px', height='160', align='right')
                                             h3.no-top-margin.hide-xs=context[2].headline + ' , ' +context[2].price
                                             .carousel-text-container
                                                 p.hide-xs=context[2].description
