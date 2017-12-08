@@ -36,19 +36,17 @@ body
                         a(href='/') Sales
                     li
                         a(href='/rents') Rentals
-                    li
-                        ul.nav.navbar-nav.navbar-right
+                    li.nav.navbar-nav
+                        a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle 
+                            | Post a New Ad
+                            span.caret
+                        ul(role="menu").dropdown-menu
                             li
-                                a(href='#' data-toggle="dropdown" aria-extended="true").dropdown-toggle 
-                                    | Post a New Ad
-                                    span.caret
-                                ul(role="menu").dropdown-menu
-                                    li
-                                        a(href='/sells/form')
-                                            | Add New Sales
-                                    li
-                                        a(href='/rents/form')
-                                            | Add New Rentals
+                                a(href='/sells/form')
+                                    | Add New Sales
+                            li
+                                a(href='/rents/form')
+                                    | Add New Rentals
                         //- a(href='/sells/form') Post a New Ad
                     li
                         a(href='/user/agents') Agents

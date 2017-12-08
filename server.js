@@ -7,8 +7,8 @@ const async = require('./utils/async');
 const db = require('./app/db');
 
 async()
-.then(() => db.connect('mongodb://localhost/PropertyDb'))
-    // .then(() => db.connect('mongodb://nodeproject:project@ds161262.mlab.com:61262/nodeproject'))
+// .then(() => db.connect('mongodb://localhost/PropertyDb'))
+.then(() => db.connect('mongodb://nodeproject:project@ds161262.mlab.com:61262/nodeproject'))
     .then((database) => {
         const data = require('./app/data').initData(database);
         return require('./app').initApp(data, database);

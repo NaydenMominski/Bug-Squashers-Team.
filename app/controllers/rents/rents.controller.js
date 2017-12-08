@@ -4,6 +4,8 @@ const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
 const { isValidMail } = require('../../validatorts/sendmail.validator');
 const nodemailer = require('nodemailer');
+const path = '/static/pictures/rent/';
+
 
 class RentsController {
     constructor(data) {
@@ -120,6 +122,12 @@ class RentsController {
             email: user.email,
         };
 
+        if (!rent.avatarUrl) {
+            rent.avatar = req.file ? path + req.file.filename : 'no-image.png';
+        } else {
+            rent.avatar = rent.avatarUrl;
+        }
+
         rent.avatar = req.file ? req.file.filename : 'no-image.png';
         rent.price = parseInt(rent.price, 10);
         rent.user = userdb;
@@ -201,9 +209,13 @@ class RentsController {
                     avatar: user.avatar || 'default-user.png',
                     email: user.email,
                 };
+                if (!editedrent.avatarUrl) {
+                    editedrent.avatar =
+                        req.file ? path + req.file.filename : 'no-image.png';
+                } else {
+                    editedrent.avatar = editedrent.avatarUrl;
+                }
 
-                editedrent.avatar =
-                    req.file ? req.file.filename : 'no-image.png';
 
                 editedrent.price = parseInt(editedrent.price, 10);
 

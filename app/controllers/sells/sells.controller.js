@@ -4,6 +4,7 @@ const constants = require('../../../utils/constants');
 const { isValid } = require('../../validatorts/rents.validator');
 const { isValidMail } = require('../../validatorts/sendmail.validator');
 const nodemailer = require('nodemailer');
+const path = '/static/pictures/sell/';
 
 class SellsController {
     constructor(data) {
@@ -104,9 +105,13 @@ class SellsController {
             avatar: user.avatar || 'default-user.png',
             email: user.email,
         };
+
         if (!sell.avatarUrl) {
-            sell.avatar = req.file ? req.file.filename : 'no-image.png';
+            sell.avatar = req.file ? path + req.file.filename : 'no-image.png';
+        } else {
+            sell.avatar = sell.avatarUrl;
         }
+
         sell.price = parseInt(sell.price, 10);
         sell.user = userdb;
         sell.date = new Date();
@@ -152,7 +157,7 @@ class SellsController {
                     return res.redirect(404, '/sells');
                 }
 
-                const errors = isValid(req)
+                const errors = isValid(req);
                 if (errors) {
                     errors.forEach(function(error) {
                         req.flash('error_msg', error.msg);
@@ -172,10 +177,13 @@ class SellsController {
                     avatar: user.avatar || 'default-user.png',
                     email: user.email,
                 };
+                if (!editedSell.avatarUrl) {
+                    editedSell.avatar = req.file ? path + req.file.filename : 'no-image.png';
+                } else {
+                    editedSell.avatar = editedSell.avatarUrl;
+                }
 
 
-                editedSell.avatar =
-                    req.file ? req.file.filename : 'no-image.png';
                 editedSell.price = parseInt(editedSell.price, 10);
                 editedSell.user = userdb;
                 editedSell.date = new Date();

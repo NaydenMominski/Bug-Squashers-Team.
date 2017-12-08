@@ -32,8 +32,8 @@ block body
                         br
                         #tab-details.tab-pane.active
                             .col-md-12
-                                a(href='/static/pictures/rent/' + context.avatar, rel='prettyPhoto[ad_gal]')
-                                    img(src='/static/pictures/rent/' + context.avatar, width='300')
+                                a(href=context.avatar, rel='prettyPhoto[ad_gal]')
+                                    img(src=context.avatar, width='300')
                             .col-md-6.final-result-image
                                 ul  
                                     li.property-meta-item

@@ -132,12 +132,22 @@ block body
                     input#lat(type="hidden", name="lat", value="")
                     input#lng(type="hidden", name="lng", value="")
                 .form-group
+                    h3
+                        | Please fill one of following
+                    .clear
+                    hr
+                    label.control-label.col-sm-2(for='avatarUrl')
+                        | AvatarURL:
+                    .control-field.col-sm-10.no-right-padding
+                        input.form-control.input-sm(type='text', name='avatarUrl', value='')
+                br
+               
+                .form-group
                     label.control-label.col-sm-2(for='avatar')
                         | Avatar:
                     .control-field.col-sm-6.no-right-padding
                         input.form-control.input-sm(type='file', name='avatar', accept='.jpg,.jpeg,.png')
-                br
-                br
+                    br
                 input.btn.btn-default.btn-gradient.pull-right(type='submit', value=' Submit ')
                 .clear
                 br

@@ -1,5 +1,5 @@
 ![PropertyPortal](https://github.com/NDoroteya93/Bug-Squashers-Team./blob/master/static/pictures/logo.png)
-# TeamWorkProject [Demo](https://project-real-estate.herokuapp.com)
+# TeamWorkProject - [Demo](https://project-real-estate.herokuapp.com)
 ## Telerik Academy - Web Application with Node.js
 
 ### Introduction
